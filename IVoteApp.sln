@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{DF44A4E8-2FA5-466F-9B81-DFD01494E29E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{2AA062B6-500C-40CC-865E-F5291F954FBF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ElectionService", "ElectionService", "{F412BABF-9674-4DF9-8FA7-3EE6AE0E2952}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ElectionService.Infrastructure", "ElectionService.Infrastructure", "{8ABEF9FD-203E-4F37-9B9D-3E588BF062F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionService.Database", "Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Database\ElectionService.Database.csproj", "{5FFEA3D0-7E04-488E-A86A-B8E3810ECC47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ElectionService.App", "ElectionService.App", "{E9A9F55F-0752-4294-974C-E9939E26C09E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionService.CQRS", "Source\Services\ElectionService\ElectionService.App\ElectionService.CQRS\ElectionService.CQRS.csproj", "{E164890E-6873-4805-9D7A-479EFBEB76F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ElectionService.WEB", "ElectionService.WEB", "{22D4D138-14D1-4449-ADF9-8F9179DF05A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionService.API", "Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\ElectionService.API.csproj", "{5C989116-D62F-492E-B8A8-CE5A2F898AEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionService.Entities", "Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\ElectionService.Entities.csproj", "{C233377F-1A0C-4B13-90F7-B26DC78956D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ElectionService.Shared", "ElectionService.Shared", "{ADBE134D-0B3E-492B-9D52-16353784AB52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionService.Shared", "Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\ElectionService.Shared.csproj", "{68645388-0F02-4C39-BF1D-65DFB03698B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FFEA3D0-7E04-488E-A86A-B8E3810ECC47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FFEA3D0-7E04-488E-A86A-B8E3810ECC47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FFEA3D0-7E04-488E-A86A-B8E3810ECC47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FFEA3D0-7E04-488E-A86A-B8E3810ECC47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E164890E-6873-4805-9D7A-479EFBEB76F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E164890E-6873-4805-9D7A-479EFBEB76F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E164890E-6873-4805-9D7A-479EFBEB76F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E164890E-6873-4805-9D7A-479EFBEB76F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C989116-D62F-492E-B8A8-CE5A2F898AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C989116-D62F-492E-B8A8-CE5A2F898AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C989116-D62F-492E-B8A8-CE5A2F898AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C989116-D62F-492E-B8A8-CE5A2F898AEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C233377F-1A0C-4B13-90F7-B26DC78956D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C233377F-1A0C-4B13-90F7-B26DC78956D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C233377F-1A0C-4B13-90F7-B26DC78956D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C233377F-1A0C-4B13-90F7-B26DC78956D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68645388-0F02-4C39-BF1D-65DFB03698B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68645388-0F02-4C39-BF1D-65DFB03698B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68645388-0F02-4C39-BF1D-65DFB03698B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68645388-0F02-4C39-BF1D-65DFB03698B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2AA062B6-500C-40CC-865E-F5291F954FBF} = {DF44A4E8-2FA5-466F-9B81-DFD01494E29E}
+		{F412BABF-9674-4DF9-8FA7-3EE6AE0E2952} = {2AA062B6-500C-40CC-865E-F5291F954FBF}
+		{8ABEF9FD-203E-4F37-9B9D-3E588BF062F2} = {F412BABF-9674-4DF9-8FA7-3EE6AE0E2952}
+		{5FFEA3D0-7E04-488E-A86A-B8E3810ECC47} = {8ABEF9FD-203E-4F37-9B9D-3E588BF062F2}
+		{E9A9F55F-0752-4294-974C-E9939E26C09E} = {F412BABF-9674-4DF9-8FA7-3EE6AE0E2952}
+		{E164890E-6873-4805-9D7A-479EFBEB76F4} = {E9A9F55F-0752-4294-974C-E9939E26C09E}
+		{22D4D138-14D1-4449-ADF9-8F9179DF05A8} = {F412BABF-9674-4DF9-8FA7-3EE6AE0E2952}
+		{5C989116-D62F-492E-B8A8-CE5A2F898AEE} = {22D4D138-14D1-4449-ADF9-8F9179DF05A8}
+		{C233377F-1A0C-4B13-90F7-B26DC78956D2} = {8ABEF9FD-203E-4F37-9B9D-3E588BF062F2}
+		{ADBE134D-0B3E-492B-9D52-16353784AB52} = {F412BABF-9674-4DF9-8FA7-3EE6AE0E2952}
+		{68645388-0F02-4C39-BF1D-65DFB03698B9} = {ADBE134D-0B3E-492B-9D52-16353784AB52}
+	EndGlobalSection
+EndGlobal

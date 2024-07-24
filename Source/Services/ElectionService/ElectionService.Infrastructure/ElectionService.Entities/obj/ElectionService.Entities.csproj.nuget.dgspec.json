@@ -1,0 +1,132 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj",
+        "projectName": "ElectionService.Entities",
+        "projectPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj",
+        "packagesPath": "C:\\Users\\MBARK\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MBARK\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj": {
+                "projectPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj",
+        "projectName": "ElectionService.Shared",
+        "projectPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj",
+        "packagesPath": "C:\\Users\\MBARK\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MBARK\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
