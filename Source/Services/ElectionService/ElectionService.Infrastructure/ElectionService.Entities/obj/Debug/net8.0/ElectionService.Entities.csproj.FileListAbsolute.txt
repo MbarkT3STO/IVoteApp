@@ -1,0 +1,16 @@
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\bin\Debug\net8.0\ElectionService.Entities.deps.json
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\bin\Debug\net8.0\ElectionService.Entities.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\bin\Debug\net8.0\ElectionService.Entities.pdb
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\bin\Debug\net8.0\ElectionService.Shared.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\bin\Debug\net8.0\ElectionService.Shared.pdb
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\obj\Debug\net8.0\ElectionService.Entities.csproj.AssemblyReference.cache
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\obj\Debug\net8.0\ElectionService.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\obj\Debug\net8.0\ElectionService.Entities.AssemblyInfoInputs.cache
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\obj\Debug\net8.0\ElectionService.Entities.AssemblyInfo.cs
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\obj\Debug\net8.0\ElectionService.Entities.csproj.CoreCompileInputs.cache
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\obj\Debug\net8.0\ElectionService.Entities.sourcelink.json
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\obj\Debug\net8.0\Election.7A76AC26.Up2Date
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\obj\Debug\net8.0\ElectionService.Entities.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\obj\Debug\net8.0\refint\ElectionService.Entities.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\obj\Debug\net8.0\ElectionService.Entities.pdb
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Infrastructure\ElectionService.Entities\obj\Debug\net8.0\ref\ElectionService.Entities.dll

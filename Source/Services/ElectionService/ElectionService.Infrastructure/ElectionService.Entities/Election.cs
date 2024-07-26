@@ -19,4 +19,6 @@ public class Election
 
 	public ElectionStatus Status { get; set; }
 	public string CreatedBy { get; set; }
+
+	public List<Candidate> Candidates { get; set; }
 }

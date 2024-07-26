@@ -1,0 +1,12 @@
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\bin\Debug\net8.0\ElectionService.Shared.deps.json
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\bin\Debug\net8.0\ElectionService.Shared.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\bin\Debug\net8.0\ElectionService.Shared.pdb
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\obj\Debug\net8.0\ElectionService.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\obj\Debug\net8.0\ElectionService.Shared.AssemblyInfoInputs.cache
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\obj\Debug\net8.0\ElectionService.Shared.AssemblyInfo.cs
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\obj\Debug\net8.0\ElectionService.Shared.csproj.CoreCompileInputs.cache
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\obj\Debug\net8.0\ElectionService.Shared.sourcelink.json
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\obj\Debug\net8.0\ElectionService.Shared.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\obj\Debug\net8.0\refint\ElectionService.Shared.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\obj\Debug\net8.0\ElectionService.Shared.pdb
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\obj\Debug\net8.0\ref\ElectionService.Shared.dll

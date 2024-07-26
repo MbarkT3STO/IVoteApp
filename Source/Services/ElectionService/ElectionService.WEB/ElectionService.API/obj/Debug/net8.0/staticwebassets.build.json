@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Iz732JK9gYIybDNxEon/JHDv6euKved8QZDGIiKCnFU=",
+  "Source": "ElectionService.API",
+  "BasePath": "_content/ElectionService.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
