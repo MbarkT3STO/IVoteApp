@@ -1,6 +1,5 @@
-using System.Reflection;
-using MediatR;
-namespace ElectionService.API.DI;
+using Microsoft.Extensions.DependencyInjection;
+namespace ElectionService.CQRS.DI;
 
 public static class ApplicationDIExtensions
 {

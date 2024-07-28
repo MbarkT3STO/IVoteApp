@@ -1,4 +1,4 @@
-using ElectionService.API.DI;
+using ElectionService.CQRS.DI;
 using ElectionService.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +11,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 
 // Add Application services
 builder.Services.AddApplicationServices();
+
+builder.Services.AddControllers();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,6 +34,7 @@ builder.Services.AddCors( options =>
 
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -66,6 +69,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.UseCors("AllowSpecificOrigin");
 app.UseRouting();
+app.MapControllers();
 
 app.Run();
 

@@ -148,3 +148,9 @@ C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionSer
 c:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\AutoMapper.dll
 c:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\MediatR.dll
 c:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\MediatR.Contracts.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\MBARK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
