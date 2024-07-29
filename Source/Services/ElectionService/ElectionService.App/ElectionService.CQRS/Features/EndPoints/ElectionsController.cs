@@ -1,3 +1,4 @@
+using ElectionService.CQRS.Features.Election.Commands;
 using ElectionService.CQRS.Features.Election.Queries;
 
 namespace ElectionService.CQRS.Features.EndPoints;
@@ -18,6 +19,23 @@ public class ElectionsController : ControllerBase
 	public async Task<IActionResult> Get()
 	{
 		var result = await mediator.Send(new GetElectionsQuery());
+
+		if(result.IsSuccess)
+		{
+			return Ok(result.Value);
+		}
+
+		return BadRequest(result.Error);
+	}
+
+
+	[HttpPost]
+	[Route(nameof(Create))]
+	public async Task<IActionResult> Create(CreateElectionCommand command)
+	{
+		command.CreatedBy = "admin";
+
+		var result = await mediator.Send(command);
 
 		if(result.IsSuccess)
 		{

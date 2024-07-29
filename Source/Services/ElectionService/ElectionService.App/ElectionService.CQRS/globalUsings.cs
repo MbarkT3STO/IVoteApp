@@ -8,6 +8,8 @@ global using ElectionService.Shared.Enums;
 global using ElectionService.CQRS.Common.Exceptions;
 global using ElectionService.CQRS.Common.Interfaces;
 global using ElectionService.CQRS.Common.Implementations;
+global using ElectionService.CQRS.Common.Base;
+
 
 
 
