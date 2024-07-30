@@ -27,6 +27,10 @@ namespace ElectionService.Database.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -42,9 +46,14 @@ namespace ElectionService.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("PoliticalPartyId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ElectionId");
+
+                    b.HasIndex("PoliticalPartyId");
 
                     b.ToTable("Candidates", (string)null);
                 });
@@ -80,6 +89,40 @@ namespace ElectionService.Database.Migrations
                     b.ToTable("Elections", (string)null);
                 });
 
+            modelBuilder.Entity("ElectionService.Entities.PoliticalParty", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EstablishmentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LogoUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WebsiteUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PoliticalParty");
+                });
+
             modelBuilder.Entity("ElectionService.Entities.Candidate", b =>
                 {
                     b.HasOne("ElectionService.Entities.Election", "Election")
@@ -88,10 +131,23 @@ namespace ElectionService.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ElectionService.Entities.PoliticalParty", "PoliticalParty")
+                        .WithMany("Candidates")
+                        .HasForeignKey("PoliticalPartyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Election");
+
+                    b.Navigation("PoliticalParty");
                 });
 
             modelBuilder.Entity("ElectionService.Entities.Election", b =>
+                {
+                    b.Navigation("Candidates");
+                });
+
+            modelBuilder.Entity("ElectionService.Entities.PoliticalParty", b =>
                 {
                     b.Navigation("Candidates");
                 });

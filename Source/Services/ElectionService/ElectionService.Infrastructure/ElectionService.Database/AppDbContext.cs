@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
 	}
 
 
+	public virtual DbSet<PoliticalParty> PoliticalParties { get; set; }
 	public virtual DbSet<Election> Elections { get; set; }
 	public virtual DbSet<Candidate> Candidates { get; set; }
 

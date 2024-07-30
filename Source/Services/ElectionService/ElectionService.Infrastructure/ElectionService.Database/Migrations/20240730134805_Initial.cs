@@ -29,14 +29,33 @@ namespace ElectionService.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PoliticalParty",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EstablishmentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LogoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WebsiteUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PoliticalParty", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Candidates",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ElectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PoliticalPartyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,12 +66,23 @@ namespace ElectionService.Database.Migrations
                         principalTable: "Elections",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Candidates_PoliticalParty_PoliticalPartyId",
+                        column: x => x.PoliticalPartyId,
+                        principalTable: "PoliticalParty",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Candidates_ElectionId",
                 table: "Candidates",
                 column: "ElectionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Candidates_PoliticalPartyId",
+                table: "Candidates",
+                column: "PoliticalPartyId");
         }
 
         /// <inheritdoc />
@@ -63,6 +93,9 @@ namespace ElectionService.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "Elections");
+
+            migrationBuilder.DropTable(
+                name: "PoliticalParty");
         }
     }
 }
