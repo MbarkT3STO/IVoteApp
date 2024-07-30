@@ -59,4 +59,18 @@ public class ElectionsController : ControllerBase
 		return BadRequest(result.Error);
 	}
 
+
+	[HttpPost(nameof(UpdateTitle))]
+	public async Task<IActionResult> UpdateTitle(UpdateElectionTitleCommand command)
+	{
+		var result = await mediator.Send(command);
+
+		if(result.IsSuccess)
+		{
+			return Ok(result.Value);
+		}
+
+		return BadRequest(result.Error);
+	}
+
 }
