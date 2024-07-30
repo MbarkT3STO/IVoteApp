@@ -5,16 +5,11 @@ namespace ElectionService.CQRS.Features.EndPoints;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ElectionsController : ControllerBase
+public class ElectionsController(IMediator mediator) : ControllerBase
 {
-	readonly IMediator mediator;
+	readonly IMediator mediator = mediator;
 
-	public ElectionsController(IMediator mediator)
-	{
-		this.mediator = mediator;
-	}
-
-	[HttpGet]
+    [HttpGet]
 	[Route(nameof(Get))]
 	public async Task<IActionResult> Get()
 	{
