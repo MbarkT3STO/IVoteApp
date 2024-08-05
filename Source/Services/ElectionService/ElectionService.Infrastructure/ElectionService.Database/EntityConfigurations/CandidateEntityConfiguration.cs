@@ -25,6 +25,7 @@ public class CandidateEntityConfiguration : IEntityTypeConfiguration<Candidate>
 
 		builder.Property( candidate => candidate.PhotoUrl ).IsRequired();
 
+		builder.HasOne( candidate => candidate.PoliticalParty ).WithMany( politicalParty => politicalParty.Candidates ).HasForeignKey( candidate => candidate.PoliticalPartyId );
 		builder.HasOne( candidate => candidate.Election ).WithMany( election => election.Candidates ).HasForeignKey( candidate => candidate.ElectionId );
 	}
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElectionService.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240730134805_Initial")]
+    [Migration("20240730192604_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -95,7 +95,6 @@ namespace ElectionService.Database.Migrations
             modelBuilder.Entity("ElectionService.Entities.PoliticalParty", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedBy")
@@ -123,7 +122,7 @@ namespace ElectionService.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PoliticalParty");
+                    b.ToTable("PoliticalParties", (string)null);
                 });
 
             modelBuilder.Entity("ElectionService.Entities.Candidate", b =>

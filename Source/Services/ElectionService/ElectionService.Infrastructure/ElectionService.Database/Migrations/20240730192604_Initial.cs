@@ -29,7 +29,7 @@ namespace ElectionService.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PoliticalParty",
+                name: "PoliticalParties",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -42,7 +42,7 @@ namespace ElectionService.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PoliticalParty", x => x.Id);
+                    table.PrimaryKey("PK_PoliticalParties", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,9 +67,9 @@ namespace ElectionService.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Candidates_PoliticalParty_PoliticalPartyId",
+                        name: "FK_Candidates_PoliticalParties_PoliticalPartyId",
                         column: x => x.PoliticalPartyId,
-                        principalTable: "PoliticalParty",
+                        principalTable: "PoliticalParties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -95,7 +95,7 @@ namespace ElectionService.Database.Migrations
                 name: "Elections");
 
             migrationBuilder.DropTable(
-                name: "PoliticalParty");
+                name: "PoliticalParties");
         }
     }
 }
