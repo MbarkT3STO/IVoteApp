@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\MBARK\\.nuget\\packages\\": {}
+    "C:\\Users\\MBVRK\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj",
+      "projectUniqueName": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj",
       "projectName": "ElectionService.Shared",
-      "projectPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj",
-      "packagesPath": "C:\\Users\\MBARK\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\obj\\",
+      "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj",
+      "packagesPath": "C:\\Users\\MBVRK\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\MBARK\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\MBVRK\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

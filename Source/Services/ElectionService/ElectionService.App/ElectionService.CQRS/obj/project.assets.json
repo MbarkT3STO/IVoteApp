@@ -9834,19 +9834,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MBARK\\.nuget\\packages\\": {}
+    "C:\\Users\\MBVRK\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.App\\ElectionService.CQRS\\ElectionService.CQRS.csproj",
+      "projectUniqueName": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.App\\ElectionService.CQRS\\ElectionService.CQRS.csproj",
       "projectName": "ElectionService.CQRS",
-      "projectPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.App\\ElectionService.CQRS\\ElectionService.CQRS.csproj",
-      "packagesPath": "C:\\Users\\MBARK\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.App\\ElectionService.CQRS\\obj\\",
+      "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.App\\ElectionService.CQRS\\ElectionService.CQRS.csproj",
+      "packagesPath": "C:\\Users\\MBVRK\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.App\\ElectionService.CQRS\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\MBARK\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\MBVRK\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9860,8 +9860,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj": {
-              "projectPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj"
+            "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj": {
+              "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj"
             }
           }
         }

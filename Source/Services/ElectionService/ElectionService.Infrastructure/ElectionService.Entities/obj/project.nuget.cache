@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hcIylMetWE5gFzSwPQBC1Iv0y10t+yZ1kYP/ZtQX70EpC9WSCVZm72hJzIo9D6RfkzG1boFu7FUN9pXprR8vWQ==",
+  "dgSpecHash": "ImnVuaZ6E+Mw8WLGA9qgZuT/BsKzLfmuDLhS8oluLRKZz+4lOPR1YGKsP5vA6sSk1/JMS1wAayyKnGSd+vvmfw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj",
+  "projectFilePath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

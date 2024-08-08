@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj": {}
+    "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj": {
+    "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj",
+        "projectUniqueName": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj",
         "projectName": "ElectionService.Database",
-        "projectPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj",
-        "packagesPath": "C:\\Users\\MBARK\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\obj\\",
+        "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj",
+        "packagesPath": "C:\\Users\\MBVRK\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MBARK\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MBVRK\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj": {
-                "projectPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj"
+              "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj": {
+                "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj"
               }
             }
           }
@@ -98,17 +98,17 @@
         }
       }
     },
-    "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj": {
+    "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj",
         "projectName": "ElectionService.Entities",
-        "projectPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj",
-        "packagesPath": "C:\\Users\\MBARK\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\obj\\",
+        "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\ElectionService.Entities.csproj",
+        "packagesPath": "C:\\Users\\MBVRK\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MBARK\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MBVRK\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -122,8 +122,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj": {
-                "projectPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj"
+              "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj": {
+                "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj"
               }
             }
           }
@@ -162,17 +162,17 @@
         }
       }
     },
-    "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj": {
+    "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj",
         "projectName": "ElectionService.Shared",
-        "projectPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj",
-        "packagesPath": "C:\\Users\\MBARK\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MBARK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\obj\\",
+        "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\ElectionService.Shared.csproj",
+        "packagesPath": "C:\\Users\\MBVRK\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Shared\\ElectionService.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MBARK\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MBVRK\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
