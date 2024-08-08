@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ElectionService.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f76e65ead0c4158d7584ebbb851ae10046417ff5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bcc8a5d7c3452f03173e3a28624ee5af8f5ef798")]
 [assembly: System.Reflection.AssemblyProductAttribute("ElectionService.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ElectionService.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

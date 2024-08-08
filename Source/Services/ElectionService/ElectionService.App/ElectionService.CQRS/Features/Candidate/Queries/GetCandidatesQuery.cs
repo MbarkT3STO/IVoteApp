@@ -39,9 +39,8 @@ public class GetCandidatesQueryMapProfile : Profile
 /// <summary>
 /// Represents the query used to get candidates.
 /// </summary>
-public class GetCandidatesQuery : IRequest<GetCandidatesQueryResult>
+public class GetCandidatesQuery : AppQuery<GetCandidatesQueryResult>
 {
-
 }
 
 

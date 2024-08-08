@@ -43,7 +43,7 @@ public class CreateCandidateCommandMappingProfile : Profile
 /// <summary>
 /// Represents the command used to create a candidate.
 /// </summary>
-public class CreateCandidateCommand : IRequest<CreateCandidateCommandResult>
+public class CreateCandidateCommand : AppCommand<CreateCandidateCommandResult>
 {
 	public Guid ElectionId { get; set; }
 	public Guid PoliticalPartyId { get; set; }
