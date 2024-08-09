@@ -13,7 +13,12 @@ public interface IQuery<TResult> : IRequest<TResult> where TResult : class
 	/// <summary>
 	/// Gets the result of the query.
 	/// </summary>
-	public TResult Result { get; }
+	public TResult? Result { get; }
+
+	/// <summary>
+	/// Gets the cache key of the query.
+	/// </summary>
+	public string CacheKey { get; }
 }
 
 
@@ -31,5 +36,10 @@ public interface IQuery<TResult, TResultValue> : IRequest<TResult> where TResult
 	/// <summary>
 	/// Gets the result of the query.
 	/// </summary>
-	public TResult Result { get; }
+	public TResult? Result { get; }
+
+	/// <summary>
+	/// Gets the cache key of the query.
+	/// </summary>
+	public string CacheKey { get; }
 }

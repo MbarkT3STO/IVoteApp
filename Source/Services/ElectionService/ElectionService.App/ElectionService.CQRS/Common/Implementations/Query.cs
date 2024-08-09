@@ -9,7 +9,8 @@ public class Query<TResult> : IQuery<TResult> where TResult : class
 {
 	public Guid QueryId { get; set; }
 
-	public TResult Result { get; set; }
+	public TResult? Result { get; set; }
+	public string CacheKey { get; }
 }
 
 /// <summary>
@@ -20,5 +21,7 @@ public class Query<TResult, TResultValue> : IQuery<TResult, TResultValue> where 
 {
 	public Guid QueryId { get; set; }
 
-	public TResult Result { get; set; }
+	public TResult? Result { get; set; }
+	public string CacheKey { get; }
+
 }

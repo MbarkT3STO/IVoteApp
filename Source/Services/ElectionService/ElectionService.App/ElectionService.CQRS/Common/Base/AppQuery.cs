@@ -7,9 +7,30 @@ namespace ElectionService.CQRS.Common.Base;
 /// <typeparam name="TResult">The type of the query result.</typeparam>
 public abstract class AppQuery<TResult> : IQuery<TResult> where TResult : class
 {
-	public Guid QueryId { get; } = Guid.NewGuid();
+	public Guid QueryId { get; }
 
-	public TResult Result { get; }
+	public TResult? Result { get; }
+
+	public string CacheKey { get; }
+
+
+
+	protected AppQuery()
+	{
+		QueryId = Guid.NewGuid();
+	}
+
+	protected AppQuery(string cacheKey)
+	{
+		QueryId = Guid.NewGuid();
+		CacheKey = cacheKey;
+	}
+
+	protected AppQuery(Guid queryId, string cacheKey)
+	{
+		QueryId = queryId;
+		CacheKey = cacheKey;
+	}
 }
 
 
@@ -23,4 +44,6 @@ public abstract class AppQuery<TResult, TResultValue> : IQuery<TResult, TResultV
 	public Guid QueryId { get; } = Guid.NewGuid();
 
 	public TResult Result { get; }
+
+	public string CacheKey { get; }
 }

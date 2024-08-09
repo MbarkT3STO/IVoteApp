@@ -41,6 +41,9 @@ public class GetCandidatesQueryMapProfile : Profile
 /// </summary>
 public class GetCandidatesQuery : AppQuery<GetCandidatesQueryResult>
 {
+    public GetCandidatesQuery() : base(cacheKey: nameof(GetCandidatesQuery))
+    {
+    }
 }
 
 

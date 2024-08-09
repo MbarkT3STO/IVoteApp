@@ -44,7 +44,7 @@ public class GetCandidateByIdQuery : AppQuery<GetCandidateByIdQueryResult>
 {
 	public Guid CandidateId { get; set; }
 
-	public GetCandidateByIdQuery(Guid candidateId)
+	public GetCandidateByIdQuery(Guid candidateId) : base(cacheKey: $"{nameof(GetCandidateByIdQuery)}-{candidateId}")
 	{
 		CandidateId = candidateId;
 	}
