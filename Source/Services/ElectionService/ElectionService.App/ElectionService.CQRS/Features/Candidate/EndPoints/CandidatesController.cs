@@ -36,4 +36,20 @@ public class CandidatesController(IMediator mediator) : ControllerBase
 
 		return BadRequest(result.Error);
 	}
+
+
+	[HttpGet(nameof(GetById))]
+	public async Task<IActionResult> GetById(Guid id)
+	{
+		var query = new GetCandidateByIdQuery(id);
+
+		var result = await mediator.Send(query);
+
+		if(result.IsSuccess)
+		{
+			return Ok(result.Value);
+		}
+
+		return BadRequest(result.Error);
+	}
 }
