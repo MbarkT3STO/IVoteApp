@@ -11,6 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 
 // Add Application services
 builder.Services.AddApplicationServices();
+builder.Services.AddSqlServerCache(builder.Configuration);
 
 builder.Services.AddControllers();
 

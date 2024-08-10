@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "A/FVR4eYgp5OLgzk99fQaGcq+f5JvYkRQfoHH/4gyvAoyIJJ5SrSzUnUu+NPFyRx4FmzEVVZ2JIoFj/e1blLRQ==",
+  "dgSpecHash": "IExu6kxmQTUs3ccHqtRjfmxwLwd3Pf9vJLzadfOg0sKPwW1JWAYRkw9WoHHyaCi7qlySiIur8ioQkX29w75smA==",
   "success": true,
   "projectFilePath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.App\\ElectionService.CQRS\\ElectionService.CQRS.csproj",
   "expectedPackageFiles": [
@@ -66,6 +66,7 @@
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\8.0.7\\microsoft.entityframeworkcore.sqlserver.8.0.7.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.caching.memory\\8.0.0\\microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
+    "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.caching.sqlserver\\8.0.7\\microsoft.extensions.caching.sqlserver.8.0.7.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
@@ -79,7 +80,7 @@
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.logging\\8.0.0\\microsoft.extensions.logging.8.0.0.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.objectpool\\2.2.0\\microsoft.extensions.objectpool.2.2.0.nupkg.sha512",
-    "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
+    "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.extensions.webencoders\\2.2.0\\microsoft.extensions.webencoders.2.2.0.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.identity.client\\4.56.0\\microsoft.identity.client.4.56.0.nupkg.sha512",

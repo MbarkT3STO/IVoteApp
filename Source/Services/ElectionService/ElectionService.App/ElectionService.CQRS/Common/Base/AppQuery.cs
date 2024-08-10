@@ -13,6 +13,8 @@ public abstract class AppQuery<TResult> : IQuery<TResult> where TResult : class
 
 	public string CacheKey { get; }
 
+	public bool UseCacheIfAvailable { get; } = true;
+
 
 
 	protected AppQuery()
@@ -46,4 +48,5 @@ public abstract class AppQuery<TResult, TResultValue> : IQuery<TResult, TResultV
 	public TResult Result { get; }
 
 	public string CacheKey { get; }
+	public bool UseCacheIfAvailable { get; } = true;
 }

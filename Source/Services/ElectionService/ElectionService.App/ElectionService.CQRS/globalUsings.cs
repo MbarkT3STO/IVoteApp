@@ -12,7 +12,7 @@ global using ElectionService.CQRS.Common.Exceptions;
 global using ElectionService.CQRS.Common.Interfaces;
 global using ElectionService.CQRS.Common.Implementations;
 global using ElectionService.CQRS.Common.Base;
-
+global using ElectionService.CQRS.Features.Cache;
 
 
 

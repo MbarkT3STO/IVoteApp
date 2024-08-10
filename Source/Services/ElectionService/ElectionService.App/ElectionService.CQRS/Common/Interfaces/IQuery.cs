@@ -19,6 +19,11 @@ public interface IQuery<TResult> : IRequest<TResult> where TResult : class
 	/// Gets the cache key of the query.
 	/// </summary>
 	public string CacheKey { get; }
+
+	/// <summary>
+	/// Gets a value indicating whether the query should use the cache if it is available.
+	/// </summary>
+	public bool UseCacheIfAvailable { get; }
 }
 
 
@@ -42,4 +47,9 @@ public interface IQuery<TResult, TResultValue> : IRequest<TResult> where TResult
 	/// Gets the cache key of the query.
 	/// </summary>
 	public string CacheKey { get; }
+
+		/// <summary>
+	/// Gets a value indicating whether the query should use the cache if it is available.
+	/// </summary>
+	public bool UseCacheIfAvailable { get; }
 }

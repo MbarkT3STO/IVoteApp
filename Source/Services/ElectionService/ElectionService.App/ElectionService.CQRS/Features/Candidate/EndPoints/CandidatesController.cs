@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using ElectionService.CQRS.Features.Candidate.Commands;
 using ElectionService.CQRS.Features.Candidate.Queries;
 
@@ -13,9 +14,24 @@ public class CandidatesController(IMediator mediator) : ControllerBase
 	[Route(nameof(Get))]
 	public async Task<IActionResult> Get()
 	{
-		var result = await mediator.Send(new GetCandidatesQuery());
 
-		if(result.IsSuccess)
+		var stopwatch = Stopwatch.StartNew();
+
+		var query = new GetCandidatesQuery();
+		var result = await mediator.Send(query);
+
+		stopwatch.Stop();
+
+		if (result.IsSuccess)
+		{
+			// Return the result with the elapsed time
+			return Ok(new
+			{
+				result.Value,
+				ElapsedTime = stopwatch.Elapsed
+			});
+		}
+		if (result.IsSuccess)
 		{
 			return Ok(result.Value);
 		}
