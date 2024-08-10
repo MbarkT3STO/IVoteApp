@@ -15,23 +15,44 @@ public abstract class AppQuery<TResult> : IQuery<TResult> where TResult : class
 
 	public bool UseCacheIfAvailable { get; } = true;
 
+	public int PageNumber { get; }
+
+	public int PageSize { get; }
+
+	public int PageIndex => PageNumber - 1;
+
+	public int PageOffset => PageIndex * PageSize;
 
 
-	protected AppQuery()
-	{
-		QueryId = Guid.NewGuid();
-	}
+	// protected AppQuery()
+	// {
+	// 	QueryId = Guid.NewGuid();
+	// }
 
 	protected AppQuery(string cacheKey)
 	{
 		QueryId = Guid.NewGuid();
 		CacheKey = cacheKey;
+		UseCacheIfAvailable = true;
+		PageNumber = 1;
+		PageSize = 10;
 	}
 
-	protected AppQuery(Guid queryId, string cacheKey)
+	protected AppQuery(string cacheKey, int pageNumber, int pageSize = 10)
 	{
-		QueryId = queryId;
+		QueryId = Guid.NewGuid();
 		CacheKey = cacheKey;
+		UseCacheIfAvailable = true;
+		PageNumber = pageNumber;
+		PageSize = pageSize;
+	}
+
+	protected AppQuery(int pageNumber, int pageSize = 10)
+	{
+		QueryId = Guid.NewGuid();
+		UseCacheIfAvailable = false;
+		PageNumber = pageNumber;
+		PageSize = pageSize;
 	}
 }
 
@@ -49,4 +70,6 @@ public abstract class AppQuery<TResult, TResultValue> : IQuery<TResult, TResultV
 
 	public string CacheKey { get; }
 	public bool UseCacheIfAvailable { get; } = true;
+	public int PageNumber { get; }
+	public int PageSize { get; } = 10;
 }

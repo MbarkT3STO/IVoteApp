@@ -52,7 +52,7 @@ public abstract class BaseQueryHandler<TQuery, TResponse> : IRequestHandler<TQue
 /// </summary>
 /// <typeparam name="TQuery">The type of the query.</typeparam>
 /// <typeparam name="TQueryResult">The type of the response.</typeparam>
-public abstract class BaseCacheQueryHandler<TQuery, TQueryResult, TQueryResultDTO> : IRequestHandler<TQuery, TQueryResult>
+public abstract class BaseQueryHandler<TQuery, TQueryResult, TQueryResultDTO> : IRequestHandler<TQuery, TQueryResult>
 where TQuery : AppQuery<TQueryResult>
 where TQueryResult : QueryResult<TQueryResultDTO, TQueryResult>
 {
@@ -62,7 +62,7 @@ where TQueryResult : QueryResult<TQueryResultDTO, TQueryResult>
 	protected readonly IDistributedCache _distributedCache;
 
 
-	protected BaseCacheQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache)
+	protected BaseQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache)
 	{
 		_mapper = mapper;
 		_mediator = mediator;

@@ -39,6 +39,33 @@ public class CandidatesController(IMediator mediator) : ControllerBase
 		return BadRequest(result.Error);
 	}
 
+	[HttpGet(nameof(GetFromPage))]
+	public async Task<IActionResult> GetFromPage(int pageNumber)
+	{
+		var stopwatch = Stopwatch.StartNew();
+
+		var query = new GetCandidatesQuery(pageNumber);
+		var result = await mediator.Send(query);
+
+		stopwatch.Stop();
+
+		if (result.IsSuccess)
+		{
+			// Return the result with the elapsed time
+			return Ok(new
+			{
+				result.Value,
+				ElapsedTime = stopwatch.Elapsed
+			});
+		}
+		if (result.IsSuccess)
+		{
+			return Ok(result.Value);
+		}
+
+		return BadRequest(result.Error);
+	}
+
 
 	[HttpPost(nameof(Create))]
 	public async Task<IActionResult> Create(CreateCandidateCommand command)
