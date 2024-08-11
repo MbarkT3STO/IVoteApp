@@ -1,6 +1,8 @@
 
 
 
+using Microsoft.Extensions.Caching.Distributed;
+
 namespace ElectionService.CQRS.Features.Candidate.Queries;
 
 public class GetCandidateByIdQueryResultDto
@@ -40,39 +42,46 @@ public class GetCandidateByIdQueryMapProfile : Profile
 /// <summary>
 /// Represents the query used to get a candidate by id.
 /// </summary>
-public class GetCandidateByIdQuery : AppQuery<GetCandidateByIdQueryResult>
+public class GetCandidateByIdQuery : AppQuery<GetCandidateByIdQuery, GetCandidateByIdQueryResult>
 {
 	public Guid CandidateId { get; set; }
 
-	public GetCandidateByIdQuery(Guid candidateId) : base(cacheKey: $"{nameof(GetCandidateByIdQuery)}-{candidateId}")
+
+	public GetCandidateByIdQuery() : base()
+	{
+	}
+
+	public GetCandidateByIdQuery(string cacheKey) : base(cacheKey)
+	{
+	}
+
+	/// <summary>
+	/// Sets the candidate id.
+	/// </summary>
+	public GetCandidateByIdQuery WithCandidateId(Guid candidateId)
 	{
 		CandidateId = candidateId;
+
+		return this;
 	}
 }
 
 
-public class GetCandidateByIdQueryHandler : BaseQueryHandler<GetCandidateByIdQuery, GetCandidateByIdQueryResult>
+public class GetCandidateByIdQueryHandler : BaseQueryHandler<GetCandidateByIdQuery, GetCandidateByIdQueryResult, GetCandidateByIdQueryResultDto>
 {
-	public GetCandidateByIdQueryHandler(IMapper mapper, AppDbContext dbContext) : base(mapper, dbContext)
+	public GetCandidateByIdQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache) : base(mapper, mediator, dbContext, distributedCache)
 	{
 	}
 
-	public override async Task<GetCandidateByIdQueryResult> Handle(GetCandidateByIdQuery query, CancellationToken cancellationToken)
+	protected override async Task<GetCandidateByIdQueryResult> HandleCore(GetCandidateByIdQuery query, CancellationToken cancellationToken)
 	{
-		try
-		{
-			var candidate = await _dbContext.Candidates.FirstOrDefaultAsync(x => x.Id == query.CandidateId, cancellationToken);
+		var candidate = await _dbContext.Candidates.FirstOrDefaultAsync(x => x.Id == query.CandidateId, cancellationToken);
 
-			if (candidate is null)
-				return GetCandidateByIdQueryResult.Failed(new Error("Candidate not found."));
+		if (candidate is null)
+			return GetCandidateByIdQueryResult.Failed(new Error("Candidate not found."));
 
-			var resultDto = _mapper.Map<GetCandidateByIdQueryResultDto>(candidate);
+		var resultDto = _mapper.Map<GetCandidateByIdQueryResultDto>(candidate);
 
-			return GetCandidateByIdQueryResult.Succeeded(resultDto);
-		}
-		catch (Exception e)
-		{
-			return GetCandidateByIdQueryResult.Failed(new Error(e.Message));
-		}
+		return GetCandidateByIdQueryResult.Succeeded(resultDto);
 	}
 }

@@ -41,9 +41,21 @@ public class GetCandidatesQueryMapProfile : Profile
 /// <summary>
 /// Represents the query used to get candidates.
 /// </summary>
-public class GetCandidatesQuery : AppQuery<GetCandidatesQueryResult>
+public class GetCandidatesQuery : AppQuery<GetCandidatesQuery, GetCandidatesQueryResult>
 {
-	public GetCandidatesQuery(int pageNumber=1, int pageSize = 10) : base($"{nameof(GetCandidatesQuery)}-page-{pageNumber}-pageSize-{pageSize}", pageNumber, pageSize)
+	// public GetCandidatesQuery(int pageNumber=1, int pageSize = 10) : base($"{nameof(GetCandidatesQuery)}-page-{pageNumber}-pageSize-{pageSize}", pageNumber, pageSize)
+	// {
+	// }
+
+	public GetCandidatesQuery(string cacheKey) : base(cacheKey)
+	{
+	}
+
+	public GetCandidatesQuery(int pageNumber, int pageSize = 10) : base(pageNumber, pageSize)
+	{
+	}
+
+	public GetCandidatesQuery(string cacheKey, int pageNumber, int pageSize = 10) : base(cacheKey, pageNumber, pageSize)
 	{
 	}
 }
@@ -103,55 +115,20 @@ public class GetCandidatesQueryHandler : BaseQueryHandler<GetCandidatesQuery, Ge
 	{
 	}
 
-	// public override async Task<GetCandidatesQueryResult> Handle(GetCandidatesQuery query, CancellationToken cancellationToken)
-	// {
-	// 	try
-	// 	{
-	// 		if (query.UseCacheIfAvailable)
-	// 		{
-	// 			var availableCache = await _distributedCache.GetStringAsync(query.CacheKey, cancellationToken);
-	// 			if (availableCache != null)
-	// 			{
-	// 				var queryResultDto = JsonSerializer.Deserialize<IEnumerable<GetCandidatesQueryResultDto>>(availableCache);
-	// 				var queryResult = GetCandidatesQueryResult.Succeeded(queryResultDto);
-
-	// 				return queryResult;
-	// 			}
-	// 			else
-	// 			{
-	// 				var candidates = await _dbContext.Candidates.ToListAsync(cancellationToken);
-	// 				var queryResultDto = _mapper.Map<IEnumerable<GetCandidatesQueryResultDto>>(candidates);
-	// 				var queryResult = GetCandidatesQueryResult.Succeeded(queryResultDto);
-
-	// 				_mediator.Send(new SetQueryCacheEntry(query.CacheKey, queryResult.Value));
-
-	// 				return queryResult;
-	// 			}
-	// 		}
-	// 		else
-	// 		{
-	// 			var candidates = await _dbContext.Candidates.ToListAsync(cancellationToken);
-	// 			var queryResultDto = _mapper.Map<IEnumerable<GetCandidatesQueryResultDto>>(candidates);
-	// 			var queryResult = GetCandidatesQueryResult.Succeeded(queryResultDto);
-
-	// 			return queryResult;
-	// 		}
-	// 	}
-	// 	catch (Exception ex)
-	// 	{
-	// 		return GetCandidatesQueryResult.Failed(ex);
-	// 	}
-	// }
-
-
 	protected override async Task<GetCandidatesQueryResult> HandleCore(GetCandidatesQuery query, CancellationToken cancellationToken)
 	{
-		// var candidates = await _dbContext.Candidates.Skip(query.PageOffset).Take(query.PageSize).ToListAsync(cancellationToken);
-		var candidates = await _dbContext.Candidates.FromPage(query).ToListAsync(cancellationToken);
+		var candidates = await _dbContext.Candidates.ToListAsync(cancellationToken);
 		var queryResultDto = _mapper.Map<IEnumerable<GetCandidatesQueryResultDto>>(candidates);
 		var queryResult = GetCandidatesQueryResult.Succeeded(queryResultDto);
 
-		_mediator.Send(new SetQueryCacheEntry(query.CacheKey, queryResult.Value));
+		return queryResult;
+	}
+
+	protected override async Task<GetCandidatesQueryResult> HandlePagination(GetCandidatesQuery query, CancellationToken cancellationToken)
+	{
+		var candidates = await _dbContext.Candidates.FromPage(query).ToListAsync(cancellationToken);
+		var queryResultDto = _mapper.Map<IEnumerable<GetCandidatesQueryResultDto>>(candidates);
+		var queryResult = GetCandidatesQueryResult.Succeeded(queryResultDto);
 
 		return queryResult;
 	}

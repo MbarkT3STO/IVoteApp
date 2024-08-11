@@ -20,7 +20,18 @@ public static class DBSetExtensions
 	public static IQueryable<T> FromPage<T>(this DbSet<T> dbSet, IQuery query) where T : class
 	{
 		return dbSet
-			.Skip(query.PageOffset)
-			.Take(query.PageSize);
+			.Skip(query.PaginationSettings.PageOffset)
+			.Take(query.PaginationSettings.PageSize);
+	}
+
+	/// <summary>
+	/// Get the specified page items from a <see cref="DbSet{T}"/>
+	/// </summary>
+	/// <param name="paginationSettings">The pagination settings for the query.</param>
+	public static IQueryable<T> FromPage<T>(this DbSet<T> dbSet, IPaginationSettings paginationSettings) where T : class
+	{
+		return dbSet
+			.Skip(paginationSettings.PageOffset)
+			.Take(paginationSettings.PageSize);
 	}
 }

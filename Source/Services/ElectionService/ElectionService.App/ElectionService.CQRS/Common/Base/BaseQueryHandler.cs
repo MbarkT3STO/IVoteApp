@@ -1,7 +1,5 @@
-using System.Reflection;
 using System.Text.Json;
-using ElectionService.CQRS.Common.Implementations;
-using ElectionService.Database;
+using ElectionService.CQRS.Extensions;
 using Microsoft.Extensions.Caching.Distributed;
 
 namespace ElectionService.CQRS.Common.Base;
@@ -52,9 +50,10 @@ public abstract class BaseQueryHandler<TQuery, TResponse> : IRequestHandler<TQue
 /// </summary>
 /// <typeparam name="TQuery">The type of the query.</typeparam>
 /// <typeparam name="TQueryResult">The type of the response.</typeparam>
-public abstract class BaseQueryHandler<TQuery, TQueryResult, TQueryResultDTO> : IRequestHandler<TQuery, TQueryResult>
-where TQuery : AppQuery<TQueryResult>
-where TQueryResult : QueryResult<TQueryResultDTO, TQueryResult>
+/// <typeparam name="TQueryResultValue">The type of the query result value.</typeparam>
+public abstract class BaseQueryHandler<TQuery, TQueryResult, TQueryResultValue> : IRequestHandler<TQuery, TQueryResult>
+where TQuery : AppQuery<TQuery, TQueryResult>
+where TQueryResult : QueryResult<TQueryResultValue, TQueryResult>
 {
 	protected readonly IMapper _mapper;
 	protected readonly IMediator _mediator;
@@ -74,23 +73,46 @@ where TQueryResult : QueryResult<TQueryResultDTO, TQueryResult>
 	{
 		try
 		{
-			if (query.UseCacheIfAvailable)
+			if (query.CacheSettings.UseCacheIfAvailable)
 			{
-				var cachedResult = await TryGetFromCache(query, cancellationToken);
-				if (cachedResult != null)
+				var cachedQueryResult = await TryGetFromCache(query, cancellationToken);
+				if (cachedQueryResult != null)
 				{
-					return cachedResult;
+					query.Result = cachedQueryResult;
+					return cachedQueryResult;
 				}
 			}
 
-			return await HandleCore(query, cancellationToken);
+			if (query.PaginationSettings.UsePagination)
+			{
+				var paginatedQueryResult = await HandlePagination(query, cancellationToken);
+				query.Result = paginatedQueryResult;
+
+				if (query.CacheSettings.UseCacheIfAvailable)
+				{
+					CacheQueryResult(paginatedQueryResult, query, cancellationToken);
+				}
+
+				return paginatedQueryResult;
+			}
+
+			var queryResult = await HandleCore(query, cancellationToken);
+			query.Result = queryResult;
+
+			if (query.CacheSettings.UseCacheIfAvailable)
+			{
+				CacheQueryResult(queryResult, query, cancellationToken);
+			}
+
+			return queryResult;
 		}
 		catch (Exception ex)
 		{
 			var error = Error.FromException(ex);
-			return (TQueryResult)Activator.CreateInstance(typeof(TQueryResult), error);
+			return (TQueryResult)Activator.CreateInstance(typeof(TQueryResult), error)!;
 		}
 	}
+
 
 	/// <summary>
 	/// Handles the core logic of the query.
@@ -100,22 +122,48 @@ where TQueryResult : QueryResult<TQueryResultDTO, TQueryResult>
 	protected abstract Task<TQueryResult> HandleCore(TQuery query, CancellationToken cancellationToken);
 
 	/// <summary>
+	/// Handles the pagination logic of the query.
+	/// </summary>
+	/// <param name="query">The query.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
+	protected virtual Task<TQueryResult> HandlePagination(TQuery query, CancellationToken cancellationToken) => throw new NotImplementedException();
+
+
+
+	/// <summary>
 	/// Tries to get query result from cache.
 	/// </summary>
 	/// <param name="query">The query to get from cache.</param>
 	/// <param name="cancellationToken">The cancellation token.</param>
 	private async Task<TQueryResult?> TryGetFromCache(TQuery query, CancellationToken cancellationToken)
 	{
-		var availableCache = await _distributedCache.GetStringAsync(query.CacheKey, cancellationToken);
+		var availableCache = await _distributedCache.GetStringAsync(query.CacheSettings.CacheKey, cancellationToken);
 
 		if (availableCache != null)
 		{
-			var queryResultValue = JsonSerializer.Deserialize<TQueryResultDTO>(availableCache);
-			var queryResult = (TQueryResult)Activator.CreateInstance(typeof(TQueryResult), queryResultValue);
+			var queryResultValue = JsonSerializer.Deserialize<TQueryResultValue>(availableCache);
+			var queryResult = (TQueryResult)Activator.CreateInstance(typeof(TQueryResult), queryResultValue)!;
 
 			return queryResult;
 		}
 
 		return default;
+	}
+
+
+	/// <summary>
+	/// Caches the query result value in distributed cache.
+	/// </summary>
+	/// <param name="queryResult">The query result.</param>
+	/// <param name="query">The query.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
+	protected Task CacheQueryResult(TQueryResult queryResult, TQuery query, CancellationToken cancellationToken=default)
+	{
+		if (query.CacheSettings.UseCacheIfAvailable)
+		{
+			_mediator.Send(new SetQueryCacheEntry(query.CacheSettings.CacheKey, queryResult.Value));
+		}
+
+		return Task.CompletedTask;
 	}
 }
