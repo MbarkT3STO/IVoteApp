@@ -88,12 +88,12 @@ public abstract class AppQuery<TResult> : IQuery<TResult> where TResult : class
 /// Represents a base class for query operation for the application.
 /// </summary>
 /// <typeparam name="TQuery">The type of the query.</typeparam>
-/// <typeparam name="TResult">The type of the query result.</typeparam>
-public abstract class AppQuery<TQuery, TResult> : IQuery<TResult> where TResult : class where TQuery : AppQuery<TQuery, TResult>
+/// <typeparam name="TQueryResult">The type of the query result.</typeparam>
+public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> where TQueryResult : class where TQuery : AppQuery<TQuery, TQueryResult>
 {
 	public Guid QueryId { get; }
 
-	public TResult? Result { get; set;}
+	public TQueryResult? Result { get; set;}
 
 	public ICacheSettings CacheSettings { get; }
 	public IPaginationSettings PaginationSettings { get; }

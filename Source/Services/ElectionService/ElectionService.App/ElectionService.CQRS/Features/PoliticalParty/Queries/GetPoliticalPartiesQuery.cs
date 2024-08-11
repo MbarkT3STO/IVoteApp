@@ -1,5 +1,8 @@
 
 
+using ElectionService.CQRS.Extensions;
+using Microsoft.Extensions.Caching.Distributed;
+
 namespace ElectionService.CQRS.Features.PoliticalParty.Queries;
 
 public class GetPoliticalPartiesQueryResultDto
@@ -42,35 +45,48 @@ public class GetPoliticalPartiesQueryMapProfile : Profile
 /// <summary>
 /// Represents the query used to get political parties.
 /// </summary>
-public class GetPoliticalPartiesQuery : IRequest<GetPoliticalPartiesQueryResult>
+public class GetPoliticalPartiesQuery : AppQuery<GetPoliticalPartiesQuery, GetPoliticalPartiesQueryResult>
 {
+	public GetPoliticalPartiesQuery()
+	{
+	}
 
+	public GetPoliticalPartiesQuery(string cacheKey) : base(cacheKey)
+	{
+	}
+
+	public GetPoliticalPartiesQuery(int pageNumber, int pageSize = 10) : base(pageNumber, pageSize)
+	{
+	}
+
+	public GetPoliticalPartiesQuery(string cacheKey, int pageNumber, int pageSize = 10) : base(cacheKey, pageNumber, pageSize)
+	{
+	}
 }
 
 
 
-public class GetPoliticalPartiesQueryHandler : BaseQueryHandler<GetPoliticalPartiesQuery, GetPoliticalPartiesQueryResult>
+public class GetPoliticalPartiesQueryHandler : BaseQueryHandler<GetPoliticalPartiesQuery, GetPoliticalPartiesQueryResult, IEnumerable<GetPoliticalPartiesQueryResultDto>>
 {
-	public GetPoliticalPartiesQueryHandler(IMapper mapper, AppDbContext dbContext) : base(mapper, dbContext)
+	public GetPoliticalPartiesQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache) : base(mapper, mediator, dbContext, distributedCache)
 	{
 	}
 
-
-	public override async Task<GetPoliticalPartiesQueryResult> Handle(GetPoliticalPartiesQuery query, CancellationToken cancellationToken)
+	protected override async Task<GetPoliticalPartiesQueryResult> HandleCore(GetPoliticalPartiesQuery query, CancellationToken cancellationToken)
 	{
-		try
-		{
-			var politicalParties = await _dbContext.PoliticalParties.ToListAsync(cancellationToken);
+		var politicalParties = await _dbContext.PoliticalParties.ToListAsync(cancellationToken);
+		var queryResultDto = _mapper.Map<IEnumerable<GetPoliticalPartiesQueryResultDto>>(politicalParties);
+		var queryResult = GetPoliticalPartiesQueryResult.Succeeded(queryResultDto);
 
-			var queryResultDto = _mapper.Map<IEnumerable<GetPoliticalPartiesQueryResultDto>>(politicalParties);
+		return queryResult;
+	}
 
-			var queryResult = GetPoliticalPartiesQueryResult.Succeeded(queryResultDto);
+	protected override async Task<GetPoliticalPartiesQueryResult> HandlePagination(GetPoliticalPartiesQuery query, CancellationToken cancellationToken)
+	{
+		var politicalParties = await _dbContext.PoliticalParties.FromPage(query).ToListAsync(cancellationToken);
+		var queryResultDto = _mapper.Map<IEnumerable<GetPoliticalPartiesQueryResultDto>>(politicalParties);
+		var queryResult = GetPoliticalPartiesQueryResult.Succeeded(queryResultDto);
 
-			return queryResult;
-		}
-		catch (Exception ex)
-		{
-			return GetPoliticalPartiesQueryResult.Failed(ex);
-		}
+		return queryResult;
 	}
 }

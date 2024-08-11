@@ -14,11 +14,12 @@ public class PoliticalPartyController : ControllerBase
 		this.mediator = mediator;
 	}
 
-	[HttpGet]
-	[Route(nameof(Get))]
+	[HttpGet(nameof(Get))]
 	public async Task<IActionResult> Get()
 	{
-		var result = await mediator.Send(new GetPoliticalPartiesQuery());
+		var cacheKey = $"{nameof(GetPoliticalPartiesQuery)}";
+		var query = GetPoliticalPartiesQuery.CreateCachedQuery(cacheKey);
+		var result = await mediator.Send(query);
 
 		if(result.IsSuccess)
 		{
