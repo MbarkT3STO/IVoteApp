@@ -34,4 +34,41 @@ public static class DBSetExtensions
 			.Skip(paginationSettings.PageOffset)
 			.Take(paginationSettings.PageSize);
 	}
+
+
+
+
+
+	/// <summary>
+	/// Get the specified page items from a <see cref="IQueryable{T}"/>
+	/// </summary>
+	/// <returns>An <see cref="IQueryable{T}"/> of <typeparamref name="T"/></returns>
+	public static IQueryable<T> FromPage<T>(this IQueryable<T> queryable, int pageNumber, int pageSize) where T : class
+	{
+		return queryable
+			.Skip((pageNumber - 1) * pageSize)
+			.Take(pageSize);
+	}
+
+	/// <summary>
+	/// Get the specified page items from a <see cref="IQueryable{T}"/>
+	/// </summary>
+	/// <param name="query">The query.</param>
+	public static IQueryable<T> FromPage<T>(this IQueryable<T> queryable, IQuery query) where T : class
+	{
+		return queryable
+			.Skip(query.PaginationSettings.PageOffset)
+			.Take(query.PaginationSettings.PageSize);
+	}
+
+	/// <summary>
+	/// Get the specified page items from a <see cref="IQueryable{T}"/>
+	/// </summary>
+	/// <param name="paginationSettings">The pagination settings for the query.</param>
+	public static IQueryable<T> FromPage<T>(this IQueryable<T> queryable, IPaginationSettings paginationSettings) where T : class
+	{
+		return queryable
+			.Skip(paginationSettings.PageOffset)
+			.Take(paginationSettings.PageSize);
+	}
 }

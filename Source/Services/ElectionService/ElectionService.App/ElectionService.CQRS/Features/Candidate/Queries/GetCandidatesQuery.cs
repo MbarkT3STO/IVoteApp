@@ -43,10 +43,6 @@ public class GetCandidatesQueryMapProfile : Profile
 /// </summary>
 public class GetCandidatesQuery : AppQuery<GetCandidatesQuery, GetCandidatesQueryResult>
 {
-	// public GetCandidatesQuery(int pageNumber=1, int pageSize = 10) : base($"{nameof(GetCandidatesQuery)}-page-{pageNumber}-pageSize-{pageSize}", pageNumber, pageSize)
-	// {
-	// }
-
 	public GetCandidatesQuery(string cacheKey) : base(cacheKey)
 	{
 	}
@@ -61,54 +57,6 @@ public class GetCandidatesQuery : AppQuery<GetCandidatesQuery, GetCandidatesQuer
 }
 
 
-// public class GetCandidatesQueryHandler : BaseQueryHandler<GetCandidatesQuery, GetCandidatesQueryResult>
-// {
-// 	public GetCandidatesQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache) : base(mapper, mediator, dbContext, distributedCache)
-// 	{
-// 	}
-
-// 	public override async Task<GetCandidatesQueryResult> Handle(GetCandidatesQuery query, CancellationToken cancellationToken)
-// 	{
-// 		try
-// 		{
-// 			if (query.UseCacheIfAvailable)
-// 			{
-// 				var availableCache = await _distributedCache.GetStringAsync(query.CacheKey, cancellationToken);
-// 				if (availableCache != null)
-// 				{
-// 					var queryResultDto = JsonSerializer.Deserialize<IEnumerable<GetCandidatesQueryResultDto>>(availableCache);
-// 					var queryResult = GetCandidatesQueryResult.Succeeded(queryResultDto);
-
-// 					return queryResult;
-// 				}
-// 				else
-// 				{
-// 					var candidates = await _dbContext.Candidates.ToListAsync(cancellationToken);
-// 					var queryResultDto = _mapper.Map<IEnumerable<GetCandidatesQueryResultDto>>(candidates);
-// 					var queryResult = GetCandidatesQueryResult.Succeeded(queryResultDto);
-
-// 					_mediator.Send(new SetQueryCacheEntry(query.CacheKey, queryResult.Value));
-
-// 					return queryResult;
-// 				}
-// 			}
-// 			else
-// 			{
-// 				var candidates = await _dbContext.Candidates.ToListAsync(cancellationToken);
-// 				var queryResultDto = _mapper.Map<IEnumerable<GetCandidatesQueryResultDto>>(candidates);
-// 				var queryResult = GetCandidatesQueryResult.Succeeded(queryResultDto);
-
-// 				return queryResult;
-// 			}
-// 		}
-// 		catch (Exception ex)
-// 		{
-// 			return GetCandidatesQueryResult.Failed(ex);
-// 		}
-// 	}
-
-// }
-
 public class GetCandidatesQueryHandler : BaseQueryHandler<GetCandidatesQuery, GetCandidatesQueryResult, IEnumerable<GetCandidatesQueryResultDto>>
 {
 	public GetCandidatesQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache) : base(mapper, mediator, dbContext, distributedCache)
@@ -117,16 +65,15 @@ public class GetCandidatesQueryHandler : BaseQueryHandler<GetCandidatesQuery, Ge
 
 	protected override async Task<GetCandidatesQueryResult> HandleCore(GetCandidatesQuery query, CancellationToken cancellationToken)
 	{
-		var candidates = await _dbContext.Candidates.ToListAsync(cancellationToken);
-		var queryResultDto = _mapper.Map<IEnumerable<GetCandidatesQueryResultDto>>(candidates);
-		var queryResult = GetCandidatesQueryResult.Succeeded(queryResultDto);
+		var candidatesQuery = _dbContext.Candidates.AsQueryable();
 
-		return queryResult;
-	}
+		// Use the pagination method from the base class
+		if(query.PaginationSettings.UsePagination)
+		{
+			candidatesQuery = ApplyPagination(candidatesQuery, query);
+		}
 
-	protected override async Task<GetCandidatesQueryResult> HandlePagination(GetCandidatesQuery query, CancellationToken cancellationToken)
-	{
-		var candidates = await _dbContext.Candidates.FromPage(query).ToListAsync(cancellationToken);
+		var candidates = await candidatesQuery.ToListAsync(cancellationToken);
 		var queryResultDto = _mapper.Map<IEnumerable<GetCandidatesQueryResultDto>>(candidates);
 		var queryResult = GetCandidatesQueryResult.Succeeded(queryResultDto);
 

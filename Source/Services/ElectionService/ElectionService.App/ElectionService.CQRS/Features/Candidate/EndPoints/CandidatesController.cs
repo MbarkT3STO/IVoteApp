@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using ElectionService.CQRS.Features.Candidate.Commands;
 using ElectionService.CQRS.Features.Candidate.Queries;
 

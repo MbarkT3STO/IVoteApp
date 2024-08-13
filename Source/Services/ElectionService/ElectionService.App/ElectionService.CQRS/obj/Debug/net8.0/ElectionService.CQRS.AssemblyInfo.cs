@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ElectionService.CQRS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7cea7b7ada945fb965d9af15c5f3bb6f16098001")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29045def0d8dacaeedde48cc2a5e87792c92afae")]
 [assembly: System.Reflection.AssemblyProductAttribute("ElectionService.CQRS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ElectionService.CQRS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

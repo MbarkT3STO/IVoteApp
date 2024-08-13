@@ -75,6 +75,7 @@ where TQueryResult : QueryResult<TQueryResultValue, TQueryResult>
 		{
 			if (query.CacheSettings.UseCacheIfAvailable)
 			{
+				SetCacheKey(query);
 				var cachedQueryResult = await TryGetFromCache(query, cancellationToken);
 				if (cachedQueryResult != null)
 				{
@@ -83,23 +84,10 @@ where TQueryResult : QueryResult<TQueryResultValue, TQueryResult>
 				}
 			}
 
-			if (query.PaginationSettings.UsePagination)
-			{
-				var paginatedQueryResult = await HandlePagination(query, cancellationToken);
-				query.Result = paginatedQueryResult;
-
-				if (query.CacheSettings.UseCacheIfAvailable)
-				{
-					CacheQueryResult(paginatedQueryResult, query, cancellationToken);
-				}
-
-				return paginatedQueryResult;
-			}
-
 			var queryResult = await HandleCore(query, cancellationToken);
 			query.Result = queryResult;
 
-			if (query.CacheSettings.UseCacheIfAvailable)
+			if (query.CacheSettings.UseCacheIfAvailable && queryResult.Value != null)
 			{
 				CacheQueryResult(queryResult, query, cancellationToken);
 			}
@@ -115,19 +103,20 @@ where TQueryResult : QueryResult<TQueryResultValue, TQueryResult>
 
 
 	/// <summary>
+	/// Applies pagination settings to the query.
+	/// </summary>
+	protected IQueryable<T> ApplyPagination<T>(IQueryable<T> queryable, TQuery query) where T : class
+	{
+		return queryable.FromPage(query.PaginationSettings);
+	}
+
+
+	/// <summary>
 	/// Handles the core logic of the query.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <param name="cancellationToken">The cancellation token.</param>
 	protected abstract Task<TQueryResult> HandleCore(TQuery query, CancellationToken cancellationToken);
-
-	/// <summary>
-	/// Handles the pagination logic of the query.
-	/// </summary>
-	/// <param name="query">The query.</param>
-	/// <param name="cancellationToken">The cancellation token.</param>
-	protected virtual Task<TQueryResult> HandlePagination(TQuery query, CancellationToken cancellationToken) => throw new NotImplementedException();
-
 
 
 	/// <summary>
@@ -139,7 +128,7 @@ where TQueryResult : QueryResult<TQueryResultValue, TQueryResult>
 	{
 		var availableCache = await _distributedCache.GetStringAsync(query.CacheSettings.CacheKey, cancellationToken);
 
-		if (availableCache != null)
+		if (availableCache != null && availableCache != "null")
 		{
 			var queryResultValue = JsonSerializer.Deserialize<TQueryResultValue>(availableCache);
 			var queryResult = (TQueryResult)Activator.CreateInstance(typeof(TQueryResult), queryResultValue)!;
@@ -150,6 +139,14 @@ where TQueryResult : QueryResult<TQueryResultValue, TQueryResult>
 		return default;
 	}
 
+	/// <summary>
+	/// Sets or overrides the cache key (This method could be overridden in derived classes to change the cache key).
+	/// </summary>
+	/// <param name="query">The query to set the cache key for.</param>
+	protected virtual void SetCacheKey(TQuery query)
+	{
+		// query.SetCacheKey(query.CacheSettings.CacheKey);
+	}
 
 	/// <summary>
 	/// Caches the query result value in distributed cache.
@@ -167,3 +164,12 @@ where TQueryResult : QueryResult<TQueryResultValue, TQueryResult>
 		return Task.CompletedTask;
 	}
 }
+
+
+
+
+
+
+
+
+

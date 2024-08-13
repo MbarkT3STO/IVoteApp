@@ -74,16 +74,15 @@ public class GetPoliticalPartiesQueryHandler : BaseQueryHandler<GetPoliticalPart
 
 	protected override async Task<GetPoliticalPartiesQueryResult> HandleCore(GetPoliticalPartiesQuery query, CancellationToken cancellationToken)
 	{
-		var politicalParties = await _dbContext.PoliticalParties.ToListAsync(cancellationToken);
-		var queryResultDto = _mapper.Map<IEnumerable<GetPoliticalPartiesQueryResultDto>>(politicalParties);
-		var queryResult = GetPoliticalPartiesQueryResult.Succeeded(queryResultDto);
+		var politicalPartiesQuery = _dbContext.PoliticalParties.AsQueryable();
 
-		return queryResult;
-	}
+		// Use the pagination method from the base class
+		if(query.PaginationSettings.UsePagination)
+		{
+			politicalPartiesQuery = ApplyPagination(politicalPartiesQuery, query);
+		}
 
-	protected override async Task<GetPoliticalPartiesQueryResult> HandlePagination(GetPoliticalPartiesQuery query, CancellationToken cancellationToken)
-	{
-		var politicalParties = await _dbContext.PoliticalParties.FromPage(query).ToListAsync(cancellationToken);
+		var politicalParties = await politicalPartiesQuery.ToListAsync(cancellationToken);
 		var queryResultDto = _mapper.Map<IEnumerable<GetPoliticalPartiesQueryResultDto>>(politicalParties);
 		var queryResult = GetPoliticalPartiesQueryResult.Succeeded(queryResultDto);
 

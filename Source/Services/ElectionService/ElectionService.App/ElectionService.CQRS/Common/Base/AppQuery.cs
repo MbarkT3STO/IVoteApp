@@ -95,9 +95,8 @@ public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> wher
 
 	public TQueryResult? Result { get; set;}
 
-	public ICacheSettings CacheSettings { get; }
+	public ICacheSettings CacheSettings { get; private set; }
 	public IPaginationSettings PaginationSettings { get; }
-
 
 	protected AppQuery()
 	{
@@ -130,6 +129,16 @@ public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> wher
 		CacheSettings = new QueryCacheSettings();
 		PaginationSettings = new QueryPaginationSettings(pageNumber, pageSize);
 	}
+
+	/// <summary>
+	/// Overrides the current cache settings with a new cache key.
+	/// </summary>
+	/// <param name="cacheKey">The new cache key.</param>
+	public void SetCacheKey(string cacheKey)
+	{
+		CacheSettings = new QueryCacheSettings(cacheKey);
+	}
+
 
 	/// <summary>
 	/// Creates a normal query without caching or pagination.
@@ -172,18 +181,19 @@ public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> wher
 
 
 
-/// <summary>
-/// Represents a base class for query operation for the application.
-/// </summary>
-/// <typeparam name="TResult">The type of the query result.</typeparam>
-/// <typeparam name="TResultValue">The type of the query result value.</typeparam>
-public abstract class AppQuery<TQuery, TResult, TResultValue> : IQuery<TResult, TResultValue> where TResult : QueryResult<TResultValue, TResult>
-{
-	public Guid QueryId { get; } = Guid.NewGuid();
 
-	public TResult Result { get; }
+// /// <summary>
+// /// Represents a base class for query operation for the application.
+// /// </summary>
+// /// <typeparam name="TResult">The type of the query result.</typeparam>
+// /// <typeparam name="TResultValue">The type of the query result value.</typeparam>
+// public abstract class AppQuery<TQuery, TResult, TResultValue> : IQuery<TResult, TResultValue> where TResult : QueryResult<TResultValue, TResult>
+// {
+// 	public Guid QueryId { get; } = Guid.NewGuid();
 
-	public ICacheSettings CacheSettings { get; }
+// 	public TResult Result { get; }
 
-	public IPaginationSettings PaginationSettings { get; }
-}
+// 	public ICacheSettings CacheSettings { get; }
+
+// 	public IPaginationSettings PaginationSettings { get; }
+// }
