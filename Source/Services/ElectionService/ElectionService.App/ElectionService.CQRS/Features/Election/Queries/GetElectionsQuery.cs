@@ -1,6 +1,4 @@
-using ElectionService.CQRS.Common.Base;
-using ElectionService.Database;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace ElectionService.CQRS.Features.Election.Queries;
 
@@ -45,31 +43,48 @@ public class GetElectionsQueryMappingProfile : Profile
 
 
 
-public class GetElectionsQuery : IRequest<GetElectionsQueryResult>
+/// <summary>
+/// Represents the query used to get the elections.
+/// </summary>
+public class GetElectionsQuery : AppQuery<GetElectionsQuery, GetElectionsQueryResult>
 {
-	public GetElectionsQuery()
+	public GetElectionsQuery() : base()
+	{
+	}
+
+	public GetElectionsQuery(string cacheKey) : base(cacheKey)
+	{
+	}
+
+	public GetElectionsQuery(int pageNumber, int pageSize = 10) : base(pageNumber, pageSize)
+	{
+	}
+
+	public GetElectionsQuery(string cacheKey, int pageNumber, int pageSize = 10) : base(cacheKey, pageNumber, pageSize)
 	{
 	}
 }
 
 
-public class GetElectionsQueryHandler(IMapper mapper, AppDbContext dbContext) : BaseQueryHandler<GetElectionsQuery, GetElectionsQueryResult>(mapper, dbContext)
+public class GetElectionsQueryHandler : BaseQueryHandler<GetElectionsQuery, GetElectionsQueryResult, IEnumerable<GetElectionsQueryResultDto>>
 {
-
-	public override async Task<GetElectionsQueryResult> Handle(GetElectionsQuery query, CancellationToken cancellationToken)
+	public GetElectionsQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache) : base(mapper, mediator, dbContext, distributedCache)
 	{
-		try
-		{
-			var elections = await dbContext.Elections.ToListAsync(cancellationToken);
-			var queryResultDto = mapper.Map<IEnumerable<GetElectionsQueryResultDto>>(elections);
-			var queryResult = GetElectionsQueryResult.Succeeded(queryResultDto);
-
-			return queryResult;
-		}
-		catch (Exception ex)
-		{
-			return GetElectionsQueryResult.Failed(ex);
-		}
 	}
 
+	protected override async Task<GetElectionsQueryResult> HandleCore(GetElectionsQuery query, CancellationToken cancellationToken)
+	{
+		var electionsQuery = _dbContext.Elections.AsQueryable();
+
+		if (query.PaginationSettings.UsePagination)
+		{
+			electionsQuery = ApplyPagination(electionsQuery, query);
+		}
+
+		var elections = await electionsQuery.ToListAsync(cancellationToken);
+		var queryResultDto = _mapper.Map<IEnumerable<GetElectionsQueryResultDto>>(elections);
+		var queryResult = GetElectionsQueryResult.Succeeded(queryResultDto);
+
+		return queryResult;
+	}
 }

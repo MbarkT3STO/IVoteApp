@@ -9,11 +9,27 @@ public class ElectionsController(IMediator mediator) : ControllerBase
 {
 	readonly IMediator mediator = mediator;
 
-    [HttpGet]
-	[Route(nameof(Get))]
+	[HttpGet(nameof(Get))]
 	public async Task<IActionResult> Get()
 	{
-		var result = await mediator.Send(new GetElectionsQuery());
+		var cacheKey = $"{nameof(GetElectionsQuery)}";
+		var query = GetElectionsQuery.CreateCachedQuery(cacheKey);
+		var result = await mediator.Send(query);
+
+		if(result.IsSuccess)
+		{
+			return Ok(result.Value);
+		}
+
+		return BadRequest(result.Error);
+	}
+
+	[HttpGet(nameof(GetById))]
+	public async Task<IActionResult> GetById(Guid id)
+	{
+		var cacheKey = $"{nameof(GetElectionByIdQuery)}-{id}";
+		var query = GetElectionByIdQuery.CreateCachedQuery(cacheKey).WithElectionId(id);
+		var result = await mediator.Send(query);
 
 		if(result.IsSuccess)
 		{
@@ -24,8 +40,7 @@ public class ElectionsController(IMediator mediator) : ControllerBase
 	}
 
 
-	[HttpPost]
-	[Route(nameof(Create))]
+	[HttpPost(nameof(Create))]
 	public async Task<IActionResult> Create(CreateElectionCommand command)
 	{
 		command.CreatedBy = "admin";
