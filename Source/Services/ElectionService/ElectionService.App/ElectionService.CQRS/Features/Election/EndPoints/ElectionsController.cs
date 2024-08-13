@@ -24,6 +24,22 @@ public class ElectionsController(IMediator mediator) : ControllerBase
 		return BadRequest(result.Error);
 	}
 
+
+	[HttpGet(nameof(GetFromPage))]
+	public async Task<IActionResult> GetFromPage(int page)
+	{
+		var cacheKey = $"{nameof(GetElectionsQuery)}-page-{page}-pageSize-10";
+		var query = GetElectionsQuery.CreateCachedAndPaginatedQuery(cacheKey, page);
+		var result = await mediator.Send(query);
+
+		if(result.IsSuccess)
+		{
+			return Ok(result.Value);
+		}
+
+		return BadRequest(result.Error);
+	}
+
 	[HttpGet(nameof(GetById))]
 	public async Task<IActionResult> GetById(Guid id)
 	{
@@ -38,6 +54,8 @@ public class ElectionsController(IMediator mediator) : ControllerBase
 
 		return BadRequest(result.Error);
 	}
+
+
 
 
 	[HttpPost(nameof(Create))]
