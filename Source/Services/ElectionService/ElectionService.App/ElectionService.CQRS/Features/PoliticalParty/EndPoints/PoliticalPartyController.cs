@@ -47,6 +47,22 @@ public class PoliticalPartyController : ControllerBase
 	}
 
 
+	[HttpGet(nameof(GetFromPage))]
+	public async Task<IActionResult> GetFromPage(int pageNumber)
+	{
+		var cacheKey = $"{nameof(GetPoliticalPartiesQuery)}-page-{pageNumber}-pageSize-10";
+		var query = GetPoliticalPartiesQuery.CreateCachedAndPaginatedQuery(cacheKey, pageNumber);
+		var result = await mediator.Send(query);
+
+		if(result.IsSuccess)
+		{
+			return Ok(result.Value);
+		}
+
+		return BadRequest(result.Error);
+	}
+
+
 	[HttpPost(nameof(Create))]
 	public async Task<IActionResult> Create(CreatePoliticalPartyCommand command)
 	{
