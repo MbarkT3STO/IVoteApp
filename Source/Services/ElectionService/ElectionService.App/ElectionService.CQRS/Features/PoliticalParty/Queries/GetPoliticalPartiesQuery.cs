@@ -76,7 +76,6 @@ public class GetPoliticalPartiesQueryHandler : BaseQueryHandler<GetPoliticalPart
 	{
 		var politicalPartiesQuery = _dbContext.PoliticalParties.AsQueryable();
 
-		// Use the pagination method from the base class
 		if(query.PaginationSettings.UsePagination)
 		{
 			politicalPartiesQuery = ApplyPagination(politicalPartiesQuery, query);

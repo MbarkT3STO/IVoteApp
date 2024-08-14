@@ -1,5 +1,6 @@
 
 
+
 namespace ElectionService.CQRS.Features.Election.Commands;
 
 public class UpdateElectionTitleCommandResultDto
@@ -52,7 +53,7 @@ public class UpdateElectionTitleCommandMappingProfile : Profile
 /// <summary>
 /// Represents the command used to update an election's title.
 /// </summary>
-public class UpdateElectionTitleCommand : IRequest<UpdateElectionTitleCommandResult>
+public class UpdateElectionTitleCommand : AppCommand<UpdateElectionTitleCommand, UpdateElectionTitleCommandResult>
 {
 	public Guid Id { get; set; }
 
@@ -66,33 +67,23 @@ public class UpdateElectionTitleCommand : IRequest<UpdateElectionTitleCommandRes
 
 public class UpdateElectionTitleCommandHandler : BaseCommandHandler<UpdateElectionTitleCommand, UpdateElectionTitleCommandResult, UpdateElectionTitleCommandResultDto>
 {
-	public UpdateElectionTitleCommandHandler(IMapper mapper, AppDbContext dbContext) : base(mapper, dbContext)
-	{
-	}
+    public UpdateElectionTitleCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
+    {
+    }
 
+    protected override async Task<UpdateElectionTitleCommandResult> HandleCore(UpdateElectionTitleCommand command, CancellationToken cancellationToken)
+    {
+		var election = await _dbContext.Elections.FirstOrDefaultAsync(x => x.Id == command.Id, cancellationToken);
 
+		if (election == null)
+			return FailedResult("Election not found");
 
-	public override async Task<UpdateElectionTitleCommandResult> Handle(UpdateElectionTitleCommand command, CancellationToken cancellationToken)
-	{
-		try
-		{
-			var election = await _dbContext.Elections
-				.FirstOrDefaultAsync(x => x.Id == command.Id, cancellationToken);
+		election.Title = command.Title;
 
-			if (election == null)
-				return UpdateElectionTitleCommandResult.Failed(new Error("Election not found"));
+		await _dbContext.SaveChangesAsync(cancellationToken);
 
-			election.Title = command.Title;
+		var resultDto = _mapper.Map<UpdateElectionTitleCommandResultDto>(election);
 
-			await _dbContext.SaveChangesAsync(cancellationToken);
-
-			var resultDto = _mapper.Map<UpdateElectionTitleCommandResultDto>(election);
-
-			return UpdateElectionTitleCommandResult.Succeeded(resultDto);
-		}
-		catch (Exception ex)
-		{
-			return UpdateElectionTitleCommandResult.Failed(ex);
-		}
+		return SucceededResult(resultDto);
 	}
 }

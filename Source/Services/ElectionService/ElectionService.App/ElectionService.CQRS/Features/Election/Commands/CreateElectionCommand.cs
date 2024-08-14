@@ -47,7 +47,7 @@ public class CreateElectionCommandMappingProfile : Profile
 
 
 
-public class CreateElectionCommand : IRequest<CreateElectionCommandResult>
+public class CreateElectionCommand : AppCommand<CreateElectionCommand, CreateElectionCommandResult>
 {
 	public string Title { get; set; }
 
@@ -64,28 +64,20 @@ public class CreateElectionCommand : IRequest<CreateElectionCommandResult>
 
 public class CreateElectionCommandHandler : BaseCommandHandler<CreateElectionCommand, CreateElectionCommandResult, CreateElectionCommandResultDto>
 {
-	public CreateElectionCommandHandler(IMapper mapper, AppDbContext dbContext) : base(mapper, dbContext)
-	{
-	}
+    public CreateElectionCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
+    {
+    }
 
-	public override async Task<CreateElectionCommandResult> Handle(CreateElectionCommand command, CancellationToken cancellationToken)
-	{
-		try
-		{
-			var election = _mapper.Map<Entities.Election>(command);
-			election.Id = Guid.NewGuid();
+    protected override async Task<CreateElectionCommandResult> HandleCore(CreateElectionCommand command, CancellationToken cancellationToken)
+    {
+		var election = _mapper.Map<Entities.Election>(command);
+		election.Id = Guid.NewGuid();
 
+		_dbContext.Elections.Add(election);
+		await _dbContext.SaveChangesAsync(cancellationToken);
 
-			_dbContext.Elections.Add(election);
-			await _dbContext.SaveChangesAsync(cancellationToken);
+		var resultDto = _mapper.Map<CreateElectionCommandResultDto>(election);
 
-			var resultDto = _mapper.Map<CreateElectionCommandResultDto>(election);
-
-			return CreateElectionCommandResult.Succeeded(resultDto);
-		}
-		catch (Exception ex)
-		{
-			return CreateElectionCommandResult.Failed(ex);
-		}
+		return SucceededResult(resultDto);
 	}
 }

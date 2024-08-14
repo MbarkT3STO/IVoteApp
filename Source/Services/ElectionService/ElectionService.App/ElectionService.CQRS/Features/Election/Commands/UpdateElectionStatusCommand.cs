@@ -1,3 +1,4 @@
+
 namespace ElectionService.CQRS.Features.Election.Commands;
 
 public class UpdateElectionStatusCommandResultDto
@@ -43,7 +44,7 @@ public class UpdateElectionStatusCommandMappingProfile : Profile
 /// <summary>
 /// Represents a command that updates the status of an election.
 /// </summary>
-public class UpdateElectionStatusCommand : IRequest<UpdateElectionStatusCommandResult>
+public class UpdateElectionStatusCommand : AppCommand<UpdateElectionStatusCommand, UpdateElectionStatusCommandResult>
 {
 	public Guid Id { get; set; }
 
@@ -53,16 +54,13 @@ public class UpdateElectionStatusCommand : IRequest<UpdateElectionStatusCommandR
 
 public class UpdateElectionStatusCommandHandler : BaseCommandHandler<UpdateElectionStatusCommand, UpdateElectionStatusCommandResult, UpdateElectionStatusCommandResultDto>
 {
-	public UpdateElectionStatusCommandHandler(IMapper mapper, AppDbContext dbContext) : base(mapper, dbContext)
-	{
-	}
+    public UpdateElectionStatusCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
+    {
+    }
 
-	public override async Task<UpdateElectionStatusCommandResult> Handle(UpdateElectionStatusCommand command, CancellationToken cancellationToken)
-	{
-		try
-		{
-			var election = await _dbContext.Elections
-				.FirstOrDefaultAsync(x => x.Id == command.Id, cancellationToken);
+    protected override async Task<UpdateElectionStatusCommandResult> HandleCore(UpdateElectionStatusCommand command, CancellationToken cancellationToken)
+    {
+        var election = await _dbContext.Elections.FirstOrDefaultAsync(x => x.Id == command.Id, cancellationToken);
 
 			if (election == null)
 				return UpdateElectionStatusCommandResult.Failed(new Error("Election not found"));
@@ -73,11 +71,6 @@ public class UpdateElectionStatusCommandHandler : BaseCommandHandler<UpdateElect
 
 			var resultDto = _mapper.Map<UpdateElectionStatusCommandResultDto>(election);
 
-			return UpdateElectionStatusCommandResult.Succeeded(resultDto);
-		}
-		catch (Exception ex)
-		{
-			return UpdateElectionStatusCommandResult.Failed(ex);
-		}
-	}
+			return SucceededResult(resultDto);
+    }
 }

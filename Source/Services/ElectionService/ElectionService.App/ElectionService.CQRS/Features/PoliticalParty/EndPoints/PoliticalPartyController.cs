@@ -75,4 +75,19 @@ public class PoliticalPartyController : ControllerBase
 
 		return BadRequest(result.Error);
 	}
+
+
+	[HttpPost(nameof(Update))]
+	public async Task<IActionResult> Update(Guid id, string name, string description, DateTime establishmentDate, string logoUrl, string webSiteUrl)
+	{
+		var command = UpdatePoliticalPartyCommand.Create(id, name, description, establishmentDate, logoUrl, webSiteUrl);
+		var result = await mediator.Send(command);
+
+		if(result.IsSuccess)
+		{
+			return Ok(result.Value);
+		}
+
+		return BadRequest(result.Error);
+	}
 }

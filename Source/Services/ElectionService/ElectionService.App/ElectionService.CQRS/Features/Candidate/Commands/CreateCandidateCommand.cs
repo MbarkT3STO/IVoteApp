@@ -1,5 +1,6 @@
 
 
+
 namespace ElectionService.CQRS.Features.Candidate.Commands;
 
 public class CreateCandidateCommandResultDto
@@ -43,7 +44,7 @@ public class CreateCandidateCommandMappingProfile : Profile
 /// <summary>
 /// Represents the command used to create a candidate.
 /// </summary>
-public class CreateCandidateCommand : AppCommand<CreateCandidateCommandResult>
+public class CreateCandidateCommand : AppCommand<CreateCandidateCommand, CreateCandidateCommandResult>
 {
 	public Guid ElectionId { get; set; }
 	public Guid PoliticalPartyId { get; set; }
@@ -55,27 +56,20 @@ public class CreateCandidateCommand : AppCommand<CreateCandidateCommandResult>
 
 public class CreateCandidateCommandHandler : BaseCommandHandler<CreateCandidateCommand, CreateCandidateCommandResult, CreateCandidateCommandResultDto>
 {
-	public CreateCandidateCommandHandler(IMapper mapper, AppDbContext dbContext) : base(mapper, dbContext)
-	{
-	}
+    public CreateCandidateCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
+    {
+    }
 
-	public override async Task<CreateCandidateCommandResult> Handle(CreateCandidateCommand command, CancellationToken cancellationToken)
-	{
-		try
-		{
-			var candidate = _mapper.Map<Entities.Candidate>(command);
-			candidate.Id = Guid.NewGuid();
+    protected override async Task<CreateCandidateCommandResult> HandleCore(CreateCandidateCommand command, CancellationToken cancellationToken)
+    {
+		var candidate = _mapper.Map<Entities.Candidate>(command);
+		candidate.Id = Guid.NewGuid();
 
-			_dbContext.Candidates.Add(candidate);
-			await _dbContext.SaveChangesAsync(cancellationToken);
+		_dbContext.Candidates.Add(candidate);
+		await _dbContext.SaveChangesAsync(cancellationToken);
 
-			var resultDto = _mapper.Map<CreateCandidateCommandResultDto>(candidate);
+		var resultDto = _mapper.Map<CreateCandidateCommandResultDto>(candidate);
 
-			return CreateCandidateCommandResult.Succeeded(resultDto);
-		}
-		catch (Exception ex)
-		{
-			return CreateCandidateCommandResult.Failed(ex);
-		}
+		return SucceededResult(resultDto);
 	}
 }

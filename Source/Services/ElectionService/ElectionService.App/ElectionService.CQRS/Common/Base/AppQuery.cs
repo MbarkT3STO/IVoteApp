@@ -5,7 +5,7 @@ namespace ElectionService.CQRS.Common.Base;
 /// Represents a base class for query operation for the application.
 /// </summary>
 /// <typeparam name="TResult">The type of the query result.</typeparam>
-public abstract class AppQuery<TResult> : IQuery<TResult> where TResult : class
+public abstract class AppQuery<TResult>: IQuery<TResult> where TResult: class
 {
 	public Guid QueryId { get; }
 
@@ -24,7 +24,7 @@ public abstract class AppQuery<TResult> : IQuery<TResult> where TResult : class
 	{
 		QueryId = Guid.NewGuid();
 
-		CacheSettings = new QueryCacheSettings(cacheKey);
+		CacheSettings      = new QueryCacheSettings(cacheKey);
 		PaginationSettings = new QueryPaginationSettings();
 	}
 
@@ -32,7 +32,7 @@ public abstract class AppQuery<TResult> : IQuery<TResult> where TResult : class
 	{
 		QueryId = Guid.NewGuid();
 
-		CacheSettings = new QueryCacheSettings(cacheKey);
+		CacheSettings      = new QueryCacheSettings(cacheKey);
 		PaginationSettings = new QueryPaginationSettings(pageNumber, pageSize);
 	}
 
@@ -40,7 +40,7 @@ public abstract class AppQuery<TResult> : IQuery<TResult> where TResult : class
 	{
 		QueryId = Guid.NewGuid();
 
-		CacheSettings = new QueryCacheSettings();
+		CacheSettings      = new QueryCacheSettings();
 		PaginationSettings = new QueryPaginationSettings(pageNumber, pageSize);
 	}
 
@@ -89,7 +89,7 @@ public abstract class AppQuery<TResult> : IQuery<TResult> where TResult : class
 /// </summary>
 /// <typeparam name="TQuery">The type of the query.</typeparam>
 /// <typeparam name="TQueryResult">The type of the query result.</typeparam>
-public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> where TQueryResult : class where TQuery : AppQuery<TQuery, TQueryResult>
+public abstract class AppQuery<TQuery, TQueryResult>: IQuery<TQueryResult> where TQueryResult: class where TQuery: AppQuery<TQuery, TQueryResult>
 {
 	public Guid QueryId { get; }
 
@@ -102,7 +102,7 @@ public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> wher
 	{
 		QueryId = Guid.NewGuid();
 
-		CacheSettings = QueryCacheSettings.CreateNotCachedQuerySettings();
+		CacheSettings      = QueryCacheSettings.CreateNotCachedQuerySettings();
 		PaginationSettings = QueryPaginationSettings.CreateNotPaginatedQuerySettings();
 	}
 
@@ -110,7 +110,7 @@ public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> wher
 	{
 		QueryId = Guid.NewGuid();
 
-		CacheSettings = new QueryCacheSettings(cacheKey);
+		CacheSettings      = new QueryCacheSettings(cacheKey);
 		PaginationSettings = new QueryPaginationSettings();
 	}
 
@@ -118,7 +118,7 @@ public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> wher
 	{
 		QueryId = Guid.NewGuid();
 
-		CacheSettings = new QueryCacheSettings(cacheKey);
+		CacheSettings      = new QueryCacheSettings(cacheKey);
 		PaginationSettings = new QueryPaginationSettings(pageNumber, pageSize);
 	}
 
@@ -126,7 +126,7 @@ public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> wher
 	{
 		QueryId = Guid.NewGuid();
 
-		CacheSettings = new QueryCacheSettings();
+		CacheSettings      = new QueryCacheSettings();
 		PaginationSettings = new QueryPaginationSettings(pageNumber, pageSize);
 	}
 
@@ -154,7 +154,14 @@ public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> wher
 	/// <param name="pageSize">The page size.</param>
 	public static TQuery CreateCachedAndPaginatedQuery(string cacheKey, int pageNumber, int pageSize = 10)
 	{
-		return (TQuery)Activator.CreateInstance(typeof(TQuery), cacheKey, pageNumber, pageSize)!;
+		try
+		{
+			return (TQuery)Activator.CreateInstance(typeof(TQuery), cacheKey, pageNumber, pageSize)!;
+		}
+		catch (MissingMethodException)
+		{
+			throw new MissingMethodException($"The type {typeof(TQuery)} must implement this {nameof(AppQuery<TQuery, TQueryResult>)}(string cacheKey, int pageNumber, int pageSize) constructor signature to use CreateCachedAndPaginatedQuery(string cacheKey, int pageNumber, int pageSize)");
+		}
 	}
 
 	/// <summary>
@@ -163,7 +170,14 @@ public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> wher
 	/// <param name="cacheKey">The cache key.</param>
 	public static TQuery CreateCachedQuery(string cacheKey)
 	{
-		return (TQuery)Activator.CreateInstance(typeof(TQuery), cacheKey)!;
+		try
+		{
+			return (TQuery)Activator.CreateInstance(typeof(TQuery), cacheKey)!;
+		}
+		catch (MissingMethodException)
+		{
+			throw new MissingMethodException($"The type {typeof(TQuery)} must implement this {nameof(AppQuery<TQuery, TQueryResult>)}(string cacheKey) constructor signature to use CreateCachedQuery(string cacheKey)");
+		}
 	}
 
 	/// <summary>
@@ -171,9 +185,17 @@ public abstract class AppQuery<TQuery, TQueryResult> : IQuery<TQueryResult> wher
 	/// </summary>
 	/// <param name="pageNumber">The page number.</param>
 	/// <param name="pageSize">The page size.</param>
+	/// <exception cref="MissingMethodException"></exception>
 	public static TQuery CreatePaginatedQuery(int pageNumber, int pageSize = 10)
 	{
-		return (TQuery)Activator.CreateInstance(typeof(TQuery), pageNumber, pageSize)!;
+		try
+		{
+			return (TQuery)Activator.CreateInstance(typeof(TQuery), pageNumber, pageSize)!;
+		}
+		catch (MissingMethodException)
+		{
+			throw new MissingMethodException($"The type {typeof(TQuery)} must implement this {nameof(AppQuery<TQuery, TQueryResult>)}(int pageNumber, int pageSize) constructor signature to use CreatePaginatedQuery(int pageNumber, int pageSize)");
+		}
 	}
 }
 

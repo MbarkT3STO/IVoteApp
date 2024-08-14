@@ -1,5 +1,6 @@
 
 
+
 namespace ElectionService.CQRS.Features.PoliticalParty.Commands;
 
 public class CreatePoliticalPartyCommandResultDto
@@ -17,22 +18,22 @@ public class CreatePoliticalPartyCommandResultDto
 /// <summary>
 /// Represents the command used to create a political party.
 /// </summary>
-public class CreatePoliticalPartyCommandResult : CommandResult<CreatePoliticalPartyCommandResultDto, CreatePoliticalPartyCommandResult>
+public class CreatePoliticalPartyCommandResult: CommandResult<CreatePoliticalPartyCommandResultDto, CreatePoliticalPartyCommandResult>
 {
-	public CreatePoliticalPartyCommandResult(CreatePoliticalPartyCommandResultDto value) : base(value)
+	public CreatePoliticalPartyCommandResult(CreatePoliticalPartyCommandResultDto value): base(value)
 	{
 	}
 
-	public CreatePoliticalPartyCommandResult(Error error) : base(error)
+	public CreatePoliticalPartyCommandResult(Error error): base(error)
 	{
 	}
 
-	public CreatePoliticalPartyCommandResult(bool isSuccess) : base(isSuccess)
+	public CreatePoliticalPartyCommandResult(bool isSuccess): base(isSuccess)
 	{
 	}
 }
 
-public class CreatePoliticalPartyCommandMappingProfile : Profile
+public class CreatePoliticalPartyCommandMappingProfile: Profile
 {
 	public CreatePoliticalPartyCommandMappingProfile()
 	{
@@ -46,7 +47,7 @@ public class CreatePoliticalPartyCommandMappingProfile : Profile
 /// <summary>
 /// Represents the command used to create a political party.
 /// </summary>
-public class CreatePoliticalPartyCommand : IRequest<CreatePoliticalPartyCommandResult>
+public class CreatePoliticalPartyCommand: AppCommand<CreatePoliticalPartyCommand, CreatePoliticalPartyCommandResult>
 {
 	public string Name { get; set; }
 	public string Description { get; set; }
@@ -57,18 +58,16 @@ public class CreatePoliticalPartyCommand : IRequest<CreatePoliticalPartyCommandR
 }
 
 
-public class CreatePoliticalPartyCommandHandler : BaseCommandHandler<CreatePoliticalPartyCommand, CreatePoliticalPartyCommandResult, CreatePoliticalPartyCommandResultDto>
+public class CreatePoliticalPartyCommandHandler: BaseCommandHandler<CreatePoliticalPartyCommand, CreatePoliticalPartyCommandResult, CreatePoliticalPartyCommandResultDto>
 {
-	public CreatePoliticalPartyCommandHandler(IMapper mapper, AppDbContext dbContext) : base(mapper, dbContext)
-	{
-	}
+    public CreatePoliticalPartyCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext): base(mediator, mapper, dbContext)
+    {
+    }
 
-	public override async Task<CreatePoliticalPartyCommandResult> Handle(CreatePoliticalPartyCommand command, CancellationToken cancellationToken)
-	{
-		try
-		{
-			var politicalParty = _mapper.Map<Entities.PoliticalParty>(command);
-			politicalParty.Id = Guid.NewGuid();
+    protected override async Task<CreatePoliticalPartyCommandResult> HandleCore(CreatePoliticalPartyCommand command, CancellationToken cancellationToken)
+    {
+        	var politicalParty    = _mapper.Map<Entities.PoliticalParty>(command);
+        	    politicalParty.Id = Guid.NewGuid();
 
 			_dbContext.PoliticalParties.Add(politicalParty);
 			await _dbContext.SaveChangesAsync(cancellationToken);
@@ -76,10 +75,5 @@ public class CreatePoliticalPartyCommandHandler : BaseCommandHandler<CreatePolit
 			var resultDto = _mapper.Map<CreatePoliticalPartyCommandResultDto>(politicalParty);
 
 			return CreatePoliticalPartyCommandResult.Succeeded(resultDto);
-		}
-		catch (Exception ex)
-		{
-			return CreatePoliticalPartyCommandResult.Failed(ex);
-		}
-	}
+    }
 }
