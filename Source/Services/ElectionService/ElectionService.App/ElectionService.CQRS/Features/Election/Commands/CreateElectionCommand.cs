@@ -23,7 +23,7 @@ public class CreateElectionCommandResultDto
 /// <summary>
 /// Represents the result of a command that creates an election.
 /// </summary>
-public class CreateElectionCommandResult : CommandResult<CreateElectionCommandResultDto, CreateElectionCommandResult>
+public class CreateElectionCommandResult : AppCommandResult<CreateElectionCommandResultDto, CreateElectionCommandResult>
 {
 	public CreateElectionCommandResult(CreateElectionCommandResultDto value) : base(value)
 	{
@@ -62,7 +62,7 @@ public class CreateElectionCommand : AppCommand<CreateElectionCommand, CreateEle
 }
 
 
-public class CreateElectionCommandHandler : BaseCommandHandler<CreateElectionCommand, CreateElectionCommandResult, CreateElectionCommandResultDto>
+public class CreateElectionCommandHandler : BaseAppCommandHandler<CreateElectionCommand, CreateElectionCommandResult, CreateElectionCommandResultDto>
 {
     public CreateElectionCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
     {

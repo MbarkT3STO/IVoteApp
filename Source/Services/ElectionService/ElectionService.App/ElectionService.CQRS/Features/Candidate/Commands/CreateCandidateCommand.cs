@@ -17,7 +17,7 @@ public class CreateCandidateCommandResultDto
 /// <summary>
 /// Represents the result of a command that creates a candidate.
 /// </summary>
-public class CreateCandidateCommandResult : CommandResult<CreateCandidateCommandResultDto, CreateCandidateCommandResult>
+public class CreateCandidateCommandResult : AppCommandResult<CreateCandidateCommandResultDto, CreateCandidateCommandResult>
 {
 	public CreateCandidateCommandResult(CreateCandidateCommandResultDto value) : base(value)
 	{
@@ -51,17 +51,31 @@ public class CreateCandidateCommand : AppCommand<CreateCandidateCommand, CreateC
 	public string Name { get; set; }
 	public string Description { get; set; }
 	public string PhotoUrl { get; set; }
+
+	public CreateCandidateCommand()
+	{
+
+	}
+
+	public CreateCandidateCommand(string name, string description, string photoUrl, Guid politicalPartyId, Guid electionId)
+	{
+		Name = name;
+		Description = description;
+		PhotoUrl = photoUrl;
+		PoliticalPartyId = politicalPartyId;
+		ElectionId = electionId;
+	}
 }
 
 
-public class CreateCandidateCommandHandler : BaseCommandHandler<CreateCandidateCommand, CreateCandidateCommandResult, CreateCandidateCommandResultDto>
+public class CreateCandidateCommandHandler : BaseAppCommandHandler<CreateCandidateCommand, CreateCandidateCommandResult, CreateCandidateCommandResultDto>
 {
-    public CreateCandidateCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
-    {
-    }
+	public CreateCandidateCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
+	{
+	}
 
-    protected override async Task<CreateCandidateCommandResult> HandleCore(CreateCandidateCommand command, CancellationToken cancellationToken)
-    {
+	protected override async Task<CreateCandidateCommandResult> HandleCore(CreateCandidateCommand command, CancellationToken cancellationToken)
+	{
 		var candidate = _mapper.Map<Entities.Candidate>(command);
 		candidate.Id = Guid.NewGuid();
 

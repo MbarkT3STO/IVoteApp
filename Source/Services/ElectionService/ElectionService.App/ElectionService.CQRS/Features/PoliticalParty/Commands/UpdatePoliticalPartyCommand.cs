@@ -17,7 +17,7 @@ public class UpdatePoliticalPartyCommandResultDto
 /// <summary>
 /// Represents the command result used after updating a political party.
 /// </summary>
-public class UpdatePoliticalPartyCommandResult : CommandResult<UpdatePoliticalPartyCommandResultDto, UpdatePoliticalPartyCommandResult>
+public class UpdatePoliticalPartyCommandResult : AppCommandResult<UpdatePoliticalPartyCommandResultDto, UpdatePoliticalPartyCommandResult>
 {
 	public UpdatePoliticalPartyCommandResult(UpdatePoliticalPartyCommandResultDto value) : base(value)
 	{
@@ -71,7 +71,7 @@ public class UpdatePoliticalPartyCommand : AppCommand<UpdatePoliticalPartyComman
 }
 
 
-public class UpdatePoliticalPartyCommandHandler : BaseCommandHandler<UpdatePoliticalPartyCommand, UpdatePoliticalPartyCommandResult, UpdatePoliticalPartyCommandResultDto>
+public class UpdatePoliticalPartyCommandHandler : BaseAppCommandHandler<UpdatePoliticalPartyCommand, UpdatePoliticalPartyCommandResult, UpdatePoliticalPartyCommandResultDto>
 {
 	public UpdatePoliticalPartyCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
 	{

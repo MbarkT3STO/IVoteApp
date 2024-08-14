@@ -20,7 +20,7 @@ public class UpdateElectionStatusCommandResultDto
 /// <summary>
 /// Represents the result of a command that updates the status of an election.
 /// </summary>
-public class UpdateElectionStatusCommandResult : CommandResult<UpdateElectionStatusCommandResultDto, UpdateElectionStatusCommandResult>
+public class UpdateElectionStatusCommandResult : AppCommandResult<UpdateElectionStatusCommandResultDto, UpdateElectionStatusCommandResult>
 {
 	public UpdateElectionStatusCommandResult(UpdateElectionStatusCommandResultDto value) : base(value)
 	{
@@ -52,7 +52,7 @@ public class UpdateElectionStatusCommand : AppCommand<UpdateElectionStatusComman
 }
 
 
-public class UpdateElectionStatusCommandHandler : BaseCommandHandler<UpdateElectionStatusCommand, UpdateElectionStatusCommandResult, UpdateElectionStatusCommandResultDto>
+public class UpdateElectionStatusCommandHandler : BaseAppCommandHandler<UpdateElectionStatusCommand, UpdateElectionStatusCommandResult, UpdateElectionStatusCommandResultDto>
 {
     public UpdateElectionStatusCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
     {

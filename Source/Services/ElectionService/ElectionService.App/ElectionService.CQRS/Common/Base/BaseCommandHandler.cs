@@ -39,7 +39,7 @@ public abstract class BaseCommandHandler<TCommand, TCommandResult> : IRequestHan
 /// <typeparam name="TCommand">The type of the command.</typeparam>
 /// <typeparam name="TCommandResult">The type of the command result.</typeparam>
 /// <typeparam name="TCommandResultValue">The type of the command result value.</typeparam>
-public abstract class BaseCommandHandler<TCommand, TCommandResult, TCommandResultValue> : IRequestHandler<TCommand, TCommandResult>
+public abstract class BaseAppCommandHandler<TCommand, TCommandResult, TCommandResultValue> : IRequestHandler<TCommand, TCommandResult>
 where TCommand : AppCommand<TCommand, TCommandResult>
 where TCommandResult : class, ICommandResult<TCommandResultValue>
 {
@@ -48,14 +48,14 @@ where TCommandResult : class, ICommandResult<TCommandResultValue>
 	private protected readonly AppDbContext _dbContext;
 
 
-	protected BaseCommandHandler(IMapper mapper)
+	protected BaseAppCommandHandler(IMapper mapper)
 	{
 		_mapper = mapper;
 		_mediator = null!;
 	}
 
 
-	protected BaseCommandHandler(IMapper mapper, AppDbContext dbContext)
+	protected BaseAppCommandHandler(IMapper mapper, AppDbContext dbContext)
 	{
 		_mapper = mapper;
 		_dbContext = dbContext;
@@ -63,14 +63,14 @@ where TCommandResult : class, ICommandResult<TCommandResultValue>
 	}
 
 
-	protected BaseCommandHandler(IMediator mediator, IMapper mapper)
+	protected BaseAppCommandHandler(IMediator mediator, IMapper mapper)
 	{
 		_mediator = mediator;
 		_mapper = mapper;
 	}
 
 
-	protected BaseCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext)
+	protected BaseAppCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext)
 	{
 		_mediator = mediator;
 		_mapper = mapper;

@@ -68,4 +68,20 @@ public class CandidatesController(IMediator mediator) : ControllerBase
 
 		return BadRequest(result.Error);
 	}
+
+
+	[HttpPut(nameof(Update))]
+	public async Task<IActionResult> Update(Guid id, string name, string description, string photoUrl, string webSiteUrl, Guid politicalPartyId, Guid electionId)
+	{
+		var command = UpdateCandidateCommand.Create(id, name, description, photoUrl, politicalPartyId, electionId);
+		var result = await mediator.Send(command);
+
+		if(result.IsSuccess)
+		{
+			return Ok(result.Value);
+		}
+
+		return BadRequest(result.Error);
+	}
+
 }

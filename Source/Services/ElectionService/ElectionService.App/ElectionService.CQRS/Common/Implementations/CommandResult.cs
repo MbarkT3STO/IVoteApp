@@ -26,7 +26,7 @@ public abstract class CommandResult : ICommandResult
 /// Represents the base result of a command execution with a value.
 /// </summary>
 /// <typeparam name="TValue">The type of the value.</typeparam>
-public abstract class CommandResult<TValue, TCommandResult> : ICommandResult<TValue> where TCommandResult : CommandResult<TValue, TCommandResult>
+public abstract class AppCommandResult<TValue, TCommandResult> : ICommandResult<TValue> where TCommandResult : AppCommandResult<TValue, TCommandResult>
 {
     public bool IsSuccess { get; }
     public bool IsFailure => !IsSuccess;
@@ -34,19 +34,19 @@ public abstract class CommandResult<TValue, TCommandResult> : ICommandResult<TVa
     public TValue Value { get; }
 
 
-    protected CommandResult(TValue value)
+    protected AppCommandResult(TValue value)
     {
         IsSuccess = true;
         Value = value;
     }
 
-    protected CommandResult(Error error)
+    protected AppCommandResult(Error error)
     {
         IsSuccess = false;
         Error = error;
     }
 
-    protected CommandResult(bool isSuccess)
+    protected AppCommandResult(bool isSuccess)
     {
         IsSuccess = isSuccess;
         Error = isSuccess ? null : new Error("Unknown error");

@@ -18,7 +18,7 @@ public class CreatePoliticalPartyCommandResultDto
 /// <summary>
 /// Represents the command used to create a political party.
 /// </summary>
-public class CreatePoliticalPartyCommandResult: CommandResult<CreatePoliticalPartyCommandResultDto, CreatePoliticalPartyCommandResult>
+public class CreatePoliticalPartyCommandResult: AppCommandResult<CreatePoliticalPartyCommandResultDto, CreatePoliticalPartyCommandResult>
 {
 	public CreatePoliticalPartyCommandResult(CreatePoliticalPartyCommandResultDto value): base(value)
 	{
@@ -58,7 +58,7 @@ public class CreatePoliticalPartyCommand: AppCommand<CreatePoliticalPartyCommand
 }
 
 
-public class CreatePoliticalPartyCommandHandler: BaseCommandHandler<CreatePoliticalPartyCommand, CreatePoliticalPartyCommandResult, CreatePoliticalPartyCommandResultDto>
+public class CreatePoliticalPartyCommandHandler: BaseAppCommandHandler<CreatePoliticalPartyCommand, CreatePoliticalPartyCommandResult, CreatePoliticalPartyCommandResultDto>
 {
     public CreatePoliticalPartyCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext): base(mediator, mapper, dbContext)
     {
