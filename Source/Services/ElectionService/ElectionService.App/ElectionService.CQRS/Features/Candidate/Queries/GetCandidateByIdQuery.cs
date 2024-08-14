@@ -67,7 +67,7 @@ public class GetCandidateByIdQuery : AppQuery<GetCandidateByIdQuery, GetCandidat
 }
 
 
-public class GetCandidateByIdQueryHandler : BaseQueryHandler<GetCandidateByIdQuery, GetCandidateByIdQueryResult, GetCandidateByIdQueryResultDto>
+public class GetCandidateByIdQueryHandler : BaseAppQueryHandler<GetCandidateByIdQuery, GetCandidateByIdQueryResult, GetCandidateByIdQueryResultDto>
 {
 	public GetCandidateByIdQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache) : base(mapper, mediator, dbContext, distributedCache)
 	{

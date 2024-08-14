@@ -66,7 +66,7 @@ public class GetPoliticalPartiesQuery : AppQuery<GetPoliticalPartiesQuery, GetPo
 
 
 
-public class GetPoliticalPartiesQueryHandler : BaseQueryHandler<GetPoliticalPartiesQuery, GetPoliticalPartiesQueryResult, IEnumerable<GetPoliticalPartiesQueryResultDto>>
+public class GetPoliticalPartiesQueryHandler : BaseAppQueryHandler<GetPoliticalPartiesQuery, GetPoliticalPartiesQueryResult, IEnumerable<GetPoliticalPartiesQueryResultDto>>
 {
 	public GetPoliticalPartiesQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache) : base(mapper, mediator, dbContext, distributedCache)
 	{

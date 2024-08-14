@@ -66,7 +66,7 @@ public class GetElectionByIdQuery : AppQuery<GetElectionByIdQuery, GetElectionBy
 	}
 
 
-	public class GetElectionByIdQueryHandler : BaseQueryHandler<GetElectionByIdQuery, GetElectionByIdQueryResult, GetElectionByIdQueryResultDto>
+	public class GetElectionByIdQueryHandler : BaseAppQueryHandler<GetElectionByIdQuery, GetElectionByIdQueryResult, GetElectionByIdQueryResultDto>
 	{
 		public GetElectionByIdQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache) : base(mapper, mediator, dbContext, distributedCache)
 		{

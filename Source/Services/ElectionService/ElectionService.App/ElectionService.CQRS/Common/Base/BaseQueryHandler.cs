@@ -51,7 +51,7 @@ public abstract class BaseQueryHandler<TQuery, TResponse> : IRequestHandler<TQue
 /// <typeparam name="TQuery">The type of the query.</typeparam>
 /// <typeparam name="TQueryResult">The type of the response.</typeparam>
 /// <typeparam name="TQueryResultValue">The type of the query result value.</typeparam>
-public abstract class BaseQueryHandler<TQuery, TQueryResult, TQueryResultValue> : IRequestHandler<TQuery, TQueryResult>
+public abstract class BaseAppQueryHandler<TQuery, TQueryResult, TQueryResultValue> : IRequestHandler<TQuery, TQueryResult>
 where TQuery : AppQuery<TQuery, TQueryResult>
 where TQueryResult : QueryResult<TQueryResultValue, TQueryResult>
 {
@@ -61,7 +61,7 @@ where TQueryResult : QueryResult<TQueryResultValue, TQueryResult>
 	protected readonly IDistributedCache _distributedCache;
 
 
-	protected BaseQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache)
+	protected BaseAppQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache)
 	{
 		_mapper = mapper;
 		_mediator = mediator;
@@ -162,6 +162,23 @@ where TQueryResult : QueryResult<TQueryResultValue, TQueryResult>
 		}
 
 		return Task.CompletedTask;
+	}
+
+	/// <summary>
+	/// Creates a succeeded query result from the query result value.
+	/// </summary>
+	protected virtual TQueryResult SucceededResult(TQueryResultValue value)
+	{
+		return (TQueryResult)Activator.CreateInstance(typeof(TQueryResult), value)!;
+	}
+
+	/// <summary>
+	/// Creates a failed query result with the specified error message.
+	/// </summary>
+	/// <param name="message">The error message.</param>
+	protected virtual TQueryResult FailedResult(string message)
+	{
+		return (TQueryResult)Activator.CreateInstance(typeof(TQueryResult), new Error(message))!;
 	}
 }
 

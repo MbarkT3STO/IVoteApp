@@ -57,7 +57,7 @@ public class GetCandidatesQuery : AppQuery<GetCandidatesQuery, GetCandidatesQuer
 }
 
 
-public class GetCandidatesQueryHandler : BaseQueryHandler<GetCandidatesQuery, GetCandidatesQueryResult, IEnumerable<GetCandidatesQueryResultDto>>
+public class GetCandidatesQueryHandler : BaseAppQueryHandler<GetCandidatesQuery, GetCandidatesQueryResult, IEnumerable<GetCandidatesQueryResultDto>>
 {
 	public GetCandidatesQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache) : base(mapper, mediator, dbContext, distributedCache)
 	{

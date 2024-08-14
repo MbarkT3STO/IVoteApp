@@ -66,7 +66,7 @@ public class GetElectionsQuery : AppQuery<GetElectionsQuery, GetElectionsQueryRe
 }
 
 
-public class GetElectionsQueryHandler : BaseQueryHandler<GetElectionsQuery, GetElectionsQueryResult, IEnumerable<GetElectionsQueryResultDto>>
+public class GetElectionsQueryHandler : BaseAppQueryHandler<GetElectionsQuery, GetElectionsQueryResult, IEnumerable<GetElectionsQueryResultDto>>
 {
 	public GetElectionsQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache) : base(mapper, mediator, dbContext, distributedCache)
 	{

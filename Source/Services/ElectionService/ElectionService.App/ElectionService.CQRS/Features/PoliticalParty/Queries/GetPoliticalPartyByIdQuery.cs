@@ -71,7 +71,7 @@ public class GetPoliticalPartyByIdQuery : AppQuery<GetPoliticalPartyByIdQuery, G
 }
 
 
-public class GetPoliticalPartyByIdQueryHandler : BaseQueryHandler<GetPoliticalPartyByIdQuery, GetPoliticalPartyByIdQueryResult, GetPoliticalPartyByIdQueryResultDto>
+public class GetPoliticalPartyByIdQueryHandler : BaseAppQueryHandler<GetPoliticalPartyByIdQuery, GetPoliticalPartyByIdQueryResult, GetPoliticalPartyByIdQueryResultDto>
 {
 	public GetPoliticalPartyByIdQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache) : base(mapper, mediator, dbContext, distributedCache)
 	{
