@@ -14,27 +14,12 @@ public abstract class BaseQueryHandler<TQuery, TResponse> : IRequestHandler<TQue
 	protected readonly IMapper _mapper;
 	protected readonly IMediator _mediator;
 	protected readonly AppDbContext _dbContext;
-	protected readonly IDistributedCache _distributedCache;
 
-	protected BaseQueryHandler(IMapper mapper, AppDbContext dbContext)
-	{
-		_mapper = mapper;
-		_dbContext = dbContext;
-	}
-
-	protected BaseQueryHandler(IMapper mapper, AppDbContext dbContext, IDistributedCache distributedCache)
-	{
-		_mapper = mapper;
-		_dbContext = dbContext;
-		_distributedCache = distributedCache;
-	}
-
-	protected BaseQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext, IDistributedCache distributedCache)
+	protected BaseQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext)
 	{
 		_mapper = mapper;
 		_mediator = mediator;
 		_dbContext = dbContext;
-		_distributedCache = distributedCache;
 	}
 
 	public virtual async Task<TResponse> Handle(TQuery query, CancellationToken cancellationToken)

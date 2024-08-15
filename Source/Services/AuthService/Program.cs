@@ -32,7 +32,11 @@ var audience     = builder.Configuration["JwtSettings:Audience"];
 var key          = builder.Configuration["JwtSettings:Key"];
 var symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+builder.Services.AddAuthentication(options =>
+{
+	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+	options.DefaultChallengeScheme    = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
 {
 	options.TokenValidationParameters = new TokenValidationParameters
 	{

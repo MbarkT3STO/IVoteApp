@@ -19,8 +19,6 @@ global using MediatR;
 
 // global using MassTransit;
 
-// global using AuthService.Queries;
-// global using AuthService.Commands;
 
 
 global using AuthService.Options;
@@ -31,6 +29,6 @@ global using AuthService.Common.Implementations;
 global using AuthService.Common.Base;
 global using AuthService.Common.Enums;
 global using AuthService.Common.Exceptions;
-// global using AuthService.APP.Queries;
+global using AuthService.APP.Queries;
 global using AuthService.APP.Commands;
 
