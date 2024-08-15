@@ -19,7 +19,7 @@ public class GetPoliticalPartyByIdQueryResultDto
 /// <summary>
 /// Represents the result of the get political party by id query.
 /// </summary>
-public class GetPoliticalPartyByIdQueryResult : QueryResult<GetPoliticalPartyByIdQueryResultDto, GetPoliticalPartyByIdQueryResult>
+public class GetPoliticalPartyByIdQueryResult : AppQueryResult<GetPoliticalPartyByIdQueryResultDto, GetPoliticalPartyByIdQueryResult>
 {
 	public GetPoliticalPartyByIdQueryResult(GetPoliticalPartyByIdQueryResultDto? value) : base(value)
 	{

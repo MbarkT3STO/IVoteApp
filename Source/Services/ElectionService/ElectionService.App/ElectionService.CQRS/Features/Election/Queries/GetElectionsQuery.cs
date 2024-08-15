@@ -22,7 +22,7 @@ public class GetElectionsQueryResultDto
 /// <summary>
 /// Represents the result of a query that returns the elections.
 /// </summary>
-public class GetElectionsQueryResult : QueryResult<IEnumerable<GetElectionsQueryResultDto>, GetElectionsQueryResult>
+public class GetElectionsQueryResult : AppQueryResult<IEnumerable<GetElectionsQueryResultDto>, GetElectionsQueryResult>
 {
 	public GetElectionsQueryResult(IEnumerable<GetElectionsQueryResultDto>? value) : base(value)
 	{

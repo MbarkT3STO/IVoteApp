@@ -6,7 +6,7 @@ namespace ElectionService.CQRS.Common.Implementations;
 /// Represents the result of a query operation that can either succeed with a value or fail with an error.
 /// </summary>
 /// <typeparam name="TValue">The type of the value returned upon success.</typeparam>
-public abstract class QueryResult<TValue, TQueryResult> : IQueryResult<TValue> where TQueryResult : QueryResult<TValue, TQueryResult>
+public abstract class AppQueryResult<TValue, TQueryResult> : IQueryResult<TValue> where TQueryResult : AppQueryResult<TValue, TQueryResult>
 {
 	public bool IsSuccess { get; }
 	public bool IsFailure => !IsSuccess;
@@ -15,13 +15,13 @@ public abstract class QueryResult<TValue, TQueryResult> : IQueryResult<TValue> w
 
 	TValue? IQueryResult<TValue>.Value => Value;
 
-	protected QueryResult(TValue? value)
+	protected AppQueryResult(TValue? value)
 	{
 		IsSuccess = true;
 		Value = value;
 	}
 
-	protected QueryResult(Error error)
+	protected AppQueryResult(Error error)
 	{
 		IsSuccess = false;
 		Error = error;

@@ -19,7 +19,7 @@ public class GetElectionByIdQueryResultDto
 	public string CreatedBy { get; set; }
 }
 
-public class GetElectionByIdQueryResult : QueryResult<GetElectionByIdQueryResultDto, GetElectionByIdQueryResult>
+public class GetElectionByIdQueryResult : AppQueryResult<GetElectionByIdQueryResultDto, GetElectionByIdQueryResult>
 {
 	public GetElectionByIdQueryResult(GetElectionByIdQueryResultDto? value) : base(value)
 	{

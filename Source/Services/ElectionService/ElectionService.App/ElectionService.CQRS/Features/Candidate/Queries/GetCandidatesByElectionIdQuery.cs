@@ -15,7 +15,7 @@ public class GetCandidatesByElectionIdQueryResultDto
 	public string PhotoUrl { get; set; }
 }
 
-public class GetCandidatesByElectionIdQueryResult : QueryResult<IEnumerable<GetCandidatesByElectionIdQueryResultDto>, GetCandidatesByElectionIdQueryResult>
+public class GetCandidatesByElectionIdQueryResult : AppQueryResult<IEnumerable<GetCandidatesByElectionIdQueryResultDto>, GetCandidatesByElectionIdQueryResult>
 {
 	public GetCandidatesByElectionIdQueryResult(IEnumerable<GetCandidatesByElectionIdQueryResultDto>? value) : base(value)
 	{

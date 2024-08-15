@@ -27,13 +27,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ElectionService.Shared", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionService.Shared", "Source\Services\ElectionService\ElectionService.Shared\ElectionService.Shared\ElectionService.Shared.csproj", "{68645388-0F02-4C39-BF1D-65DFB03698B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "Source\Services\Gateway\Gateway.csproj", "{4CC1F491-0A7F-4879-97F2-219035BB55CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5FFEA3D0-7E04-488E-A86A-B8E3810ECC47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -56,6 +55,13 @@ Global
 		{68645388-0F02-4C39-BF1D-65DFB03698B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68645388-0F02-4C39-BF1D-65DFB03698B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68645388-0F02-4C39-BF1D-65DFB03698B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CC1F491-0A7F-4879-97F2-219035BB55CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CC1F491-0A7F-4879-97F2-219035BB55CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CC1F491-0A7F-4879-97F2-219035BB55CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CC1F491-0A7F-4879-97F2-219035BB55CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2AA062B6-500C-40CC-865E-F5291F954FBF} = {DF44A4E8-2FA5-466F-9B81-DFD01494E29E}
@@ -69,5 +75,6 @@ Global
 		{C233377F-1A0C-4B13-90F7-B26DC78956D2} = {8ABEF9FD-203E-4F37-9B9D-3E588BF062F2}
 		{ADBE134D-0B3E-492B-9D52-16353784AB52} = {F412BABF-9674-4DF9-8FA7-3EE6AE0E2952}
 		{68645388-0F02-4C39-BF1D-65DFB03698B9} = {ADBE134D-0B3E-492B-9D52-16353784AB52}
+		{4CC1F491-0A7F-4879-97F2-219035BB55CA} = {2AA062B6-500C-40CC-865E-F5291F954FBF}
 	EndGlobalSection
 EndGlobal

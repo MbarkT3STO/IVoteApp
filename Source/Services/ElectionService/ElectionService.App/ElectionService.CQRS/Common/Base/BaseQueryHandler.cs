@@ -53,7 +53,7 @@ public abstract class BaseQueryHandler<TQuery, TResponse> : IRequestHandler<TQue
 /// <typeparam name="TQueryResultValue">The type of the query result value.</typeparam>
 public abstract class BaseAppQueryHandler<TQuery, TQueryResult, TQueryResultValue> : IRequestHandler<TQuery, TQueryResult>
 where TQuery : AppQuery<TQuery, TQueryResult>
-where TQueryResult : QueryResult<TQueryResultValue, TQueryResult>
+where TQueryResult : AppQueryResult<TQueryResultValue, TQueryResult>
 {
 	protected readonly IMapper _mapper;
 	protected readonly IMediator _mediator;

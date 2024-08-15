@@ -18,7 +18,7 @@ public class GetCandidateByIdQueryResultDto
 /// <summary>
 /// Represents the result of the get candidate by id query.
 /// </summary>
-public class GetCandidateByIdQueryResult : QueryResult<GetCandidateByIdQueryResultDto, GetCandidateByIdQueryResult>
+public class GetCandidateByIdQueryResult : AppQueryResult<GetCandidateByIdQueryResultDto, GetCandidateByIdQueryResult>
 {
 	public GetCandidateByIdQueryResult(GetCandidateByIdQueryResultDto? value) : base(value)
 	{

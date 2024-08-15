@@ -20,7 +20,7 @@ public class GetPoliticalPartiesQueryResultDto
 /// <summary>
 /// Represents the query used to get political parties.
 /// </summary>
-public class GetPoliticalPartiesQueryResult : QueryResult<IEnumerable<GetPoliticalPartiesQueryResultDto>, GetPoliticalPartiesQueryResult>
+public class GetPoliticalPartiesQueryResult : AppQueryResult<IEnumerable<GetPoliticalPartiesQueryResultDto>, GetPoliticalPartiesQueryResult>
 {
 	public GetPoliticalPartiesQueryResult(IEnumerable<GetPoliticalPartiesQueryResultDto>? value) : base(value)
 	{

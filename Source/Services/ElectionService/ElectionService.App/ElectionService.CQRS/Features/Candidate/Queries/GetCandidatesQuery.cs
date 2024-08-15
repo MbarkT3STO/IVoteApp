@@ -17,7 +17,7 @@ public class GetCandidatesQueryResultDto
 /// <summary>
 /// Represents the result of the get candidates query.
 /// </summary>
-public class GetCandidatesQueryResult : QueryResult<IEnumerable<GetCandidatesQueryResultDto>, GetCandidatesQueryResult>
+public class GetCandidatesQueryResult : AppQueryResult<IEnumerable<GetCandidatesQueryResultDto>, GetCandidatesQueryResult>
 {
 	public GetCandidatesQueryResult(IEnumerable<GetCandidatesQueryResultDto>? value) : base(value)
 	{
