@@ -70,6 +70,9 @@ public class LoginCommandHandler: BaseAppCommandHandler<LoginCommand, LoginComma
 		var (AccessToken, AccessTokenExpirationDate) = _jwtService.GenerateJwtToken(user);
 		var refreshToken                             = _jwtService.GenerateRefreshToken(user);
 
+		await _dbContext.RefreshTokens.AddAsync(refreshToken, cancellationToken);
+		await _dbContext.SaveChangesAsync(cancellationToken);
+
 		var resultValue = new LoginCommandResultDto(AccessToken, AccessTokenExpirationDate, refreshToken.Token, refreshToken.ExpiresAt);
 
 		return SucceededResult(resultValue);

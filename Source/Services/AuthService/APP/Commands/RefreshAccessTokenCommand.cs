@@ -93,11 +93,12 @@ public class RefreshAccessTokenCommandHandler: BaseAppCommandHandler<RefreshAcce
 			return (false, new Error("Refresh token not active And/Or expired"), null);
 		}
 
-		var refreshTokenValidationResult = _jwtService.ValidateRefreshToken(refreshTokenEntity);
+		// var refreshTokenValidationResult = _jwtService.ValidateRefreshToken(refreshTokenEntity);
+		var refreshTokenValidationResult = refreshTokenEntity.ValidateRefreshToken();
 
 		if (refreshTokenValidationResult != RefreshTokenValidationResult.Valid)
 		{
-			refreshTokenEntity.MarkAsExpired();
+			refreshTokenEntity.UpdateStatus(refreshTokenValidationResult);
 			await _dbContext.SaveChangesAsync(cancellationToken);
 
 			return (false, new Error("Refresh token not valid And/Or expired"), null);
