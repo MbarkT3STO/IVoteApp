@@ -19,4 +19,18 @@ public class AuthController(IMediator mediator, IMapper mapper) : BaseExtendedCo
 
 		return Ok(commandResult.Value);
 	}
+
+	[HttpPost(nameof(RefreshToken))]
+	public async Task<IActionResult> RefreshToken(string username, string refreshToken)
+	{
+		var command = new RefreshAccessTokenCommand(username, refreshToken);
+		var commandResult = await _mediator.Send(command);
+
+		if(commandResult.IsFailure)
+		{
+			return BadRequest(commandResult.Error.Message);
+		}
+
+		return Ok(commandResult.Value);
+	}
 }

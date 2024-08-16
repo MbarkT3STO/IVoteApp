@@ -48,16 +48,18 @@ where TCommandResult : class, ICommandResult<TCommandResultValue>
 	private protected readonly IMapper _mapper;
 	private protected readonly AppDbContext _dbContext;
 	private protected readonly JwtSettings _jwtSettings;
+	private protected readonly JWTService _jwtService;
 	private protected readonly UserManager<AppUser> _userManager;
 
 
-	protected BaseAppCommandHandler(AppDbContext context, IMapper mapper, IMediator mediator, UserManager<AppUser> userManager,  IOptions<JwtSettings> jwtSettingsOptions)
+	protected BaseAppCommandHandler(AppDbContext context, IMapper mapper, IMediator mediator, UserManager<AppUser> userManager,  IOptions<JwtSettings> jwtSettingsOptions, JWTService jwtService)
 	{
 		_mediator = mediator;
 		_mapper = mapper;
 		_dbContext = context;
 		_userManager = userManager;
 		_jwtSettings= jwtSettingsOptions.Value;
+		_jwtService = jwtService;
 	}
 
 	public virtual async Task<TCommandResult> Handle(TCommand command, CancellationToken cancellationToken)

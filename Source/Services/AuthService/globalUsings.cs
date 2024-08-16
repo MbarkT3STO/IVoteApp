@@ -26,6 +26,7 @@ global using AuthService.DATA;
 global using AuthService.DATA.Entities;
 global using AuthService.Common.Interfaces;
 global using AuthService.Common.Implementations;
+global using AuthService.Common.Services;
 global using AuthService.Common.Base;
 global using AuthService.Common.Enums;
 global using AuthService.Common.Exceptions;

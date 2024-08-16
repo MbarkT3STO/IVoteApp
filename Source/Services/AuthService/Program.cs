@@ -1,3 +1,6 @@
+using AuthService.Common.Services;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -26,6 +29,8 @@ builder.Services.AddIdentity<AppUser, AppRole>(options =>
 // Configure JWT
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.AddOptions<JwtSettings>().Bind(builder.Configuration.GetSection("JwtSettings"));
+builder.Services.AddSingleton<JwtSettings>(builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>());
+
 
 var issuer       = builder.Configuration["JwtSettings:Issuer"];
 var audience     = builder.Configuration["JwtSettings:Audience"];
@@ -50,6 +55,9 @@ builder.Services.AddAuthentication(options =>
 		ClockSkew                    = TimeSpan.Zero
 	};
 });
+
+
+builder.Services.AddTransient<JWTService>();
 
 // Add MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));

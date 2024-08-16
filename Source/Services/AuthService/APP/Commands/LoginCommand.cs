@@ -49,9 +49,11 @@ public class LoginCommand: AppCommand<LoginCommand, LoginCommandResult>
 
 public class LoginCommandHandler: BaseAppCommandHandler<LoginCommand, LoginCommandResult, LoginCommandResultDto>
 {
-	public LoginCommandHandler(AppDbContext context, IMapper mapper, IMediator mediator, UserManager<AppUser> userManager, IOptions<JwtSettings> jwtSettingsOptions): base(context, mapper, mediator, userManager, jwtSettingsOptions)
+	public LoginCommandHandler(AppDbContext context, IMapper mapper, IMediator mediator, UserManager<AppUser> userManager, IOptions<JwtSettings> jwtSettingsOptions, JWTService jwtService): base(context, mapper, mediator, userManager, jwtSettingsOptions, jwtService)
 	{
+
 	}
+
 
 	protected override async Task<LoginCommandResult> HandleCore(LoginCommand command, CancellationToken cancellationToken)
 	{
@@ -65,8 +67,8 @@ public class LoginCommandHandler: BaseAppCommandHandler<LoginCommand, LoginComma
 		if (!passwordValid)
 			return FailedResult("Invalid username And/Or password");
 
-		var (AccessToken, AccessTokenExpirationDate) = GenerateJwtToken(user);
-		var refreshToken                             = await CreateRefreshToken(user);
+		var (AccessToken, AccessTokenExpirationDate) = _jwtService.GenerateJwtToken(user);
+		var refreshToken                             = _jwtService.GenerateRefreshToken(user);
 
 		var resultValue = new LoginCommandResultDto(AccessToken, AccessTokenExpirationDate, refreshToken.Token, refreshToken.ExpiresAt);
 
