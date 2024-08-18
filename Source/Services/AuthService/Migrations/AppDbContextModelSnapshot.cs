@@ -152,17 +152,17 @@ namespace AuthService.Migrations
                         {
                             Id = "MBVRK",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d84b9ff5-03e8-439f-b5f5-f49461bfd0d4",
-                            CreatedAt = new DateTime(2024, 8, 15, 18, 16, 12, 9, DateTimeKind.Local).AddTicks(2186),
+                            ConcurrencyStamp = "0b1ae1af-0624-4126-ba72-d7f5236016d2",
+                            CreatedAt = new DateTime(2024, 8, 18, 18, 51, 49, 690, DateTimeKind.Local).AddTicks(6870),
                             Email = "mbvrk@example.com",
                             EmailConfirmed = false,
                             FirstName = "MBVRK",
                             LastName = "MBVRK",
                             LockoutEnabled = false,
                             NormalizedUserName = "MBVRK",
-                            PasswordHash = "AQAAAAIAAYagAAAAELgLj0+qfIC8HmdshTzzX9/fggXcDdjmnSuPmovfvEhpq9Vo7IRs/vNXHTGAPFEWKw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDwnBCqNdajhX0j8fW1nK3IP2LYegK7OaekzdVELlF0eDgqelG/FyLFJ2td4mkuE0g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a54a0d1f-d004-4606-aeef-159f91a9547f",
+                            SecurityStamp = "593ae1a0-9850-4fbc-b04a-e905e480dcd8",
                             TwoFactorEnabled = false,
                             UserName = "mbvrk"
                         });
@@ -204,14 +204,23 @@ namespace AuthService.Migrations
                     b.Property<DateTime>("ExpiresAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("InvalidatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsExpired")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsInvalidated")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsUsed")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastUsedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("RevokedAt")
                         .HasColumnType("datetime2");

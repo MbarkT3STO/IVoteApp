@@ -1,4 +1,5 @@
 
+using AuthService.Extensions;
 using Microsoft.Extensions.Options;
 
 namespace AuthService.APP.Commands;
@@ -51,17 +52,18 @@ public class RefreshAccessTokenCommandHandler: BaseAppCommandHandler<RefreshAcce
 
 	protected override async Task<RefreshAccessTokenCommandResult> HandleCore(RefreshAccessTokenCommand command, CancellationToken cancellationToken)
 	{
-		var (isUserExistsAndRefreshTokenIsValid, isUserExistsAndRefreshTokenIsValidError, user) = await IsUserExistsAndRefreshTokenIsValidAsync(command.UserName, command.RefreshToken, cancellationToken);
+		var (isUserExistsAndRefreshTokenIsValid, isUserExistsAndRefreshTokenIsValidError, user, refreshToken) = await IsUserExistsAndRefreshTokenIsValidAsync(command.UserName, command.RefreshToken, cancellationToken);
 
 		if (isUserExistsAndRefreshTokenIsValid == false)
 		{
 			return FailedResult(isUserExistsAndRefreshTokenIsValidError);
 		}
 
-		// var jwtService = new JWTService(_jwtSettings);
-
 		var (accessToken, accessTokenExpirationDate) = _jwtService.GenerateJwtToken(user);
 		var resultValue                              = new RefreshAccessTokenCommandResultDto(accessToken, accessTokenExpirationDate, command.RefreshToken, DateTime.Now.AddMinutes(10));
+
+		refreshToken.MarkAsUsed();
+		await _dbContext.SaveChangesAsync(cancellationToken);
 
 		return SucceededResult(resultValue);
 	}
@@ -71,39 +73,36 @@ public class RefreshAccessTokenCommandHandler: BaseAppCommandHandler<RefreshAcce
 	/// Checks if user exists and refresh token is valid.
 	/// </summary>
 	/// <returns>Returns a tuple of (isUserExistsAndRefreshTokenIsValid, error, user)</returns>
-	private async Task<(bool IsUserExistsAndRefreshTokenIsValid, Error? Error, AppUser? User)> IsUserExistsAndRefreshTokenIsValidAsync(string userName, string refreshToken, CancellationToken cancellationToken)
+	private async Task<(bool IsUserExistsAndRefreshTokenIsValid, Error? Error, AppUser? User, RefreshToken? RefreshToken)> IsUserExistsAndRefreshTokenIsValidAsync(string userName, string refreshToken, CancellationToken cancellationToken)
 	{
 		var user = await _userManager.FindByNameAsync(userName);
 
 		if (user == null)
 		{
-			return (false, new Error("User not found"), null);
+			return (false, new Error("User not found"), null , null);
 		}
 
 		var refreshTokenEntity = await _dbContext.RefreshTokens
 			.FirstOrDefaultAsync(x => x.UserId == user.Id && x.Token == refreshToken, cancellationToken);
 
-		if (refreshTokenEntity == null)
+		if (refreshTokenEntity is null)
 		{
-			return (false, new Error("Refresh token not found"), null);
+			return (false, new Error("Refresh token not found"), null , null);
 		}
 
-		if (!refreshTokenEntity.IsActive)
+		var refreshTokenStatus = refreshTokenEntity.GetStatus();
+
+		if (refreshTokenStatus == RefreshTokenStatus.Expired || refreshTokenStatus == RefreshTokenStatus.Revoked || refreshTokenStatus == RefreshTokenStatus.Invalidated)
 		{
-			return (false, new Error("Refresh token not active And/Or expired"), null);
+			if(refreshTokenEntity.IsExpiredAndNotMarkedAsExpiredYet())
+			{
+				refreshTokenEntity.MarkAsExpired();
+				await _dbContext.SaveChangesAsync(cancellationToken);
+			}
+
+			return (false, new Error("Refresh token Expired, Revoked or Invalidated"), null , null);
 		}
 
-		// var refreshTokenValidationResult = _jwtService.ValidateRefreshToken(refreshTokenEntity);
-		var refreshTokenValidationResult = refreshTokenEntity.ValidateRefreshToken();
-
-		if (refreshTokenValidationResult != RefreshTokenValidationResult.Valid)
-		{
-			refreshTokenEntity.UpdateStatus(refreshTokenValidationResult);
-			await _dbContext.SaveChangesAsync(cancellationToken);
-
-			return (false, new Error("Refresh token not valid And/Or expired"), null);
-		}
-
-		return (true, null, user);
+		return (true, null, user, refreshTokenEntity);
 	}
 }

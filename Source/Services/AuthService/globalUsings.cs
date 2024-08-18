@@ -30,6 +30,7 @@ global using AuthService.Common.Services;
 global using AuthService.Common.Base;
 global using AuthService.Common.Enums;
 global using AuthService.Common.Exceptions;
+global using AuthService.Extensions;
 global using AuthService.APP.Queries;
 global using AuthService.APP.Commands;
 

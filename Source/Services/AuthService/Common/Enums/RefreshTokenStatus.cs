@@ -5,9 +5,8 @@ namespace AuthService.Common.Enums;
 /// </summary>
 public enum RefreshTokenStatus
 {
-	Active,
-	Revoked,
 	Expired,
+	Revoked,
 	Invalidated,
-	Used
+	Active
 }

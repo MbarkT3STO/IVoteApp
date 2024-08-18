@@ -171,11 +171,14 @@ namespace AuthService.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExpiresAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RevokedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsExpired = table.Column<bool>(type: "bit", nullable: false),
+                    ExpiresAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsRevoked = table.Column<bool>(type: "bit", nullable: false),
+                    RevokedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsUsed = table.Column<bool>(type: "bit", nullable: false),
+                    LastUsedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsInvalidated = table.Column<bool>(type: "bit", nullable: false),
+                    InvalidatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -201,7 +204,7 @@ namespace AuthService.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedAt", "Email", "EmailConfirmed", "FirstName", "ImageUrl", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UpdatedAt", "UserName" },
-                values: new object[] { "MBVRK", 0, "d84b9ff5-03e8-439f-b5f5-f49461bfd0d4", new DateTime(2024, 8, 15, 18, 16, 12, 9, DateTimeKind.Local).AddTicks(2186), "mbvrk@example.com", false, "MBVRK", null, "MBVRK", false, null, null, "MBVRK", "AQAAAAIAAYagAAAAELgLj0+qfIC8HmdshTzzX9/fggXcDdjmnSuPmovfvEhpq9Vo7IRs/vNXHTGAPFEWKw==", null, false, "a54a0d1f-d004-4606-aeef-159f91a9547f", false, null, "mbvrk" });
+                values: new object[] { "MBVRK", 0, "0b1ae1af-0624-4126-ba72-d7f5236016d2", new DateTime(2024, 8, 18, 18, 51, 49, 690, DateTimeKind.Local).AddTicks(6870), "mbvrk@example.com", false, "MBVRK", null, "MBVRK", false, null, null, "MBVRK", "AQAAAAIAAYagAAAAEDwnBCqNdajhX0j8fW1nK3IP2LYegK7OaekzdVELlF0eDgqelG/FyLFJ2td4mkuE0g==", null, false, "593ae1a0-9850-4fbc-b04a-e905e480dcd8", false, null, "mbvrk" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

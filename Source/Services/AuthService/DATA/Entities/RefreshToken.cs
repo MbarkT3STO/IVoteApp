@@ -5,11 +5,16 @@ public class RefreshToken
 	public int Id { get; set; }
 	public string Token { get; set; }
 	public DateTime CreatedAt { get; set; }
-	public DateTime ExpiresAt { get; set; }
-	public DateTime? RevokedAt { get; set; }
+
 	public bool IsExpired { get; set; }
+	public DateTime ExpiresAt { get; set; }
+	public bool IsRevoked { get; set; }
+	public DateTime? RevokedAt { get; set; }
 	public bool IsUsed { get; set; }
+	public DateTime? LastUsedAt { get; set; }
 	public bool IsInvalidated { get; set; }
+	public DateTime? InvalidatedAt { get; set; }
+
 	public bool IsActive => !IsExpired && !IsUsed && !IsInvalidated;
 
 	public string UserId { get; set; }
@@ -22,22 +27,17 @@ public class RefreshToken
 	/// </summary>
 	public RefreshTokenValidationResult ValidateRefreshToken()
 	{
-		if (IsExpired || ExpiresAt < DateTime.UtcNow)
+		if ( IsExpired || ExpiresAt < DateTime.UtcNow)
 		{
-			return RefreshTokenValidationResult.Expired;
+			return RefreshTokenValidationResult.Invalid;
 		}
 
-		if (RevokedAt != null)
+		if ( IsRevoked || RevokedAt != null)
 		{
-			return RefreshTokenValidationResult.Revoked;
+			return RefreshTokenValidationResult.Invalid;
 		}
 
-		if (IsUsed)
-		{
-			return RefreshTokenValidationResult.Used;
-		}
-
-		if(IsInvalidated)
+		if( IsInvalidated || InvalidatedAt != null)
 		{
 			return RefreshTokenValidationResult.Invalid;
 		}
@@ -53,28 +53,63 @@ public class RefreshToken
 		IsExpired = true;
 	}
 
+	/// <summary>
+	/// Marks the refresh token as revoked.
+	/// </summary>
+	public void MarkAsRevoked()
+	{
+		IsRevoked = true;
+		RevokedAt = DateTime.UtcNow;
+	}
 
 	/// <summary>
-	/// Sets the validation result of the refresh token to the given value.
+	/// Marks the refresh token as invalid.
 	/// </summary>
-	/// <param name="validationResult">The validation result.</param>
-	public void SetTheValidation(RefreshTokenValidationResult validationResult)
+	public void MarkAsInvalid()
 	{
-		switch (validationResult)
+		IsInvalidated = true;
+		InvalidatedAt = DateTime.UtcNow;
+	}
+
+	/// <summary>
+	/// Marks the refresh token as used.
+	/// </summary>
+	public void MarkAsUsed()
+	{
+		IsUsed = true;
+		LastUsedAt = DateTime.UtcNow;
+	}
+
+	/// <summary>
+	/// Checks if the refresh token is expired and not marked as expired yet.
+	/// </summary>
+	public bool IsExpiredAndNotMarkedAsExpiredYet()
+	{
+		return ExpiresAt < DateTime.UtcNow && !IsExpired;
+	}
+
+
+	/// <summary>
+	/// Gets the status of the refresh token.
+	/// </summary>
+	public RefreshTokenStatus GetStatus()
+	{
+		if (IsExpired || ExpiresAt < DateTime.UtcNow)
 		{
-			case RefreshTokenValidationResult.Used:
-				IsUsed = true;
-				break;
-			case RefreshTokenValidationResult.Invalid:
-				IsInvalidated = true;
-				break;
-			case RefreshTokenValidationResult.Revoked:
-				RevokedAt = DateTime.UtcNow;
-				break;
-			case RefreshTokenValidationResult.Expired:
-				MarkAsExpired();
-				break;
+			return RefreshTokenStatus.Expired;
 		}
+
+		if (IsRevoked || RevokedAt != null)
+		{
+			return RefreshTokenStatus.Revoked;
+		}
+
+		if (IsInvalidated || InvalidatedAt != null)
+		{
+			return RefreshTokenStatus.Invalidated;
+		}
+
+		return RefreshTokenStatus.Active;
 	}
 
 
@@ -85,14 +120,11 @@ public class RefreshToken
 	{
 		switch (status)
 		{
-			case RefreshTokenStatus.Used:
-				IsUsed = true;
-				break;
 			case RefreshTokenStatus.Invalidated:
-				IsInvalidated = true;
+				MarkAsInvalid();
 				break;
 			case RefreshTokenStatus.Revoked:
-				RevokedAt = DateTime.UtcNow;
+				MarkAsRevoked();
 				break;
 			case RefreshTokenStatus.Expired:
 				MarkAsExpired();
@@ -101,25 +133,4 @@ public class RefreshToken
 	}
 
 
-	/// <summary>
-	/// Updates the status of the refresh token to the given value.
-	/// </summary>
-	public void UpdateStatus(RefreshTokenValidationResult validationResult)
-	{
-		switch (validationResult)
-		{
-			case RefreshTokenValidationResult.Used:
-				IsUsed = true;
-				break;
-			case RefreshTokenValidationResult.Invalid:
-				IsInvalidated = true;
-				break;
-			case RefreshTokenValidationResult.Revoked:
-				RevokedAt = DateTime.UtcNow;
-				break;
-			case RefreshTokenValidationResult.Expired:
-				MarkAsExpired();
-				break;
-		}
-	}
 }

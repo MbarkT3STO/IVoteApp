@@ -63,17 +63,12 @@ public class JWTService
 	{
 		if (refreshToken.IsExpired || refreshToken.ExpiresAt < DateTime.UtcNow)
 		{
-			return RefreshTokenValidationResult.Expired;
+			return RefreshTokenValidationResult.Invalid;
 		}
 
 		if (refreshToken.RevokedAt != null)
 		{
-			return RefreshTokenValidationResult.Revoked;
-		}
-
-		if (refreshToken.IsUsed)
-		{
-			return RefreshTokenValidationResult.Used;
+			return RefreshTokenValidationResult.Invalid;
 		}
 
 		if(refreshToken.IsInvalidated)
