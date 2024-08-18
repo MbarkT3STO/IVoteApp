@@ -72,7 +72,7 @@ public class RefreshAccessTokenCommandHandler: BaseAppCommandHandler<RefreshAcce
 	/// <summary>
 	/// Checks if user exists and refresh token is valid.
 	/// </summary>
-	/// <returns>Returns a tuple of (isUserExistsAndRefreshTokenIsValid, error, user)</returns>
+	/// <returns>Returns a tuple of (isUserExistsAndRefreshTokenIsValid, error, user, refreshToken)</returns>
 	private async Task<(bool IsUserExistsAndRefreshTokenIsValid, Error? Error, AppUser? User, RefreshToken? RefreshToken)> IsUserExistsAndRefreshTokenIsValidAsync(string userName, string refreshToken, CancellationToken cancellationToken)
 	{
 		var user = await _userManager.FindByNameAsync(userName);
