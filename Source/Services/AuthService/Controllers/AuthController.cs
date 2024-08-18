@@ -33,4 +33,19 @@ public class AuthController(IMediator mediator, IMapper mapper) : BaseExtendedCo
 
 		return Ok(commandResult.Value);
 	}
+
+
+	[HttpPatch(nameof(InvalidateRefreshToken))]
+	public async Task<IActionResult> InvalidateRefreshToken(string username, string refreshToken)
+	{
+		var command = new InvalidateRefreshTokenCommand(username, refreshToken);
+		var commandResult = await _mediator.Send(command);
+
+		if(commandResult.IsFailure)
+		{
+			return BadRequest(commandResult.Error.Message);
+		}
+
+		return Ok(new { message = "Refresh token successfully invalidated" });
+	}
 }
