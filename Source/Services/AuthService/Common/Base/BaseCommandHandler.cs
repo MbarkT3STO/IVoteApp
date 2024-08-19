@@ -62,6 +62,26 @@ where TCommandResult : class, ICommandResult
 		return user;
 	}
 
+	/// <summary>
+	/// Checks if user exists by username.
+	/// </summary>
+	protected async Task<bool> IsUserExistsByNameAsync(string userName, CancellationToken cancellationToken)
+	{
+		var user = await _userManager.FindByNameAsync(userName);
+
+		return user is not null;
+	}
+
+	/// <summary>
+	/// Checks if user exists by email.
+	/// </summary>
+	protected async Task<bool> IsUserExistsByEmailAsync(string email, CancellationToken cancellationToken)
+	{
+		var user = await _userManager.FindByEmailAsync(email);
+
+		return user is not null;
+	}
+
 
 	/// <summary>
 	/// Handles the core logic of the Command.

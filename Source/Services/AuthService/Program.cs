@@ -24,7 +24,10 @@ builder.Services.AddIdentity<AppUser, AppRole>(options =>
 	options.SignIn.RequireConfirmedEmail       = false;
 	options.SignIn.RequireConfirmedPhoneNumber = false;
 	options.User.RequireUniqueEmail            = true;
-}).AddRoles<AppRole>().AddEntityFrameworkStores<AppDbContext>();
+})
+.AddRoles<AppRole>()
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders();
 
 // Configure JWT
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));

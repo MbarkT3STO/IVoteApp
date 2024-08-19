@@ -60,4 +60,17 @@ public class UsersController(IMediator mediator, IMapper mapper): BaseExtendedCo
 
 		return Ok(result.Value);
 	}
+
+
+	[Authorize(Roles = "Admin, User")]
+	[HttpPatch(nameof(ResetPassword))]
+	public async Task<IActionResult> ResetPassword(string userName, string password, string newPassword, string confirmNewPassword)
+	{
+		var command = new ResetPasswordCommand(userName, password, newPassword, confirmNewPassword);
+		var result = await mediator.Send(command);
+
+		if(result.IsFailure) return BadRequest(result.Error);
+
+		return Ok(new { message = "Password successfully reset" });
+	}
 }
