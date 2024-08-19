@@ -15,7 +15,7 @@ public class JWTService
 	/// <summary>
 	/// Generates a JWT token.
 	/// </summary>
-	public (string Token, DateTime ValidTo) GenerateJwtToken(AppUser user)
+	public (string Token, DateTime ValidTo) GenerateJwtToken(AppUser user, string? role = null)
 	{
 		var claims = new Claim[]
 		{
@@ -23,14 +23,21 @@ public class JWTService
 			new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 		};
 
-		var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key));
+		if (!string.IsNullOrEmpty(role))
+		{
+			claims = claims
+				.Append(new Claim(ClaimTypes.Role, role))
+				.ToArray();
+		}
+
+		var securityKey        = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key));
 		var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
 		var token = new JwtSecurityToken(
-			issuer: jwtSettings.Issuer,
-			audience: jwtSettings.Audience,
-			claims: claims,
-			expires: DateTime.UtcNow.AddMinutes(1),
+			issuer            : jwtSettings.Issuer,
+			audience          : jwtSettings.Audience,
+			claims            : claims,
+			expires           : DateTime.UtcNow.AddMinutes(1),
 			signingCredentials: signingCredentials
 		);
 
@@ -38,7 +45,6 @@ public class JWTService
 
 		return (encodedToken, token.ValidTo);
 	}
-
 
 	/// <summary>
 	/// Generates a new refresh token.

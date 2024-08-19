@@ -52,14 +52,14 @@ public class RefreshAccessTokenCommandHandler: BaseAppCommandHandler<RefreshAcce
 
 	protected override async Task<RefreshAccessTokenCommandResult> HandleCore(RefreshAccessTokenCommand command, CancellationToken cancellationToken)
 	{
-		var (isUserExistsAndRefreshTokenIsValid, isUserExistsAndRefreshTokenIsValidError, user, refreshToken) = await IsUserExistsAndRefreshTokenIsValidAsync(command.UserName, command.RefreshToken, cancellationToken);
+		var (isUserExistsAndRefreshTokenIsValid, isUserExistsAndRefreshTokenIsValidError, user, role, refreshToken) = await IsUserExistsAndRefreshTokenIsValidAsync(command.UserName, command.RefreshToken, cancellationToken);
 
 		if (isUserExistsAndRefreshTokenIsValid == false)
 		{
 			return FailedResult(isUserExistsAndRefreshTokenIsValidError);
 		}
 
-		var (accessToken, accessTokenExpirationDate) = _jwtService.GenerateJwtToken(user);
+		var (accessToken, accessTokenExpirationDate) = _jwtService.GenerateJwtToken(user, role);
 		var resultValue                              = new RefreshAccessTokenCommandResultDto(accessToken, accessTokenExpirationDate, command.RefreshToken, DateTime.Now.AddMinutes(10));
 
 		refreshToken.MarkAsUsed();
@@ -73,13 +73,13 @@ public class RefreshAccessTokenCommandHandler: BaseAppCommandHandler<RefreshAcce
 	/// Checks if user exists and refresh token is valid.
 	/// </summary>
 	/// <returns>Returns a tuple of (isUserExistsAndRefreshTokenIsValid, error, user, refreshToken)</returns>
-	private async Task<(bool IsUserExistsAndRefreshTokenIsValid, Error? Error, AppUser? User, RefreshToken? RefreshToken)> IsUserExistsAndRefreshTokenIsValidAsync(string userName, string refreshToken, CancellationToken cancellationToken)
+	private async Task<(bool IsUserExistsAndRefreshTokenIsValid, Error? Error, AppUser? User, string? Role, RefreshToken? RefreshToken)> IsUserExistsAndRefreshTokenIsValidAsync(string userName, string refreshToken, CancellationToken cancellationToken)
 	{
 		var user = await _userManager.FindByNameAsync(userName);
 
 		if (user == null)
 		{
-			return (false, new Error("User not found"), null , null);
+			return (false, new Error("User not found"), null, null, null);
 		}
 
 		var refreshTokenEntity = await _dbContext.RefreshTokens
@@ -87,7 +87,7 @@ public class RefreshAccessTokenCommandHandler: BaseAppCommandHandler<RefreshAcce
 
 		if (refreshTokenEntity is null)
 		{
-			return (false, new Error("Refresh token not found"), null , null);
+			return (false, new Error("Refresh token not found"), null, null, null);
 		}
 
 		var refreshTokenStatus = refreshTokenEntity.GetStatus();
@@ -100,9 +100,16 @@ public class RefreshAccessTokenCommandHandler: BaseAppCommandHandler<RefreshAcce
 				await _dbContext.SaveChangesAsync(cancellationToken);
 			}
 
-			return (false, new Error("Refresh token Expired, Revoked or Invalidated"), null , null);
+			return (false, new Error("Refresh token Expired, Revoked or Invalidated"), null, null, null);
 		}
 
-		return (true, null, user, refreshTokenEntity);
+		// Get the role of the user
+		var role = await _userManager.GetRolesAsync(user);
+		if (role.Count == 0)
+		{
+			return (false, new Error("User has no role"), null, null, null);
+		}
+
+		return (true, null, user, role.FirstOrDefault(), refreshTokenEntity);
 	}
 }

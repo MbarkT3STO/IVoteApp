@@ -146,6 +146,42 @@ where TCommandResult : class, ICommandResult<TCommandResultValue>
 
 
 	/// <summary>
+	/// Gets the user by name or throws an exception if not exists.
+	/// </summary>
+	/// <param name="userName">The user username.</param>
+	protected async Task<AppUser> GetUserByNameOrThrowAsync(string userName)
+	{
+		var user = await _userManager.FindByNameAsync(userName);
+
+		if (user is null)
+		{
+			throw new Exception($"User with name {userName} not found");
+		}
+
+		return user;
+	}
+
+	/// <summary>
+	/// Checks if user exists by username.
+	/// </summary>
+	protected async Task<bool> IsUserExistsByNameAsync(string userName, CancellationToken cancellationToken)
+	{
+		var user = await _userManager.FindByNameAsync(userName);
+
+		return user is not null;
+	}
+
+	/// <summary>
+	/// Checks if user exists by email.
+	/// </summary>
+	protected async Task<bool> IsUserExistsByEmailAsync(string email, CancellationToken cancellationToken)
+	{
+		var user = await _userManager.FindByEmailAsync(email);
+
+		return user is not null;
+	}
+
+	/// <summary>
 	/// Handles the core logic of the Command.
 	/// </summary>
 	/// <param name="command">The command.</param>

@@ -67,7 +67,12 @@ public class LoginCommandHandler: BaseAppCommandHandler<LoginCommand, LoginComma
 		if (!passwordValid)
 			return FailedResult("Invalid username And/Or password");
 
-		var (AccessToken, AccessTokenExpirationDate) = _jwtService.GenerateJwtToken(user);
+		var userRoles = await _userManager.GetRolesAsync(user);
+
+		if (userRoles.Count == 0)
+			return FailedResult("User has no roles");
+
+		var (AccessToken, AccessTokenExpirationDate) = _jwtService.GenerateJwtToken(user, userRoles.FirstOrDefault());
 		var refreshToken                             = _jwtService.GenerateRefreshToken(user);
 
 		await _dbContext.RefreshTokens.AddAsync(refreshToken, cancellationToken);
