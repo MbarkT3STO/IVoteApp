@@ -23,6 +23,30 @@ public class UsersController(IMediator mediator, IMapper mapper): BaseExtendedCo
 
 
 	[Authorize(Roles = "Admin")]
+	[HttpGet(nameof(GetById))]
+	public async Task<IActionResult> GetById(string id)
+	{
+		var query = new GetUserByIdQuery(id);
+		var result = await mediator.Send(query);
+
+		if (result.IsFailure) return BadRequest(result.Error);
+
+		return Ok(result.Value);
+	}
+
+	[Authorize(Roles = "Admin")]
+	[HttpGet(nameof(GetByUserName))]
+	public async Task<IActionResult> GetByUserName(string userName)
+	{
+		var query = new GetUserByNameQuery(userName);
+		var result = await mediator.Send(query);
+
+		if (result.IsFailure) return BadRequest(result.Error);
+
+		return Ok(result.Value);
+	}
+
+	[Authorize(Roles = "Admin")]
 	[HttpPost(nameof(Create))]
 	public async Task<IActionResult> Create(string username, string firstName, string lastName, string email, string password, string? imageUrl)
 	{

@@ -34,7 +34,7 @@ public class GetUsersQuery : AppQuery<GetUsersQuery, GetUsersQueryResult>
 }
 
 
-public class GetUsersQueryHandler : BaseQueryHandler<GetUsersQuery, GetUsersQueryResult>
+public class GetUsersQueryHandler : BaseAppQueryHandler<GetUsersQuery, GetUsersQueryResult>
 {
     public GetUsersQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext) : base(mapper, mediator, dbContext)
     {

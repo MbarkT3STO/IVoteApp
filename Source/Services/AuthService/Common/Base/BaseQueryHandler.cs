@@ -9,13 +9,13 @@ namespace AuthService.Common.Base;
 /// </summary>
 /// <typeparam name="TQuery">The type of the query.</typeparam>
 /// <typeparam name="TResponse">The type of the response.</typeparam>
-public abstract class BaseQueryHandler<TQuery, TResponse> : IRequestHandler<TQuery, TResponse> where TQuery : IRequest<TResponse>
+public abstract class BaseAppQueryHandler<TQuery, TResponse> : IRequestHandler<TQuery, TResponse> where TQuery : IRequest<TResponse>
 {
 	protected readonly IMapper _mapper;
 	protected readonly IMediator _mediator;
 	protected readonly AppDbContext _dbContext;
 
-	protected BaseQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext)
+	protected BaseAppQueryHandler(IMapper mapper, IMediator mediator, AppDbContext dbContext)
 	{
 		_mapper = mapper;
 		_mediator = mediator;
