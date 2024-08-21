@@ -1,5 +1,4 @@
-using AuthService.Common.Services;
-using Microsoft.Extensions.Options;
+using AuthService.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,6 +66,13 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.G
 
 // Add AutoMapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+
+// Add MassTransit with RabbitMQ
+builder.Services.ConfigureRabbitMQ(builder.Configuration);
+
+
+
 
 builder.Services.AddControllers();
 

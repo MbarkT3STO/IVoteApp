@@ -312,3 +312,11 @@ C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionSer
 C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\obj\Debug\net8.0\ref\ElectionService.API.dll
 C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\Microsoft.Extensions.Caching.SqlServer.dll
 C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\MassTransit.dll
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\MassTransit.Abstractions.dll
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\MassTransit.RabbitMqTransport.dll
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\RabbitMQ.Client.dll
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\RabbitMq.Messages.dll
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\RabbitMq.Settings.dll
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\RabbitMq.Messages.pdb
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\RabbitMq.Settings.pdb

@@ -18,5 +18,7 @@ public class PoliticalPartyEntityConfiguration : IEntityTypeConfiguration<Politi
 		builder.Property(politicalParty => politicalParty.WebsiteUrl).IsRequired();
 		builder.Property(politicalParty => politicalParty.LogoUrl).IsRequired();
 		builder.Property(politicalParty => politicalParty.CreatedBy).IsRequired();
+
+		builder.HasOne(politicalParty => politicalParty.CreatedByUser).WithMany(user => user.PoliticalParties).HasForeignKey(politicalParty => politicalParty.CreatedBy);
 	}
 }

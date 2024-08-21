@@ -15,6 +15,8 @@ public class AppDbContext : DbContext
 	public virtual DbSet<Election> Elections { get; set; }
 	public virtual DbSet<Candidate> Candidates { get; set; }
 
+	public virtual DbSet<User> Users { get; set; }
+
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{

@@ -11,4 +11,5 @@ public class PoliticalParty
 	public required string CreatedBy { get; set; }
 
 	public virtual List<Candidate> Candidates { get; set; }
+	public virtual User CreatedByUser { get; set; }
 }

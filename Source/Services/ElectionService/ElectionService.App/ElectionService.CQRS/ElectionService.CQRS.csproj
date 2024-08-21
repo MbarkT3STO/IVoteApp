@@ -2,10 +2,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ElectionService.Infrastructure\ElectionService.Database\ElectionService.Database.csproj" />
+    <ProjectReference Include="..\..\..\..\Shared\RabbitMq.Messages\RabbitMq.Messages.csproj" />
+    <ProjectReference Include="..\..\..\..\Shared\RabbitMq.Settings\RabbitMq.Settings.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MassTransit" Version="8.2.4" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.4" />
     <PackageReference Include="MediatR" Version="12.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="8.0.7" />

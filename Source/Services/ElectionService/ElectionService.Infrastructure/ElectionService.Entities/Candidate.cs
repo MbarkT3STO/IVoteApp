@@ -15,4 +15,5 @@ public class Candidate
 
 	public virtual PoliticalParty PoliticalParty { get; set; }
 	public virtual Election Election { get; set; }
+	public virtual User CreatedByUser { get; set; }
 }

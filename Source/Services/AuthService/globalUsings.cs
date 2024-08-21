@@ -13,9 +13,12 @@ global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.Extensions.Options;
+
 
 global using AutoMapper;
 global using MediatR;
+global using MassTransit;
 
 // global using MassTransit;
 
@@ -33,4 +36,8 @@ global using AuthService.Common.Exceptions;
 global using AuthService.Extensions;
 global using AuthService.APP.Queries;
 global using AuthService.APP.Commands;
+global using AuthService.APP.Events;
+global using RabbitMq.Settings;
+global using RabbitMq.Settings.QueueRoutes;
+global using RabbitMq.Messages.AuthServiceMessages;
 

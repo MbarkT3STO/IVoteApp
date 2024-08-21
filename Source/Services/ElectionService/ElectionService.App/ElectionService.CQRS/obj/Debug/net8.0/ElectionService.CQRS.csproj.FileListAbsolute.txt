@@ -38,3 +38,7 @@ C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionSer
 C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.App\ElectionService.CQRS\obj\Debug\net8.0\refint\ElectionService.CQRS.dll
 C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.App\ElectionService.CQRS\obj\Debug\net8.0\ElectionService.CQRS.pdb
 C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.App\ElectionService.CQRS\obj\Debug\net8.0\ref\ElectionService.CQRS.dll
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.App\ElectionService.CQRS\bin\Debug\net8.0\RabbitMq.Messages.dll
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.App\ElectionService.CQRS\bin\Debug\net8.0\RabbitMq.Settings.dll
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.App\ElectionService.CQRS\bin\Debug\net8.0\RabbitMq.Messages.pdb
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.App\ElectionService.CQRS\bin\Debug\net8.0\RabbitMq.Settings.pdb

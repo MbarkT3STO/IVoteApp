@@ -99,6 +99,31 @@ public class RegisterUserCommandHandler: BaseAppCommandHandler<RegisterUserComma
 			return FailedResult(addUserToRoleResult.Errors.FirstOrDefault()?.Description);
 		}
 
+		await PublishUserCreatedEvent(user, cancellationToken);
+
 		return SucceededResult(_mapper.Map<RegisterUserCommandResultDto>(user));
+	}
+
+	/// <summary>
+	/// Publishes a UserCreatedEvent with the given user and user role information.
+	/// </summary>
+	/// <param name="user">The user that was created.</param>
+	/// <param name="userRole">The role of the user that was created.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
+	private async Task PublishUserCreatedEvent(AppUser user, CancellationToken cancellationToken)
+	{
+		var userRole = await _dbContext.UserRoles.FirstOrDefaultAsync(ur => ur.UserId == user.Id, cancellationToken: cancellationToken);
+
+		var userCreatedEvent = new UserCreatedEvent
+		{
+			UserId        = user.Id,
+			FirstName = user.FirstName,
+			LastName  = user.LastName,
+			UserName  = user.UserName,
+			RoleId    = userRole.RoleId,
+			RoleName  = userRole.RoleId
+		};
+
+		await _mediator.Publish(userCreatedEvent, cancellationToken);
 	}
 }

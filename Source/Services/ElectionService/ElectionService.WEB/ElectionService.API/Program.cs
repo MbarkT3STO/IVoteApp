@@ -13,6 +13,15 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 builder.Services.AddApplicationServices();
 builder.Services.AddSqlServerCache(builder.Configuration);
 
+// RabbitMQ registration
+builder.Services.ConfigureRabbitMQ(builder.Configuration);
+
+// Register the Message Consumers
+builder.Services.RegisterMessageConsumers();
+
+
+
+
 builder.Services.AddControllers();
 
 

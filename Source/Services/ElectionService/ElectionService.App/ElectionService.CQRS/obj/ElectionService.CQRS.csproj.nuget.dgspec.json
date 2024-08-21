@@ -30,6 +30,12 @@
             "projectReferences": {
               "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj": {
                 "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj"
+              },
+              "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Messages\\RabbitMq.Messages.csproj": {
+                "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Messages\\RabbitMq.Messages.csproj"
+              },
+              "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Settings\\RabbitMq.Settings.csproj": {
+                "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Settings\\RabbitMq.Settings.csproj"
               }
             }
           }
@@ -52,6 +58,14 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "MassTransit": {
+              "target": "Package",
+              "version": "[8.2.4, )"
+            },
+            "MassTransit.RabbitMQ": {
+              "target": "Package",
+              "version": "[8.2.4, )"
             },
             "MediatR": {
               "target": "Package",
@@ -284,6 +298,148 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Messages\\RabbitMq.Messages.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Messages\\RabbitMq.Messages.csproj",
+        "projectName": "RabbitMq.Messages",
+        "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Messages\\RabbitMq.Messages.csproj",
+        "packagesPath": "C:\\Users\\MBVRK\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Messages\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MBVRK\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Settings\\RabbitMq.Settings.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Settings\\RabbitMq.Settings.csproj",
+        "projectName": "RabbitMq.Settings",
+        "projectPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Settings\\RabbitMq.Settings.csproj",
+        "packagesPath": "C:\\Users\\MBVRK\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Shared\\RabbitMq.Settings\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MBVRK\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
