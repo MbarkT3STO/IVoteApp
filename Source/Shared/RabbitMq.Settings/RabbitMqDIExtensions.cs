@@ -13,22 +13,20 @@ public static class RabbitMqDIExtensions
     /// <param name="configuration">The <see cref="IConfiguration"/> instance to retrieve the configuration values from.</param>
     public static void ConfigureRabbitMQBaseOptions(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<RabbitMqOptions>(configuration.GetSection("RabbitMQ:Settings"));
-
-        services.Configure<AuthServiceRabbitMqEndpointsOptions>(configuration.GetSection("RabbitMQ:Endpoints:AuthService"));
+        services.Configure<RabbitMqSettings>(configuration.GetSection("RabbitMQ:Settings"));
 
         // RabbitMqEndpointsOptions
-        services.AddSingleton(sp =>
-        {
-            var authServiceRabbitMqEndpointsOptions = sp.GetRequiredService<IOptions<AuthServiceRabbitMqEndpointsOptions>>();
+        // services.AddSingleton(sp =>
+        // {
+        //     var authServiceRabbitMqEndpointsOptions = sp.GetRequiredService<IOptions<AuthServiceRabbitMqEndpointsOptions>>();
 
-            var rabbitMqEndpointsOptions = new RabbitMqEndPointsOptions
-            {
-                AuthServiceRabbitMqEndpointsOptions = authServiceRabbitMqEndpointsOptions.Value
-            };
+        //     var rabbitMqEndpointsOptions = new RabbitMqEndPointsOptions
+        //     {
+        //         AuthServiceRabbitMqEndpointsOptions = authServiceRabbitMqEndpointsOptions.Value
+        //     };
 
-            return rabbitMqEndpointsOptions;
-        });
+        //     return rabbitMqEndpointsOptions;
+        // });
     }
 }
 

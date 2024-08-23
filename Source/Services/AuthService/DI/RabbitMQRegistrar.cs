@@ -9,7 +9,7 @@ public static class RabbitMQRegistrar
     /// <param name="configuration">The <see cref="IConfiguration"/> containing the RabbitMQ configuration settings.</param>
     public static void ConfigureRabbitMQ(this IServiceCollection services, IConfiguration configuration)
     {
-        var rabbitMqOptions = configuration.GetSection("RabbitMQ:Settings").Get<RabbitMqOptions>();
+        var rabbitMqOptions = configuration.GetSection("RabbitMQ:Settings").Get<RabbitMqSettings>();
         var authServiceRabbitMqEndPointsOptions = configuration.GetSection("RabbitMQ:EndPoints:AuthService").Get<AuthServiceRabbitMqEndpointsOptions>();
         var authServiceRabbitMqEndPoints = authServiceRabbitMqEndPointsOptions;
 

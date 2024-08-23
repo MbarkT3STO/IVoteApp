@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZS3iOmeqPMb8lDf63cciUDK6KvVSZ7ikdMsOlzkEz7R4aS3dmmefa6VI0lQ1z1yBy/L7AF/8KWkGpcgVT93CHA==",
+  "dgSpecHash": "XI3ZOphdq0IGThYZlM7LeU3ZDW0HdFD1p3DRIUkZ25Q8+hrBoxgUUMX5R35zFaGW+iDas6EjQpGxwVT/nI04PA==",
   "success": true,
   "projectFilePath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.WEB\\ElectionService.API\\ElectionService.API.csproj",
   "expectedPackageFiles": [
@@ -8,9 +8,9 @@
     "C:\\Users\\MBVRK\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\MBVRK\\.nuget\\packages\\masstransit\\8.2.4\\masstransit.8.2.4.nupkg.sha512",
-    "C:\\Users\\MBVRK\\.nuget\\packages\\masstransit.abstractions\\8.2.4\\masstransit.abstractions.8.2.4.nupkg.sha512",
-    "C:\\Users\\MBVRK\\.nuget\\packages\\masstransit.rabbitmq\\8.2.4\\masstransit.rabbitmq.8.2.4.nupkg.sha512",
+    "C:\\Users\\MBVRK\\.nuget\\packages\\masstransit\\8.2.5\\masstransit.8.2.5.nupkg.sha512",
+    "C:\\Users\\MBVRK\\.nuget\\packages\\masstransit.abstractions\\8.2.5\\masstransit.abstractions.8.2.5.nupkg.sha512",
+    "C:\\Users\\MBVRK\\.nuget\\packages\\masstransit.rabbitmq\\8.2.5\\masstransit.rabbitmq.8.2.5.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\mediatr\\12.4.0\\mediatr.12.4.0.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\MBVRK\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",

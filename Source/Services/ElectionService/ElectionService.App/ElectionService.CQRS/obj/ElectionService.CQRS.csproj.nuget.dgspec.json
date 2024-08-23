@@ -61,11 +61,11 @@
             },
             "MassTransit": {
               "target": "Package",
-              "version": "[8.2.4, )"
+              "version": "[8.2.5, )"
             },
             "MassTransit.RabbitMQ": {
               "target": "Package",
-              "version": "[8.2.4, )"
+              "version": "[8.2.5, )"
             },
             "MediatR": {
               "target": "Package",
@@ -419,6 +419,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "MassTransit.RabbitMQ": {
+              "target": "Package",
+              "version": "[8.2.5, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[8.0.0, )"

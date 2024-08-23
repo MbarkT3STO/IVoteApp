@@ -10,8 +10,8 @@
         "dependencies": {
           "AutoMapper": "13.0.1",
           "ElectionService.Database": "1.0.0",
-          "MassTransit": "8.2.4",
-          "MassTransit.RabbitMQ": "8.2.4",
+          "MassTransit": "8.2.5",
+          "MassTransit.RabbitMQ": "8.2.5",
           "MediatR": "12.4.0",
           "Microsoft.AspNetCore.Mvc": "2.2.0",
           "Microsoft.Extensions.Caching.SqlServer": "8.0.7",
@@ -67,9 +67,9 @@
           }
         }
       },
-      "MassTransit/8.2.4": {
+      "MassTransit/8.2.5": {
         "dependencies": {
-          "MassTransit.Abstractions": "8.2.4",
+          "MassTransit.Abstractions": "8.2.5",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
           "Microsoft.Extensions.Diagnostics.HealthChecks": "8.0.0",
           "Microsoft.Extensions.Hosting.Abstractions": "8.0.0",
@@ -78,28 +78,28 @@
         },
         "runtime": {
           "lib/net8.0/MassTransit.dll": {
-            "assemblyVersion": "8.2.4.0",
-            "fileVersion": "8.2.4.0"
+            "assemblyVersion": "8.2.5.0",
+            "fileVersion": "8.2.5.0"
           }
         }
       },
-      "MassTransit.Abstractions/8.2.4": {
+      "MassTransit.Abstractions/8.2.5": {
         "runtime": {
           "lib/net8.0/MassTransit.Abstractions.dll": {
-            "assemblyVersion": "8.2.4.0",
-            "fileVersion": "8.2.4.0"
+            "assemblyVersion": "8.2.5.0",
+            "fileVersion": "8.2.5.0"
           }
         }
       },
-      "MassTransit.RabbitMQ/8.2.4": {
+      "MassTransit.RabbitMQ/8.2.5": {
         "dependencies": {
-          "MassTransit": "8.2.4",
+          "MassTransit": "8.2.5",
           "RabbitMQ.Client": "6.8.1"
         },
         "runtime": {
           "lib/net8.0/MassTransit.RabbitMqTransport.dll": {
-            "assemblyVersion": "8.2.4.0",
-            "fileVersion": "8.2.4.0"
+            "assemblyVersion": "8.2.5.0",
+            "fileVersion": "8.2.5.0"
           }
         }
       },
@@ -2332,6 +2332,7 @@
       },
       "RabbitMq.Settings/1.0.0": {
         "dependencies": {
+          "MassTransit.RabbitMQ": "8.2.5",
           "Microsoft.Extensions.Configuration": "8.0.0",
           "Microsoft.Extensions.Configuration.Json": "8.0.0",
           "Microsoft.Extensions.DependencyInjection": "8.0.0",
@@ -2371,26 +2372,26 @@
       "path": "azure.identity/1.10.3",
       "hashPath": "azure.identity.1.10.3.nupkg.sha512"
     },
-    "MassTransit/8.2.4": {
+    "MassTransit/8.2.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ENKDefFeDLAUz1xMgx4/4BWENUiO8ckkhyBPs3anbyS7+KKnone10zTwH2pG6BjuiwwGj+r9SCu+wt460KL5wQ==",
-      "path": "masstransit/8.2.4",
-      "hashPath": "masstransit.8.2.4.nupkg.sha512"
+      "sha512": "sha512-b/gNaT6IxX+BZnLCLTzjqia5iQJxpmIGOjPiLnD6SLBRX9tyIsYVNKPAqQ6txNe2ztOOaW4ntef84VxSvA0IEA==",
+      "path": "masstransit/8.2.5",
+      "hashPath": "masstransit.8.2.5.nupkg.sha512"
     },
-    "MassTransit.Abstractions/8.2.4": {
+    "MassTransit.Abstractions/8.2.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-EibCSJbzoYLldB2qtRmSOf1umpEFE+2UCtlyZgaHBSOnmAYpwVyt6A277FpMXIccaDxl0xUvbDuNF49o8KyN9Q==",
-      "path": "masstransit.abstractions/8.2.4",
-      "hashPath": "masstransit.abstractions.8.2.4.nupkg.sha512"
+      "sha512": "sha512-TcAV7ZEdXTrw6D74g55mlEYLBBQvsifNrdfwt0UCps7mZVBoXoS3fvMHCQguRgj+6k1Q1qEV9kZa0aUOT7GcPQ==",
+      "path": "masstransit.abstractions/8.2.5",
+      "hashPath": "masstransit.abstractions.8.2.5.nupkg.sha512"
     },
-    "MassTransit.RabbitMQ/8.2.4": {
+    "MassTransit.RabbitMQ/8.2.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-f11TOUcc3CkS+Qv6LF+MVhLafpHK8LtIRVXGi2YSGb9Zy2BI6UlI/HEBeR8vY8/RIFhW58UHwRT6y+tQl8oGtg==",
-      "path": "masstransit.rabbitmq/8.2.4",
-      "hashPath": "masstransit.rabbitmq.8.2.4.nupkg.sha512"
+      "sha512": "sha512-gIBF5plL/BZo5/SNDo0C6BjOZoGqJu5YdqoDm0MI6A7kJad9H/5qfWdB4AK1A97vpK7At3i3uXTuriqx5+UKMg==",
+      "path": "masstransit.rabbitmq/8.2.5",
+      "hashPath": "masstransit.rabbitmq.8.2.5.nupkg.sha512"
     },
     "MediatR/12.4.0": {
       "type": "package",

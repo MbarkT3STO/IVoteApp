@@ -3,10 +3,5 @@
         "HostName": "rabbitmq://localhost",
         "UserName": "guest",
         "Password": "guest"
-    },
-    "Endpoints": {
-        "AuthService": {
-            "UserCreatedEventQueue": "rabbitmq://localhost/AuthService.UserCreatedEventQueue"
-        }
     }
 }
