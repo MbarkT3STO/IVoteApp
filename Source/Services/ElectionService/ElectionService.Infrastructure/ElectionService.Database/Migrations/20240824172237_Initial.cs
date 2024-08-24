@@ -38,17 +38,23 @@ namespace ElectionService.Database.Migrations
                     StartDateAndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDateAndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Elections", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Elections_Users_CreatedBy",
-                        column: x => x.CreatedBy,
+                        name: "FK_Elections_Users_CreatedByUserId",
+                        column: x => x.CreatedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -61,17 +67,23 @@ namespace ElectionService.Database.Migrations
                     EstablishmentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LogoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WebsiteUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PoliticalParties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PoliticalParties_Users_CreatedBy",
-                        column: x => x.CreatedBy,
+                        name: "FK_PoliticalParties_Users_CreatedByUserId",
+                        column: x => x.CreatedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -84,7 +96,14 @@ namespace ElectionService.Database.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -100,17 +119,16 @@ namespace ElectionService.Database.Migrations
                         principalTable: "PoliticalParties",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Candidates_Users_CreatedBy",
-                        column: x => x.CreatedBy,
+                        name: "FK_Candidates_Users_CreatedByUserId",
+                        column: x => x.CreatedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Candidates_CreatedBy",
+                name: "IX_Candidates_CreatedByUserId",
                 table: "Candidates",
-                column: "CreatedBy");
+                column: "CreatedByUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Candidates_ElectionId",
@@ -123,14 +141,14 @@ namespace ElectionService.Database.Migrations
                 column: "PoliticalPartyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Elections_CreatedBy",
+                name: "IX_Elections_CreatedByUserId",
                 table: "Elections",
-                column: "CreatedBy");
+                column: "CreatedByUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PoliticalParties_CreatedBy",
+                name: "IX_PoliticalParties_CreatedByUserId",
                 table: "PoliticalParties",
-                column: "CreatedBy");
+                column: "CreatedByUserId");
         }
 
         /// <inheritdoc />

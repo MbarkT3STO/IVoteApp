@@ -10,6 +10,7 @@ global using ElectionService.Shared.Enums;
 global using ElectionService.Database;
 global using ElectionService.Entities;
 global using ElectionService.CQRS.Common.Exceptions;
+global using ElectionService.CQRS.Extensions;
 global using ElectionService.CQRS.Common.Interfaces;
 global using ElectionService.CQRS.Common.Implementations;
 global using ElectionService.CQRS.Common.Enums;

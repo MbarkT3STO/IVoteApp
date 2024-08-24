@@ -320,3 +320,4 @@ C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionSer
 C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\RabbitMq.Settings.dll
 C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\RabbitMq.Messages.pdb
 C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\RabbitMq.Settings.pdb
+C:\Users\MBVRK\source\repos\IVoteApp\Source\Services\ElectionService\ElectionService.WEB\ElectionService.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

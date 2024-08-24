@@ -102,7 +102,7 @@ public class LoginCommandHandler: BaseAppCommandHandler<LoginCommand, LoginComma
 			issuer            : _jwtSettings.Issuer,
 			audience          : _jwtSettings.Audience,
 			claims            : claims,
-			expires           : DateTime.UtcNow.AddMinutes(1),
+			expires           : DateTime.UtcNow.AddMinutes(10),
 			signingCredentials: signingCredentials
 		);
 

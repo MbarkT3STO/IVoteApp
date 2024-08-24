@@ -25,7 +25,5 @@ public class ElectionEntityConfiguration : IEntityTypeConfiguration<Election>
 		builder.Property( election => election.EndDateAndTime ).IsRequired();
 		builder.Property( election => election.Status ).IsRequired();
 		builder.Property( election => election.CreatedBy ).IsRequired();
-
-		builder.HasOne(election => election.CreatedByUser).WithMany(user => user.Elections).HasForeignKey(election => election.CreatedBy);
 	}
 }

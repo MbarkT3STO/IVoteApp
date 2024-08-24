@@ -27,7 +27,5 @@ public class CandidateEntityConfiguration : IEntityTypeConfiguration<Candidate>
 
 		builder.HasOne( candidate => candidate.PoliticalParty ).WithMany( politicalParty => politicalParty.Candidates ).HasForeignKey( candidate => candidate.PoliticalPartyId ).OnDelete( DeleteBehavior.NoAction );
 		builder.HasOne( candidate => candidate.Election ).WithMany( election => election.Candidates ).HasForeignKey( candidate => candidate.ElectionId ).OnDelete( DeleteBehavior.NoAction );
-
-		builder.HasOne( candidate => candidate.CreatedByUser ).WithMany( user => user.Candidates ).HasForeignKey( candidate => candidate.CreatedBy );
 	}
 }

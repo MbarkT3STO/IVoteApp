@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ElectionService.Entities")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d22235765c6d5e53330e6a151d3302086517663a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e34107c826b9eefd6b884ddf470ef103da49412")]
 [assembly: System.Reflection.AssemblyProductAttribute("ElectionService.Entities")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ElectionService.Entities")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

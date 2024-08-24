@@ -1,14 +1,14 @@
+using ElectionService.Entities.Common.Implementations;
+
 namespace ElectionService.Entities;
 
-public class PoliticalParty
+public class PoliticalParty : AuditableEntity<Guid>
 {
-	public required Guid Id { get; set; }
 	public required string Name { get; set; }
 	public required string Description { get; set; }
 	public required DateTime EstablishmentDate { get; set; }
 	public required string LogoUrl { get; set; }
 	public required string WebsiteUrl { get; set; }
-	public required string CreatedBy { get; set; }
 
 	public virtual List<Candidate> Candidates { get; set; }
 	public virtual User CreatedByUser { get; set; }

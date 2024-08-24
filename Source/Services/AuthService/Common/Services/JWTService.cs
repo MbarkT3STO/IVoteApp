@@ -19,9 +19,11 @@ public class JWTService
 	{
 		var claims = new Claim[]
 		{
-			new (JwtRegisteredClaimNames.Sub, user.Email.ToString()),
+			new (JwtRegisteredClaimNames.Sub, user.Id.ToString()),
 			new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 		};
+
+		// Add the User ID as a claim
 
 		if (!string.IsNullOrEmpty(role))
 		{
@@ -37,7 +39,7 @@ public class JWTService
 			issuer            : jwtSettings.Issuer,
 			audience          : jwtSettings.Audience,
 			claims            : claims,
-			expires           : DateTime.UtcNow.AddMinutes(1),
+			expires           : DateTime.UtcNow.AddHours(1),
 			signingCredentials: signingCredentials
 		);
 
@@ -56,7 +58,7 @@ public class JWTService
 			UserId    = user.Id,
 			Token     = Guid.NewGuid().ToString(),
 			CreatedAt = DateTime.UtcNow,
-			ExpiresAt = DateTime.UtcNow.AddMinutes(10)
+			ExpiresAt = DateTime.UtcNow.AddHours(24)
 		};
 
 		return refreshToken;

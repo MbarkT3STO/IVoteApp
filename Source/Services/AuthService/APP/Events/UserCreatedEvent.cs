@@ -30,7 +30,7 @@ public class UserCreatedEventHandler: INotificationHandler<UserCreatedEvent>
 	public UserCreatedEventHandler(IBus bus, IOptions<RabbitMqSettings> rabbitMqOptions, IOptions<AuthServiceRabbitMqEndpointsOptions> authServiceRabbitMqEndPointsOptions)
 	{
 		_bus                                 = bus;
-		_rabbitMqSettings                     = rabbitMqOptions.Value;
+		_rabbitMqSettings                    = rabbitMqOptions.Value;
 		_authServiceRabbitMqEndPointsOptions = authServiceRabbitMqEndPointsOptions.Value;
 	}
 
@@ -49,29 +49,15 @@ public class UserCreatedEventHandler: INotificationHandler<UserCreatedEvent>
 			RoleName  = notification.RoleName,
 
 			UserId    = notification.UserId,
-			Email    = notification.Email,
+			Email     = notification.Email,
 			CreatedAt = notification.CreatedAt
 		};
 
-		// var queueName = _rabbitMqOptions.HostName + "/" + AuthServiceQueues.User.UserCreatedQueue;
-		// var queueToPublishTo = new Uri(queueName);
-		// var endPoint = await _bus.GetSendEndpoint(queueToPublishTo);
-		// await endPoint.Send(message, cancellationToken);
-
-
-		// var electionServiceUserCreatedQueueName     = _rabbitMqSettings.HostName + "/" + ElectionServiceQueues.User.UserCreatedQueue;
-		// var electionServiceUserCreatedQueue         = new Uri(electionServiceUserCreatedQueueName);
-		// var electionServiceUserCreatedQueueEndPoint = await _bus.GetSendEndpoint(electionServiceUserCreatedQueue);
-		var electionServiceUserCreatedQueueEndPoint = _bus.GetEndpoint( _rabbitMqSettings, ElectionServiceQueues.User.UserCreatedQueue);
-
-
-		// var authServiceEventSourcererUserCreatedEventsQueueName = _rabbitMqSettings.HostName + "/" + AuthServiceEventSourcererQueues.UserCreatedEventQueue;
-		// var authServiceEventSourcererUserEventsQueue = new Uri(authServiceEventSourcererUserCreatedEventsQueueName);
-		// var authServiceEventSourcererUserEventsQueueEndPoint = await _bus.GetSendEndpoint(authServiceEventSourcererUserEventsQueue);
-		var authServiceEventSourcererUserEventsQueueEndPoint = _bus.GetEndpoint( _rabbitMqSettings, AuthServiceEventSourcererQueues.UserCreatedEventQueue);
+		var electionServiceUserCreatedQueueEndPoint                = _bus.GetEndpoint( _rabbitMqSettings, ElectionServiceQueues.User.UserCreatedQueue);
+		var authServiceEventSourcererUserCreatedEventQueueEndPoint = _bus.GetEndpoint( _rabbitMqSettings, AuthServiceEventSourcererQueues.UserCreatedEventQueue);
 
 
 		await electionServiceUserCreatedQueueEndPoint.Send(message, cancellationToken);
-		await authServiceEventSourcererUserEventsQueueEndPoint.Send(message, cancellationToken);
+		await authServiceEventSourcererUserCreatedEventQueueEndPoint.Send(message, cancellationToken);
 	}
 }
