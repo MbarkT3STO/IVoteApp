@@ -17,18 +17,18 @@ public class CreateCandidateCommandResultDto
 /// <summary>
 /// Represents the result of a command that creates a candidate.
 /// </summary>
-public class CreateCandidateCommandResult : AppCommandResult<CreateCandidateCommandResultDto, CreateCandidateCommandResult>
+public class CreateCandidateCommandResult: AppCommandResult<CreateCandidateCommandResultDto, CreateCandidateCommandResult>
 {
-	public CreateCandidateCommandResult(CreateCandidateCommandResultDto value) : base(value)
+	public CreateCandidateCommandResult(CreateCandidateCommandResultDto value): base(value)
 	{
 	}
 
-	public CreateCandidateCommandResult(Error error) : base(error)
+	public CreateCandidateCommandResult(Error error): base(error)
 	{
 	}
 }
 
-public class CreateCandidateCommandMappingProfile : Profile
+public class CreateCandidateCommandMappingProfile: Profile
 {
 	public CreateCandidateCommandMappingProfile()
 	{
@@ -44,40 +44,44 @@ public class CreateCandidateCommandMappingProfile : Profile
 /// <summary>
 /// Represents the command used to create a candidate.
 /// </summary>
-public class CreateCandidateCommand : AppCommand<CreateCandidateCommand, CreateCandidateCommandResult>
+public class CreateCandidateCommand: AppCommand<CreateCandidateCommand, CreateCandidateCommandResult>
 {
 	public Guid ElectionId { get; set; }
 	public Guid PoliticalPartyId { get; set; }
 	public string Name { get; set; }
 	public string Description { get; set; }
 	public string PhotoUrl { get; set; }
+	public string CreatedBy { get; set; }
 
 	public CreateCandidateCommand()
 	{
 
 	}
 
-	public CreateCandidateCommand(string name, string description, string photoUrl, Guid politicalPartyId, Guid electionId)
+	public CreateCandidateCommand(Guid politicalPartyId, Guid electionId, string name, string description, string photoUrl, string createdBy)
 	{
-		Name = name;
-		Description = description;
-		PhotoUrl = photoUrl;
+		Name             = name;
+		Description      = description;
+		PhotoUrl         = photoUrl;
 		PoliticalPartyId = politicalPartyId;
-		ElectionId = electionId;
+		ElectionId       = electionId;
+		CreatedBy        = createdBy;
 	}
 }
 
 
-public class CreateCandidateCommandHandler : BaseAppCommandHandler<CreateCandidateCommand, CreateCandidateCommandResult, CreateCandidateCommandResultDto>
+public class CreateCandidateCommandHandler: BaseAppCommandHandler<CreateCandidateCommand, CreateCandidateCommandResult, CreateCandidateCommandResultDto>
 {
-	public CreateCandidateCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
+	public CreateCandidateCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext): base(mediator, mapper, dbContext)
 	{
 	}
 
 	protected override async Task<CreateCandidateCommandResult> HandleCore(CreateCandidateCommand command, CancellationToken cancellationToken)
 	{
-		var candidate = _mapper.Map<Entities.Candidate>(command);
-		candidate.Id = Guid.NewGuid();
+		var candidate    = _mapper.Map<Entities.Candidate>(command);
+			candidate.Id = Guid.NewGuid();
+
+		candidate.WriteCreateAudit(command.CreatedBy);
 
 		_dbContext.Candidates.Add(candidate);
 		await _dbContext.SaveChangesAsync(cancellationToken);

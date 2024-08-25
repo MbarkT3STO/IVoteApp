@@ -14,22 +14,22 @@ public class UpdateCandidateCommandResultDto
 	public string PhotoUrl { get; set; }
 }
 
-public class UpdateCandidateCommandResult : AppCommandResult<UpdateCandidateCommandResultDto, UpdateCandidateCommandResult>
+public class UpdateCandidateCommandResult: AppCommandResult<UpdateCandidateCommandResultDto, UpdateCandidateCommandResult>
 {
-	public UpdateCandidateCommandResult(UpdateCandidateCommandResultDto value) : base(value)
+	public UpdateCandidateCommandResult(UpdateCandidateCommandResultDto value): base(value)
 	{
 	}
 
-	public UpdateCandidateCommandResult(Error error) : base(error)
+	public UpdateCandidateCommandResult(Error error): base(error)
 	{
 	}
 
-	public UpdateCandidateCommandResult(bool isSuccess) : base(isSuccess)
+	public UpdateCandidateCommandResult(bool isSuccess): base(isSuccess)
 	{
 	}
 }
 
-public class UpdateCandidateCommandMappingProfile : Profile
+public class UpdateCandidateCommandMappingProfile: Profile
 {
 	public UpdateCandidateCommandMappingProfile()
 	{
@@ -41,7 +41,7 @@ public class UpdateCandidateCommandMappingProfile : Profile
 /// <summary>
 /// Represents the command used to update a candidate.
 /// </summary>
-public class UpdateCandidateCommand : AppCommand<UpdateCandidateCommand, UpdateCandidateCommandResult>
+public class UpdateCandidateCommand: AppCommand<UpdateCandidateCommand, UpdateCandidateCommandResult>
 {
 	public Guid Id { get; set; }
 	public Guid ElectionId { get; set; }
@@ -49,30 +49,32 @@ public class UpdateCandidateCommand : AppCommand<UpdateCandidateCommand, UpdateC
 	public string Name { get; set; }
 	public string Description { get; set; }
 	public string PhotoUrl { get; set; }
+	public string UpdatedBy { get; set; }
 
-	public UpdateCandidateCommand(Guid id, string name, string description, string photoUrl, Guid politicalPartyId, Guid electionId)
+	public UpdateCandidateCommand(Guid id, Guid electionId, Guid politicalPartyId, string name, string description, string photoUrl, string updatedBy)
 	{
-		Id = id;
-		Name = name;
-		Description = description;
-		PhotoUrl = photoUrl;
+		Id               = id;
+		Name             = name;
+		Description      = description;
+		PhotoUrl         = photoUrl;
 		PoliticalPartyId = politicalPartyId;
-		ElectionId = electionId;
+		ElectionId       = electionId;
+		UpdatedBy        = updatedBy;
 	}
 
 	/// <summary>
 	/// Creates a new update candidate command.
 	/// </summary>
-	public static UpdateCandidateCommand Create(Guid id, string name, string description, string photoUrl, Guid politicalPartyId, Guid electionId)
+	public static UpdateCandidateCommand Create(Guid id, Guid electionId, Guid politicalPartyId, string name, string description, string photoUrl, string updatedBy)
 	{
-		return new UpdateCandidateCommand(id, name, description, photoUrl, politicalPartyId, electionId);
+		return new UpdateCandidateCommand(id, politicalPartyId, electionId, name, description, photoUrl, updatedBy);
 	}
 }
 
 
-public class UpdateCandidateCommandHandler : BaseAppCommandHandler<UpdateCandidateCommand, UpdateCandidateCommandResult, UpdateCandidateCommandResultDto>
+public class UpdateCandidateCommandHandler: BaseAppCommandHandler<UpdateCandidateCommand, UpdateCandidateCommandResult, UpdateCandidateCommandResultDto>
 {
-	public UpdateCandidateCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
+	public UpdateCandidateCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext): base(mediator, mapper, dbContext)
 	{
 	}
 
@@ -127,6 +129,8 @@ public class UpdateCandidateCommandHandler : BaseAppCommandHandler<UpdateCandida
 		{
 			candidate.PhotoUrl = command.PhotoUrl;
 		}
+
+		candidate.WriteUpdateAudit(command.UpdatedBy);
 
 		_dbContext.Candidates.Update(candidate);
 		await _dbContext.SaveChangesAsync(cancellationToken);
