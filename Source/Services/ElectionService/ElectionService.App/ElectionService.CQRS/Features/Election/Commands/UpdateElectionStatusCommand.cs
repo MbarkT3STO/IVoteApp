@@ -20,19 +20,19 @@ public class UpdateElectionStatusCommandResultDto
 /// <summary>
 /// Represents the result of a command that updates the status of an election.
 /// </summary>
-public class UpdateElectionStatusCommandResult : AppCommandResult<UpdateElectionStatusCommandResultDto, UpdateElectionStatusCommandResult>
+public class UpdateElectionStatusCommandResult: AppCommandResult<UpdateElectionStatusCommandResultDto, UpdateElectionStatusCommandResult>
 {
-	public UpdateElectionStatusCommandResult(UpdateElectionStatusCommandResultDto value) : base(value)
+	public UpdateElectionStatusCommandResult(UpdateElectionStatusCommandResultDto value): base(value)
 	{
 	}
 
-	public UpdateElectionStatusCommandResult(Error error) : base(error)
+	public UpdateElectionStatusCommandResult(Error error): base(error)
 	{
 	}
 }
 
 
-public class UpdateElectionStatusCommandMappingProfile : Profile
+public class UpdateElectionStatusCommandMappingProfile: Profile
 {
 	public UpdateElectionStatusCommandMappingProfile()
 	{
@@ -44,33 +44,42 @@ public class UpdateElectionStatusCommandMappingProfile : Profile
 /// <summary>
 /// Represents a command that updates the status of an election.
 /// </summary>
-public class UpdateElectionStatusCommand : AppCommand<UpdateElectionStatusCommand, UpdateElectionStatusCommandResult>
+public class UpdateElectionStatusCommand: AppCommand<UpdateElectionStatusCommand, UpdateElectionStatusCommandResult>
 {
 	public Guid Id { get; set; }
-
 	public ElectionStatus Status { get; set; }
+	public string UpdatedBy { get; set; }
+
+
+	public UpdateElectionStatusCommand(Guid id, ElectionStatus status, string updatedBy)
+	{
+		Id        = id;
+		Status    = status;
+		UpdatedBy = updatedBy;
+	}
 }
 
 
-public class UpdateElectionStatusCommandHandler : BaseAppCommandHandler<UpdateElectionStatusCommand, UpdateElectionStatusCommandResult, UpdateElectionStatusCommandResultDto>
+public class UpdateElectionStatusCommandHandler: BaseAppCommandHandler<UpdateElectionStatusCommand, UpdateElectionStatusCommandResult, UpdateElectionStatusCommandResultDto>
 {
-    public UpdateElectionStatusCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext) : base(mediator, mapper, dbContext)
-    {
-    }
+	public UpdateElectionStatusCommandHandler(IMediator mediator, IMapper mapper, AppDbContext dbContext): base(mediator, mapper, dbContext)
+	{
+	}
 
-    protected override async Task<UpdateElectionStatusCommandResult> HandleCore(UpdateElectionStatusCommand command, CancellationToken cancellationToken)
-    {
-        var election = await _dbContext.Elections.FirstOrDefaultAsync(x => x.Id == command.Id, cancellationToken);
+	protected override async Task<UpdateElectionStatusCommandResult> HandleCore(UpdateElectionStatusCommand command, CancellationToken cancellationToken)
+	{
+		var election = await _dbContext.Elections.FirstOrDefaultAsync(x => x.Id == command.Id, cancellationToken);
 
 			if (election == null)
 				return UpdateElectionStatusCommandResult.Failed(new Error("Election not found"));
 
 			election.Status = command.Status;
+			election.WriteUpdateAudit(command.UpdatedBy);
 
 			await _dbContext.SaveChangesAsync(cancellationToken);
 
 			var resultDto = _mapper.Map<UpdateElectionStatusCommandResultDto>(election);
 
 			return SucceededResult(resultDto);
-    }
+	}
 }

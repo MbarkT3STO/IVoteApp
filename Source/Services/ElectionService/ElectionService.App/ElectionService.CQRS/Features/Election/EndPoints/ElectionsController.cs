@@ -1,20 +1,24 @@
 using ElectionService.CQRS.Features.Election.Commands;
 using ElectionService.CQRS.Features.Election.Queries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ElectionService.CQRS.Features.EndPoints;
 
+[Authorize(Roles = "Admin")]
 [ApiController]
 [Route("api/[controller]")]
-public class ElectionsController(IMediator mediator) : ControllerBase
+public class ElectionsController: BaseExtendedController
 {
-	readonly IMediator mediator = mediator;
+	public ElectionsController(IMediator mediator): base(mediator)
+	{
+	}
 
 	[HttpGet(nameof(Get))]
 	public async Task<IActionResult> Get()
 	{
 		var cacheKey = $"{nameof(GetElectionsQuery)}";
-		var query = GetElectionsQuery.CreateCachedQuery(cacheKey);
-		var result = await mediator.Send(query);
+		var query    = GetElectionsQuery.CreateCachedQuery(cacheKey);
+		var result   = await _mediator.Send(query);
 
 		if(result.IsSuccess)
 		{
@@ -29,8 +33,8 @@ public class ElectionsController(IMediator mediator) : ControllerBase
 	public async Task<IActionResult> GetFromPage(int page)
 	{
 		var cacheKey = $"{nameof(GetElectionsQuery)}-page-{page}-pageSize-10";
-		var query = GetElectionsQuery.CreateCachedAndPaginatedQuery(cacheKey, page);
-		var result = await mediator.Send(query);
+		var query    = GetElectionsQuery.CreateCachedAndPaginatedQuery(cacheKey, page);
+		var result   = await _mediator.Send(query);
 
 		if(result.IsSuccess)
 		{
@@ -44,8 +48,8 @@ public class ElectionsController(IMediator mediator) : ControllerBase
 	public async Task<IActionResult> GetById(Guid id)
 	{
 		var cacheKey = $"{nameof(GetElectionByIdQuery)}-{id}";
-		var query = GetElectionByIdQuery.CreateCachedQuery(cacheKey).WithElectionId(id);
-		var result = await mediator.Send(query);
+		var query    = GetElectionByIdQuery.CreateCachedQuery(cacheKey).WithElectionId(id);
+		var result   = await _mediator.Send(query);
 
 		if(result.IsSuccess)
 		{
@@ -59,11 +63,11 @@ public class ElectionsController(IMediator mediator) : ControllerBase
 
 
 	[HttpPost(nameof(Create))]
-	public async Task<IActionResult> Create(CreateElectionCommand command)
+	public async Task<IActionResult> Create(string title, string description, DateTime startDateAndTime, DateTime endDateAndTime, ElectionStatus status)
 	{
-		command.CreatedBy = "admin";
-
-		var result = await mediator.Send(command);
+		var userId  = GetUserId();
+		var command = new CreateElectionCommand(title, description, startDateAndTime, endDateAndTime, status, userId);
+		var result  = await _mediator.Send(command);
 
 		if(result.IsSuccess)
 		{
@@ -75,9 +79,11 @@ public class ElectionsController(IMediator mediator) : ControllerBase
 
 
 	[HttpPost(nameof(UpdateStatus))]
-	public async Task<IActionResult> UpdateStatus(UpdateElectionStatusCommand command)
+	public async Task<IActionResult> UpdateStatus(Guid id, ElectionStatus status)
 	{
-		var result = await mediator.Send(command);
+		var userId  = GetUserId();
+		var command = new UpdateElectionStatusCommand(id, status, userId);
+		var result  = await _mediator.Send(command);
 
 		if(result.IsSuccess)
 		{
@@ -89,9 +95,11 @@ public class ElectionsController(IMediator mediator) : ControllerBase
 
 
 	[HttpPost(nameof(UpdateTitle))]
-	public async Task<IActionResult> UpdateTitle(UpdateElectionTitleCommand command)
+	public async Task<IActionResult> UpdateTitle(Guid id, string title)
 	{
-		var result = await mediator.Send(command);
+		var userId  = GetUserId();
+		var command = new UpdateElectionTitleCommand(id, title, userId);
+		var result  = await _mediator.Send(command);
 
 		if(result.IsSuccess)
 		{
