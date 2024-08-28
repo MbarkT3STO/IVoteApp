@@ -1,3 +1,5 @@
+using EventSourcererService.DATA.Entities.JsonDataTypes.ElectionService;
+
 namespace EventSourcererService.DATA.Entities.ElectionService;
 
 /// <summary>

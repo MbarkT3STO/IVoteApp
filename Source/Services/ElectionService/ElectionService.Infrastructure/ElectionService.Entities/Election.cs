@@ -15,5 +15,4 @@ public class Election : AuditableEntity<Guid>
 	public ElectionStatus Status { get; set; }
 
 	public List<Candidate> Candidates { get; set; }
-	public virtual User CreatedByUser { get; set; }
 }
