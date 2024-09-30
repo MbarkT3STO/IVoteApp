@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yp58rz7LpWIxtImwiEQv9oXJgpezUXbH38aNBlWKlAJfJYq2tYOTPbBStLFF3F2+TjdOH8AFJ7hUFsTbPb0aHg==",
+  "dgSpecHash": "8o2lgwT9NVs=",
   "success": true,
   "projectFilePath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.App\\ElectionService.CQRS\\ElectionService.CQRS.csproj",
   "expectedPackageFiles": [

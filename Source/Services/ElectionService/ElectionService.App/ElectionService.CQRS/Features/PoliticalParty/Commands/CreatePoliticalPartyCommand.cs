@@ -1,3 +1,5 @@
+using ElectionService.CQRS.Features.PoliticalParty.Events;
+
 namespace ElectionService.CQRS.Features.PoliticalParty.Commands;
 
 public class CreatePoliticalPartyCommandResultDto
@@ -80,7 +82,7 @@ public class CreatePoliticalPartyCommandHandler: BaseAppCommandHandler<CreatePol
 	protected override async Task<CreatePoliticalPartyCommandResult> HandleCore(CreatePoliticalPartyCommand command, CancellationToken cancellationToken)
 	{
 		var politicalParty    = _mapper.Map<Entities.PoliticalParty>(command);
-		    politicalParty.Id = Guid.NewGuid();
+			politicalParty.Id = Guid.NewGuid();
 
 		politicalParty.WriteCreateAudit(command.CreatedBy);
 
@@ -90,5 +92,16 @@ public class CreatePoliticalPartyCommandHandler: BaseAppCommandHandler<CreatePol
 		var resultDto = _mapper.Map<CreatePoliticalPartyCommandResultDto>(politicalParty);
 
 		return CreatePoliticalPartyCommandResult.Succeeded(resultDto);
+	}
+
+	/// <summary>
+	/// Publishes the created event.
+	/// </summary>
+	private async Task PublishCreatedEvent(CreatePoliticalPartyCommand command, CreatePoliticalPartyCommandResult result, Entities.PoliticalParty createdObject, CancellationToken cancellationToken)
+	{
+		var eventDetails = new EventDetails(nameof(PoliticalPartyCreatedEvent), createdObject.CreatedBy, createdObject.CreatedAt);
+		var @event       = PoliticalPartyCreatedEvent.Create(eventDetails, createdObject);
+
+		await _mediator.Publish(@event, cancellationToken);
 	}
 }

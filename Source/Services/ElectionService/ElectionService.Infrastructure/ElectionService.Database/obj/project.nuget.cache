@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9l0LIzV4/8jFi+Q2R9jF0eUP1gB1q+VFlJHfaW4Lu/fxMQg5xq1QG07FzCQaLfEIGstgbKjYK8qCakHnGmGqBg==",
+  "dgSpecHash": "prs89kkxwmE=",
   "success": true,
   "projectFilePath": "C:\\Users\\MBVRK\\source\\repos\\IVoteApp\\Source\\Services\\ElectionService\\ElectionService.Infrastructure\\ElectionService.Database\\ElectionService.Database.csproj",
   "expectedPackageFiles": [

@@ -19,7 +19,6 @@ public class LoginCommandResultDto
 		RefreshTokenExpiration = refreshTokenExpiration;
 	}
 }
-
 public class LoginCommandResult: AppCommandResult<LoginCommandResultDto, LoginCommandResult>
 {
 	public LoginCommandResult(LoginCommandResultDto value): base(value)
